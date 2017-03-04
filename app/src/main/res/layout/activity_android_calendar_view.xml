@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@drawable/bgnati"
+    >
+
+
+
+    <CalendarView
+        android:id="@+id/calendar"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="130sp"
+        android:id="@+id/listViewId"
+        android:layout_below="@+id/calendar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+    </ListView>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/ic_input_add"
+        android:onClick="addEvent"
+        android:layout_gravity="right"
+        android:id="@+id/addEventID"
+        android:layout_above="@+id/listViewId"
+        android:layout_alignRight="@+id/calendar"
+        android:layout_alignEnd="@+id/calendar" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/deleteEventID"
+        android:onClick="deleteEvent"
+        android:background="@android:drawable/ic_menu_delete"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_above="@+id/listViewId"
+        android:layout_toLeftOf="@+id/EditEventId"
+        android:layout_toStartOf="@+id/EditEventId"
+        android:visibility="invisible"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:id="@+id/EditEventId"
+        android:onClick="editEvent"
+        android:background="@android:drawable/ic_menu_edit"
+        android:layout_alignTop="@+id/addEventID"
+        android:layout_alignLeft="@+id/addEventID"
+        android:layout_alignStart="@+id/addEventID" />
+</RelativeLayout>
+
+
+

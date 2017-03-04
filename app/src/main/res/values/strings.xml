@@ -1,3 +1,83 @@
 <resources>
     <string name="app_name">MonitorBaby</string>
+    <string name="title_activity_tetee">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_testing">testing</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="noTaskForToday">אין משימות להיום</string>
+    <string name="EnterEvent">הכנס אירוע</string>
+    <string name="Delete">delete</string>
+    <string name="EditEvent">עריכת אירוע</string>
+    <string name="Edit">edit</string>
+    <string name="Delete2">delete</string>
+    <string name="OK">OK</string>
+    <string name="BabySaver">BabySaver</string>
+    <string name="ErrorWhileCapture">קרתה תקלה בעת הצילום, אנא נסה שנית</string>
+    <string name="TurnOnGps">הפעל התראות GPS</string>
+    <string name="EditAddress">אנא הוסף כתובת</string>
+    <string name="AddressChange">שינוי כתובת</string>
+    <string name="PleaseTurnOnGps">"אנא הדלק את הGPS "</string>
+    <string name="TurnOffGps">כבה התראות GPS</string>
+    <string name="TurnOnGps2">הפעל התראות GPS</string>
+    <string name="alreadyThere">עוד שניה שם....</string>
+    <string name="DistanceFrom">" מרחקך מהיעד "</string>
+    <string name="Meters">" מטרים "</string>
+    <string name="CantLoginToGoogle">מכשירך לא יכול להתחבר לGoogle.</string>
+    <string name="NoPermission">אין הרשאות</string>
+    <string name="YourLenthFromDistance">"מרחקך מהיעד :  "</string>
+    <string name="EnterAdressPlease">אנא הכנס כתובת</string>
+    <string name="AddressDosntExsists">כתובת לא קיימת</string>
+    <string name="PleaseChooseTheRightAddress">אנא בחר את הכתובת הרצוייה</string>
+    <string name="Probelm">ioException</string>
+    <string name="TheKidIsSafe">היי הילד נמצא במעון נא לא לדאוג</string>
+    <string name="MessageSentSuccesfuly">ההודעה נשלחה בהצלחה</string>
+    <string name="PleaseturnOnGpsDevice">אנא הפעל את הGPS שבמכשירך</string>
+    <string name="UsernameOrpasswprdInccorect">שם המשתמש או הסיסמא אינם נכונים</string>
+    <string name="ErrorWithAttiudeToTheSystem">שגיאת כניסה למערכת</string>
+    <string name="OK3">אישור</string>
+    <string name="YourDataSavedSuccsefuly2">" - המידע שלך נשמר בהצלחה "</string>
+    <string name="Thanks">" תודה "</string>
+    <string name="ReqiureField">השדה הזה הינו חובה</string>
+    <string name="PasswordNotEquals">הסיסמאות אינן זהות</string>
+    <string name="AdviceToTurnOnGpsAndReqirment">השדה הזה הינו חובה. אנו ממליצים להדליק GPS ולרשום כתובת מדוייקת</string>
+    <string name="LegalPhoneNumber">אנא הכנס מספר טלפון חוקי</string>
+    <string name="DidntEnterNewTask">" לא הכנסת משימה חדשה"</string>
+    <string name="ChangeTask">שנה משימה</string>
+    <string name="Ate">" אכל "</string>
+    <string name="CC">"מ\"ל "</string>
+    <string name="OnDate">" בתאריך"</string>
+    <string name="Poo">קקי</string>
+    <string name="Pee">פיפי</string>
+    <string name="Didon">" עשה "</string>
+    <string name="DidOn2">" ב- "</string>
+    <string name="changeaddr">שנה כתובת</string>
+    <string name="ganAddress">כתובת המעון</string>
+    <string name="disFromTarget">המרחק שלך מהיעד</string>
+    <string name="pushToNavigate">לחץ על התמונה לניווט</string>
+    <string name="pass">סיסמה</string>
+    <string name="register">הרשמה</string>
+    <string name="connect">התחבר</string>
+    <string name="email4">מייל</string>
+    <string name="addTask1">הוסף משימה</string>
+    <string name="addToList">הוסף לרשימה</string>
+    <string name="textview">TextView</string>
+    <string name="textview2">TextView</string>
+    <string name="textview3">TextView</string>
+    <string name="bSaver">BabySaver</string>
 </resources>
