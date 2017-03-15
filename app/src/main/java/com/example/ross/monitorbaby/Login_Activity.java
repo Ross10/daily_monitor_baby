@@ -11,6 +11,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class Login_Activity extends AppCompatActivity {
 
     private String fullname;
@@ -18,7 +22,8 @@ public class Login_Activity extends AppCompatActivity {
     private String password;
     private EditText emailEditText;
     private EditText passwordEditText;
-
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,7 @@ public class Login_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_login_);
         emailEditText = (EditText)findViewById(R.id.emailEditText);
         passwordEditText = (EditText)findViewById(R.id.passwordEditText);
+
 
     }
 

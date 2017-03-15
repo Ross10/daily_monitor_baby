@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "640441718317",
+    "firebase_url": "https://daily-bcare.firebaseio.com",
+    "project_id": "daily-bcare",
+    "storage_bucket": "daily-bcare.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:640441718317:android:5321d7a1ee055471",
+        "android_client_info": {
+          "package_name": "com.example.ross.monitorbaby"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "640441718317-2v2s7u8luoftkldcs5v3fanjrkgu8qpj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ross.monitorbaby",
+            "certificate_hash": "03f0646436cb2f5dca628465b2783f699d940bfd"
+          }
+        },
+        {
+          "client_id": "640441718317-vscv958jejj1lke9eba8jokafobmeg2s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsdH_GUyZFcC-RGJQjaxMFJ3_4fULfI7g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "640441718317-vscv958jejj1lke9eba8jokafobmeg2s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

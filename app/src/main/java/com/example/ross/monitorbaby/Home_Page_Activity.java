@@ -1,6 +1,7 @@
 package com.example.ross.monitorbaby;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,12 +15,17 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
     private ImageButton todo,calender,gallery,gps,lockUser,tracking;
     private GridView gridview;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home__page_);
 
         gridview = (GridView)findViewById(R.id.gridview);
+        gridview.setCacheColorHint(Color.TRANSPARENT);
+        gridview.setFastScrollEnabled(true);
+        gridview.setScrollingCacheEnabled(false);
+
 
         // a potentially  time consuming task
         gridview.setAdapter(new ImageAdapter(Home_Page_Activity.this));

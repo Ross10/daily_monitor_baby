@@ -20,10 +20,11 @@
         android:columnWidth="90sp"
         android:numColumns="auto_fit"
         android:verticalSpacing="40sp"
+        android:fastScrollEnabled="true"
         android:horizontalSpacing="25sp"
         android:stretchMode="columnWidth"
         android:gravity="center"
-        android:layout_marginTop="72sp"
+        android:layout_marginTop="22dp"
         android:layout_below="@+id/imageView2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -33,7 +34,6 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/home_70"
         android:id="@+id/imageView2"
-        android:layout_marginTop="56sp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
