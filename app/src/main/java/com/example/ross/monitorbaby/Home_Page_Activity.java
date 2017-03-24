@@ -12,70 +12,65 @@ import android.widget.ImageButton;
 
 public class Home_Page_Activity extends AppCompatActivity implements View.OnClickListener {
 
-    private ImageButton todo,calender,gallery,gps,lockUser,tracking;
-    private GridView gridview;
+    private ImageButton doList_Btn ,calender_Btn,gallery_Btn,gps_Btn,tracking_Btn,chat_Btn;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home__page_);
+        doList_Btn = (ImageButton)findViewById(R.id.doList_Btn);
+        calender_Btn = (ImageButton)findViewById(R.id.calanter_Btn);
+        gallery_Btn = (ImageButton)findViewById(R.id.gallary_Btn);
+        gps_Btn = (ImageButton)findViewById(R.id.gps_Btn);
+        tracking_Btn = (ImageButton)findViewById(R.id.tracking_Btn);
+        chat_Btn = (ImageButton)findViewById(R.id.chat_Btn);
 
-        gridview = (GridView)findViewById(R.id.gridview);
-        gridview.setCacheColorHint(Color.TRANSPARENT);
-        gridview.setFastScrollEnabled(true);
-        gridview.setScrollingCacheEnabled(false);
-
-
-        // a potentially  time consuming task
-        gridview.setAdapter(new ImageAdapter(Home_Page_Activity.this));
-
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent homeActivity = null;
-
-                switch(position){ // navigation
-
-                    case 0:
-                        homeActivity = new Intent(Home_Page_Activity.this,AndroidCalendarView.class);
-                        break;
-
-                    case 1:
-                        homeActivity = new Intent(Home_Page_Activity.this,GpsHandler.class);
-                        break;
-
-                    case 2:
-                        homeActivity = new Intent(Home_Page_Activity.this,To_Do_list_Activity.class);
-                        break;
-
-                    case 3:
-                        homeActivity = new Intent(Home_Page_Activity.this,Album_Activity.class);
-                        break;
-
-                    case 4:
-                        homeActivity = new Intent(Home_Page_Activity.this,TrackingActivity.class);
-                        break;
-
-                    case 5:
-                        homeActivity = new Intent(Home_Page_Activity.this,Login_Activity.class);
-                        break;
-                }
-
-                if(homeActivity!=null)
-                    startActivity(homeActivity);
-
-            }
-
-
-        });
-
+        doList_Btn.setOnClickListener(this);
+        calender_Btn.setOnClickListener(this);
+        gallery_Btn.setOnClickListener(this);
+        gps_Btn.setOnClickListener(this);
+        tracking_Btn.setOnClickListener(this);
+        chat_Btn.setOnClickListener(this);
 
     }
 
 
+
+
     @Override
     public void onClick(View v) {
+
+        Intent nevigateTo = null;
+        switch (v.getId()){
+            case R.id.gps_Btn:
+                nevigateTo = new Intent(this,GpsHandler.class);
+                break;
+            case R.id.doList_Btn:
+                nevigateTo = new Intent(this,To_Do_list_Activity.class);
+                break;
+
+            case R.id.gallary_Btn:
+                nevigateTo = new Intent(this,Album_Activity.class);
+                break;
+
+            case R.id.calanter_Btn:
+                nevigateTo = new Intent(this,AndroidCalendarView.class);
+                break;
+
+            case R.id.tracking_Btn:
+                nevigateTo = new Intent(this,TrackingActivity.class);
+                break;
+
+//            case R.id.chat_Btn:
+//                nevigateTo = new Intent(this,To_Do_list_Activity.class);
+//                break;
+        }
+
+        if(nevigateTo!=null){
+            startActivity(nevigateTo);
+
+        }
 
 //
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_home__page_"
@@ -10,32 +10,111 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/bgnati"
+    android:weightSum="1"
+    android:orientation="vertical"
+
     tools:context="com.example.ross.monitorbaby.Home_Page_Activity">
 
 
-    <GridView
-        android:id="@+id/gridview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:columnWidth="90sp"
-        android:numColumns="auto_fit"
-        android:verticalSpacing="40sp"
-        android:fastScrollEnabled="true"
-        android:horizontalSpacing="25sp"
-        android:stretchMode="columnWidth"
-        android:gravity="center"
-        android:layout_marginTop="22dp"
-        android:layout_below="@+id/imageView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <ImageView
         android:layout_width="wrap_content"
+        android:layout_height="100sp"
+        app:srcCompat="@drawable/babyforhomepage"
+        android:id="@+id/imageView2" />
+
+    <ImageView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/home_70"
-        android:id="@+id/imageView2"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        app:srcCompat="@drawable/logohome"
+        android:id="@+id/imageView3" />
+
+    <LinearLayout
+        android:layout_margin="10sp"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="70sp"
+        android:weightSum="2">
+
+        <ImageButton
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:background="#0000"
+            android:drawableBottom="@drawable/dolist"
+            android:id="@+id/doList_Btn"
+            android:src="@drawable/dolist"
+            android:layout_weight="1.00" />
+
+        <ImageButton
+            android:layout_width="0sp"
+            android:background="#0000"
+            android:layout_height="fill_parent"
+            android:id="@+id/gallary_Btn"
+            android:src="@drawable/gallary"
+            android:layout_weight="1" />
 
 
-</RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_margin="10sp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+
+        android:layout_width="fill_parent"
+        android:layout_height="70sp">
+
+        <ImageButton
+            android:layout_width="0sp"
+            android:src="@drawable/chat"
+            android:background="#0000"
+            android:layout_height="fill_parent"
+            android:id="@+id/chat_Btn"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:layout_width="0sp"
+            android:layout_height="fill_parent"
+            android:src="@drawable/calander"
+            android:background="#0000"
+            android:id="@+id/calanter_Btn"
+            android:layout_weight="1" />
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_margin="10sp"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="70sp"
+        android:weightSum="2">
+
+        <ImageButton
+            android:layout_width="0sp"
+            android:layout_height="fill_parent"
+            android:background="#0000"
+            android:text="HdsfsdfsdfsdfsdfsdfsdfssdfsdfsdI"
+            android:drawableBottom="@drawable/gps"
+            android:id="@+id/gps_Btn"
+            android:src="@drawable/gps"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:layout_width="0sp"
+            android:background="#0000"
+            android:layout_height="fill_parent"
+            android:id="@+id/tracking_Btn"
+            android:src="@drawable/tracking"
+            android:layout_weight="1" />
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
+

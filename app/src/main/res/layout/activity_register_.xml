@@ -15,6 +15,8 @@
     android:background="@drawable/bgnati"
     tools:context="com.example.ross.monitorbaby.Register_Activity">
 
+
+
     <Button
         android:text="הרשמה"
         android:layout_width="wrap_content"
@@ -36,6 +38,83 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
+
+    <EditText
+
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:gravity="center"
+        android:drawableRight="@drawable/phonedis"
+        android:hint = "טלפון לעדכונים"
+        android:id="@+id/phoneNum"
+        android:layout_marginRight="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_above="@+id/registerBtn"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="11dp" />
+
+    <EditText
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:gravity="center"
+        android:hint="שם הילד"
+        android:drawableRight="@drawable/babyicon"
+        android:ems="10"
+        android:id="@+id/ChildName"
+        android:layout_above="@+id/phoneNum"
+        android:layout_alignLeft="@+id/phoneNum"
+        android:layout_alignStart="@+id/phoneNum" />
+
+    <EditText
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:drawableRight="@drawable/adresscare"
+        android:hint="כתובת המעון"
+        android:ems="10"
+        android:id="@+id/nannyAddressEditText"
+        android:gravity="center"
+        android:layout_above="@+id/ChildName"
+        android:layout_alignLeft="@+id/ChildName"
+        android:layout_alignStart="@+id/ChildName" />
+
+    <EditText
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:hint = "אשר סיסמא"
+        android:gravity="center"
+        android:drawableRight="@drawable/locklock25"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/confirmPasswdEditText"
+        android:layout_above="@+id/nannyAddressEditText"
+        android:layout_alignLeft="@+id/nannyAddressEditText"
+        android:layout_alignStart="@+id/nannyAddressEditText" />
+
+    <EditText
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/passwdEditText"
+        android:drawableRight="@drawable/locklock25"
+        android:gravity="center"
+        android:hint = "סיסמא"
+        android:contextClickable="false"
+
+        android:layout_above="@+id/confirmPasswdEditText"
+        android:layout_alignLeft="@+id/confirmPasswdEditText"
+        android:layout_alignStart="@+id/confirmPasswdEditText" />
+
     <EditText
         android:textStyle="bold"
         android:layout_width="wrap_content"
@@ -46,89 +125,9 @@
         android:drawableRight="@drawable/maicon"
         android:hint = "דואר אלקטרוני"
         android:id="@+id/emailText"
-        android:layout_below="@+id/fullNameEditText"
-        android:layout_alignLeft="@+id/fullNameEditText"
-        android:layout_marginTop="5sp"
-        android:layout_alignStart="@+id/fullNameEditText" />
-
-    <EditText
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:hint = "אשר סיסמא"
-        android:layout_marginTop="5sp"
-        android:gravity="center"
-        android:drawableRight="@drawable/locklock25"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/confirmPasswdEditText"
-        android:layout_below="@+id/passwdEditText"
+        android:layout_above="@+id/passwdEditText"
         android:layout_alignLeft="@+id/passwdEditText"
         android:layout_alignStart="@+id/passwdEditText" />
-
-    <EditText
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5sp"
-        android:inputType="textPersonName"
-        android:drawableRight="@drawable/adresscare"
-        android:hint="כתובת המעון"
-        android:ems="10"
-        android:id="@+id/nannyAddressEditText"
-        android:layout_below="@+id/confirmPasswdEditText"
-        android:layout_alignLeft="@+id/confirmPasswdEditText"
-        android:layout_alignStart="@+id/confirmPasswdEditText"
-        android:gravity="center" />
-
-    <EditText
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5sp"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/passwdEditText"
-        android:drawableRight="@drawable/locklock25"
-        android:gravity="center"
-        android:hint = "סיסמא"
-        android:contextClickable="false"
-        android:layout_below="@+id/emailText"
-        android:layout_alignLeft="@+id/emailText"
-
-        android:layout_alignStart="@+id/emailText" />
-
-    <EditText
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5sp"
-        android:inputType="textPersonName"
-        android:gravity="center"
-        android:hint="שם הילד"
-        android:drawableRight="@drawable/babyicon"
-        android:ems="10"
-        android:id="@+id/ChildName"
-        android:layout_below="@+id/nannyAddressEditText"
-        android:layout_alignLeft="@+id/nannyAddressEditText"
-        android:layout_alignStart="@+id/nannyAddressEditText" />
-
-
-    <EditText
-
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5sp"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:gravity="center"
-        android:drawableRight="@drawable/phonedis"
-        android:hint = "טלפון לעדכונים"
-        android:id="@+id/phoneNum"
-        android:layout_below="@+id/ChildName"
-        android:layout_alignLeft="@+id/ChildName"
-        android:layout_alignStart="@+id/ChildName" />
 
     <EditText
         android:gravity="center"
@@ -141,8 +140,9 @@
         android:ems="10"
         android:id="@+id/fullNameEditText"
         style="@style/Widget.AppCompat.EditText"
-        android:layout_below="@+id/imageView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_above="@+id/emailText"
+        android:layout_alignLeft="@+id/emailText"
+        android:layout_alignStart="@+id/emailText" />
 
 </RelativeLayout>
+
