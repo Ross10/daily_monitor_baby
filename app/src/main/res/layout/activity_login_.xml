@@ -49,40 +49,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/register_textView"
-        android:text="@string/register"
-        android:onClick="register"
-        android:textStyle="italic"
-        android:textSize="22dp"
-        android:layout_marginBottom="49dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:text="@string/connect"
-        android:textSize="22dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/connect_TextView"
-        android:textStyle="italic"
-        android:onClick="connect"
-
-        android:layout_above="@+id/register_textView"
-        android:layout_alignRight="@+id/register_textView"
-        android:layout_alignEnd="@+id/register_textView"
-        android:layout_marginBottom="53dp" />
-
-    <ImageView
-        android:layout_width="250dp"
-        android:layout_height="150dp"
-        app:srcCompat="@drawable/babylogo2"
-        android:id="@+id/logo"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -96,6 +62,86 @@
         android:layout_below="@+id/logo"
         android:layout_alignLeft="@+id/passwordEditText"
         android:layout_alignStart="@+id/passwordEditText" />
+
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#2299de"
+        android:text="התחבר"
+        android:textColor="#fff"
+        android:onClick="connect"
+        android:textStyle="bold"
+        android:layout_below="@+id/password_pic"
+        android:layout_marginTop="24dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/googleSignInBtn"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:onClick="googleSignIn"
+        android:layout_gravity="center"
+        android:layout_below="@+id/loginBtn"
+        android:layout_marginTop="13dp" />
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="150dp"
+        app:srcCompat="@drawable/babylogo2"
+        android:id="@+id/logo"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#000"
+        android:id="@+id/view"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/googleSignInBtn"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:id="@+id/createAccount"
+            android:layout_width="0dp"
+            android:onClick="register"
+            android:layout_height="wrap_content"
+            android:layout_weight=".49"
+            android:gravity="center"
+            android:text="צור חשבון חדש"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="#000" />
+
+        <TextView
+            android:id="@+id/lostPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".49"
+            android:gravity="center"
+            android:text="שכחתי סיסמא"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 
 </RelativeLayout>

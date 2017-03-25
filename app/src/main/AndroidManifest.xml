@@ -61,6 +61,13 @@
         <activity android:name=".GpsHandler" />
         <activity android:name=".AndroidCalendarView" />
         <activity android:name=".TrackingActivity" />
+        <activity android:name=".ChatActivity"></activity>
+
+
+        <service android:name=".FirebaseBackgroundService"
+            android:exported="false"
+            android:enabled="true">
+        </service>
     </application>
 
 </manifest>
