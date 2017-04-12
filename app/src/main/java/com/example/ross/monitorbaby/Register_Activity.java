@@ -74,15 +74,15 @@ public class Register_Activity extends AppCompatActivity {
 
 
 
-//            SharedPreferences.Editor editor = sharedPreferences.edit();
-//            editor.putString("Email",email.getText().toString());
-//            editor.putString("Password",passwd.getText().toString());
-//            editor.putString("nannyAddress",nannyAddress.getText().toString());
-//            editor.putString("childName",childName.getText().toString());
-//            editor.putString("phoneNum",phoneNum.getText().toString());
-//            editor.putString("fullname",fullname.getText().toString());
-//
-//            editor.commit();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("Email",email.getText().toString());
+            editor.putString("Password",passwd.getText().toString());
+            editor.putString("nannyAddress",nannyAddress.getText().toString());
+            editor.putString("childName",childName.getText().toString());
+            editor.putString("phoneNum",phoneNum.getText().toString());
+            editor.putString("fullname",fullname.getText().toString());
+
+            editor.commit();
 //            Toast.makeText(this, getString(R.string.Thanks) + fullname.getText().toString() +getString(R.string.YourDataSavedSuccsefuly2), Toast.LENGTH_LONG).show();
 
             progressDialog = ProgressDialog.show(Register_Activity.this,"אנא המתן..","העמוד בטעינה",true);
@@ -99,7 +99,7 @@ public class Register_Activity extends AppCompatActivity {
     }
 
     private void executeSignUp(String userEmail, String userPassword) {
-        mDialog = AppHelper.buildAlertDialog("some Title", "Some message" , false , this );
+        mDialog = AppHelper.buildAlertDialog("שמירת הנתונים מתבצעת..", "אנא המתן.." , false , this );
         mDialog.show();
 
 

@@ -16,78 +16,34 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout2"
         android:layout_alignParentTop="true"
-        android:id="@+id/relativeLayout2">
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
+
+        <ListView
+            android:id="@+id/listView1"
+            android:layout_below="@+id/imageButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+        </ListView>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_addicon"
+            android:id="@+id/imageButton"
+            android:onClick="addTaskNow"
+            android:background="@null"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_menu_edit"
-        android:id="@+id/editImg"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="onEdit"
-        />
-
-    <ListView
-        android:id="@+id/listView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/taskAdd"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-    </ListView>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/cart"
-        android:id="@+id/imageView5"
-        android:layout_marginBottom="15sp"
-        android:layout_below="@+id/relativeLayout2"
-        android:layout_above="@+id/toDoListEditText"
-        android:layout_toLeftOf="@+id/deleteImg"
-        android:layout_toStartOf="@+id/deleteImg" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_menu_delete"
-        android:id="@+id/deleteImg"
-        android:layout_gravity="fill"
-        android:layout_weight="1"
-        android:onClick="onDelete"
-        android:layout_below="@+id/editImg"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <EditText
-        android:id="@+id/toDoListEditText"
-        android:hint="@string/addTask1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_alignTop="@+id/taskAdd"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-        <requestFocus />
-    </EditText>
-
-    <Button
-        android:id="@+id/taskAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/addToList"
-        android:onClick="addTaskNow"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/deleteImg"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>

@@ -18,7 +18,7 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/baby_icon"
-        android:label="@string/app_name"
+        android:label="Daily B-Care"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         GPS
@@ -61,13 +61,14 @@
         <activity android:name=".GpsHandler" />
         <activity android:name=".AndroidCalendarView" />
         <activity android:name=".TrackingActivity" />
-        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".ChatActivity" />
 
+        <service
+            android:name=".FirebaseBackgroundService"
+            android:enabled="true"
+            android:exported="false"></service>
 
-        <service android:name=".FirebaseBackgroundService"
-            android:exported="false"
-            android:enabled="true">
-        </service>
+        <activity android:name=".TaskEditActivity"></activity>
     </application>
 
 </manifest>

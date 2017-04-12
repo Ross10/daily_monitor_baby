@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,7 +22,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.Api;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.*;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -31,7 +35,10 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.FileDescriptor;
+import java.io.PrintWriter;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class Login_Activity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = Login_Activity.class.getSimpleName();
@@ -60,6 +67,24 @@ public class Login_Activity extends AppCompatActivity implements GoogleApiClient
 
         mAuth = FirebaseAuth.getInstance();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        // Configure Google Sign In
+//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestIdToken(getString(R.string.default_web_client_id))
+//                .requestEmail()
+//                .build();
+//
+//
+//        mGoogleApiClient = new GoogleApiClient.Builder(getApplicationContext()).enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener()
+//        {
+//
+//
+//            @Override
+//            public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+//                Toast.makeText(Login_Activity.this, " you go an error ", Toast.LENGTH_LONG).show();
+//
+//            }
+//        }).addApi(Auth.GOOGLE_SIGN_IN_API,gso).build();
+
 
 
 
@@ -67,6 +92,35 @@ public class Login_Activity extends AppCompatActivity implements GoogleApiClient
     }
 
 
+//    private void signIn() {
+//        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+//        startActivityForResult(signInIntent, RC_SIGN_IN);
+//    }
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+//        if (requestCode == RC_SIGN_IN) {
+//            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+//            if (result.isSuccess()) {
+//                // Google Sign In was successful, authenticate with Firebase
+//                GoogleSignInAccount account = result.getSignInAccount();
+//                firebaseAuthWithGoogle(account);
+//            } else {
+//                // Google Sign In failed, update UI appropriately
+//                // ...
+//            }
+//        }
+//    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
 
     public void connect(View v){
 
@@ -74,44 +128,30 @@ public class Login_Activity extends AppCompatActivity implements GoogleApiClient
         String psswd = passwordEditText.getText().toString();
         progressDialog = ProgressDialog.show(Login_Activity.this,"אנא המתן..","העמוד בטעינה",true);
 
-        mAuth.signInWithEmailAndPassword(email, psswd).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+        if(email.equals("")|| psswd.equals("")){
+//            Toast.makeText(this, "ERRRORRRRRR", Toast.LENGTH_LONG).show();
+
+            mDialog=AppHelper.buildAlertDialog("בעיה בהתברות" , "לא מילאת את כל הפרטים", true , Login_Activity.this);
+            mDialog.show();
+            progressDialog.dismiss();
+
+
+        }else{
+            mAuth.signInWithEmailAndPassword(email, psswd).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
 
 //                mDialog.dismiss();
-                checkLoginSuccess(task, false);
+                    checkLoginSuccess(task, false);
 
-            }
-        });
+                }
+            });
 
-
-
-
+        }
 
 
 
 
-
-        //get data from shared reference
-//        SharedPreferences preferences = getSharedPreferences("MyPrefs",MODE_PRIVATE);
-//        email  = preferences.getString("Email","there is not such user");
-//        password = preferences.getString("Password","there is no such a password");
-//        fullname = preferences.getString("fullname","אנונימי");
-
-        // check match
-//        if(emailEditText.getText().toString().equals(email) && passwordEditText.getText().toString().equals(password)){
-//            Toast.makeText(this," ברוך הבא " +  fullname, Toast.LENGTH_LONG).show();
-//            Intent homePage = new Intent(this,Home_Page_Activity.class);
-//            startActivity(homePage);
-//        }else{
-//            AlertDialog.Builder error = new AlertDialog.Builder(this);
-//            error.setMessage(R.string.UsernameOrpasswprdInccorect);
-//            error.setTitle(R.string.ErrorWithAttiudeToTheSystem);
-//            error.setPositiveButton(R.string.OK3,null);
-//            error.setCancelable(true);
-//            error.create().show();
-//
-//        }
 
 
 
@@ -150,6 +190,13 @@ public class Login_Activity extends AppCompatActivity implements GoogleApiClient
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Toast.makeText(this, "You got an Error", Toast.LENGTH_LONG).show();
+    }
+
+
+
+    public void googleSignIn(View v){
+//        signIn();
+
     }
 
 

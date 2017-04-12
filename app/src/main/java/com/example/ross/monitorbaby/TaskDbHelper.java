@@ -78,7 +78,7 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Task task = new Task();
-                task.setId(cursor.getInt(0));
+               // task.setId(cursor.getInt(0));
                 task.setTaskName(cursor.getString(1));
 // Adding contact to list
                 taskList.add(task);

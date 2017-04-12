@@ -7,24 +7,25 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 
 public class Home_Page_Activity extends AppCompatActivity implements View.OnClickListener {
 
-    private ImageButton doList_Btn ,calender_Btn,gallery_Btn,gps_Btn,tracking_Btn,chat_Btn;
+    private Button doList_Btn ,calender_Btn,gallery_Btn,gps_Btn,tracking_Btn,chat_Btn;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home__page_);
-        doList_Btn = (ImageButton)findViewById(R.id.doList_Btn);
-        calender_Btn = (ImageButton)findViewById(R.id.calanter_Btn);
-        gallery_Btn = (ImageButton)findViewById(R.id.gallary_Btn);
-        gps_Btn = (ImageButton)findViewById(R.id.gps_Btn);
-        tracking_Btn = (ImageButton)findViewById(R.id.tracking_Btn);
-        chat_Btn = (ImageButton)findViewById(R.id.chat_Btn);
+        doList_Btn = (Button)findViewById(R.id.doList_Btn);
+        calender_Btn = (Button)findViewById(R.id.calanter_Btn);
+        gallery_Btn = (Button)findViewById(R.id.gallary_Btn);
+        gps_Btn = (Button)findViewById(R.id.gps_Btn);
+        tracking_Btn = (Button)findViewById(R.id.tracking_Btn);
+        chat_Btn = (Button)findViewById(R.id.chat_Btn);
 
         doList_Btn.setOnClickListener(this);
         calender_Btn.setOnClickListener(this);
@@ -61,10 +62,10 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
             case R.id.tracking_Btn:
                 nevigateTo = new Intent(this,TrackingActivity.class);
                 break;
-
-            case R.id.chat_Btn:
-                nevigateTo = new Intent(this,ChatActivity.class);
-                break;
+//
+//            case R.id.chat_Btn:
+//                nevigateTo = new Intent(this,ChatActivity.class);
+//                break;
         }
 
         if(nevigateTo!=null){

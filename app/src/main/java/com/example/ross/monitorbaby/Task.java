@@ -1,6 +1,10 @@
 package com.example.ross.monitorbaby;
 
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
+
+import java.util.UUID;
 
 /**
  * Created by Ross on 3/4/2017.
@@ -9,29 +13,26 @@ package com.example.ross.monitorbaby;
 // tasks management
 public class Task {
     private String taskName;
-    private int status;
-    private int id;
+    private int priorty;
+
+    private DatabaseReference dbRef;
+    private String uniqueChatId;
 
 
     public Task(){
-        this.taskName = null;
-        this.status=0;
 
     }
 
-    public Task(String taskName){
+    public Task(String taskName,int priorty){
         this.taskName = taskName;
-        this.status = status;
+        this.priorty = priorty;
+
     }
 
 
-    public int getId(){
-        return this.id;
-    }
+    public String getIdretu() { return UUID.randomUUID().toString();}
 
-    public void setId(int id){
-        this.id = id;
-    }
+
 
     public void setTaskName(String taskName){
         this.taskName = taskName;
@@ -41,11 +42,26 @@ public class Task {
         return this.taskName;
     }
 
-    public void setStatus(int status){
-        this.status = status;
+    public void setPriorty(int priorty) {
+        this.priorty = priorty;
     }
 
-    public int getStatus(){
-        return this.status;
+    public int getPriorty() {
+        return priorty;
     }
+
+
+    // Not including in FireBase database
+
+    @Exclude
+    public void setDatabaseReference(DatabaseReference databaseReference)
+    {
+        this.dbRef = databaseReference;
+    }
+    @Exclude
+    public DatabaseReference getDatabaseReference()
+    {
+        return this.dbRef;
+    }
+
 }

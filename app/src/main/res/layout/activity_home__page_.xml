@@ -35,21 +35,22 @@
         android:layout_height="70sp"
         android:weightSum="2">
 
-        <ImageButton
+        <Button
             android:layout_width="0sp"
             android:layout_height="wrap_content"
             android:background="#0000"
-            android:drawableBottom="@drawable/dolist"
+            android:drawableLeft="@drawable/dolist"
+            android:text="רשימת קניות"
             android:id="@+id/doList_Btn"
-            android:src="@drawable/dolist"
             android:layout_weight="1.00" />
 
-        <ImageButton
+        <Button
             android:layout_width="0sp"
             android:background="#0000"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/gallary_Btn"
-            android:src="@drawable/gallary"
+            android:drawableLeft="@drawable/gallary"
+            android:text="גלריית תמונות"
             android:layout_weight="1" />
 
 
@@ -64,19 +65,21 @@
         android:layout_width="fill_parent"
         android:layout_height="70sp">
 
-        <ImageButton
+        <Button
             android:layout_width="0sp"
-            android:src="@drawable/chat"
+            android:drawableLeft="@drawable/chat"
             android:background="#0000"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="צ'ט"
             android:id="@+id/chat_Btn"
             android:layout_weight="1" />
 
-        <ImageButton
+        <Button
             android:layout_width="0sp"
-            android:layout_height="fill_parent"
-            android:src="@drawable/calander"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/calander"
             android:background="#0000"
+            android:text="יומן"
             android:id="@+id/calanter_Btn"
             android:layout_weight="1" />
 
@@ -92,22 +95,22 @@
         android:layout_height="70sp"
         android:weightSum="2">
 
-        <ImageButton
+        <Button
             android:layout_width="0sp"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:background="#0000"
-            android:text="HdsfsdfsdfsdfsdfsdfsdfssdfsdfsdI"
-            android:drawableBottom="@drawable/gps"
+            android:text="GPS"
             android:id="@+id/gps_Btn"
-            android:src="@drawable/gps"
+            android:drawableLeft="@drawable/gps"
             android:layout_weight="1" />
 
-        <ImageButton
+        <Button
             android:layout_width="0sp"
             android:background="#0000"
-            android:layout_height="fill_parent"
+            android:text="מעקב"
+            android:layout_height="wrap_content"
             android:id="@+id/tracking_Btn"
-            android:src="@drawable/tracking"
+            android:drawableLeft="@drawable/tracking"
             android:layout_weight="1" />
 
 

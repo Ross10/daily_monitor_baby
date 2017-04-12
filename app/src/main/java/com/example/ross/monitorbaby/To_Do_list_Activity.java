@@ -2,6 +2,9 @@ package com.example.ross.monitorbaby;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -18,8 +21,18 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
@@ -27,6 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.R.id.list;
+import static android.R.id.progress;
 
 public class To_Do_list_Activity extends AppCompatActivity {
     private  TaskDbHelper db;
@@ -36,11 +50,17 @@ public class To_Do_list_Activity extends AppCompatActivity {
     private String [] mngtask;
     private Context appContext;
     private Task newTask;
-    private int editChooseFlag,deleteChooseFlag,position;
+    private int editChooseFlag,deleteChooseFlag,position,priority;
+    private String taskName;
     private ImageButton deleteImg,editImg;
     private List<Task> taskList;
+    private ArrayList<Task> taskisList;
+    private FirebaseAuth mAuth; //Returns an instance of this class corresponding to the default FirebaseApp instance when using getiInstance().
+    private DatabaseReference mDatabaseReference;
     private EditText toDoListEditText;
     Handler mainHandler = new Handler();
+    private ChildEventListener mChildEventListener;
+    private ValueEventListener mValueEventListener;
 
 
     @Override
@@ -48,23 +68,43 @@ public class To_Do_list_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to__do_list_);
 
+//        Task t1 = new Task("new Task2",0);
+//        FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
+//        if(userr!=null){
+//            String name = userr.getDisplayName();
+//            String email = userr.getEmail();
+//            if(email.equals("rrrr@rrr.com")){
+//                Toast.makeText(this, "hii", Toast.LENGTH_SHORT).show();
+//                mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid());
+//                mDatabaseReference.child("Task").child(t1.getIdretu()).setValue(t1);
+//
+//            }
+//        }
+
+
+
+
         // connect with layout
-        deleteImg = (ImageButton)findViewById(R.id.deleteImg);
-        editImg = (ImageButton)findViewById(R.id.editImg);
-        toDoListEditText = (EditText) findViewById(R.id.toDoListEditText);
+//        deleteImg = (ImageButton)findViewById(R.id.deleteImg);
+//        editImg = (ImageButton)findViewById(R.id.editImg);
+//        toDoListEditText = (EditText) findViewById(R.id.toDoListEditText);
         db = new TaskDbHelper(this);
         list = db.getAllTasks();
         adapt = new MyAdapter(this, R.layout.list_inner_view, list);
         listTask = (ListView) findViewById(R.id.listView1);
         listTask.setAdapter(adapt);
+        Log.d("the todo is :  hi","hi");
         mngtask =  new String[2];
         mngtask[0]= "EDIT";
         mngtask[1]= "DELETE";
         appContext = To_Do_list_Activity.this;
         editChooseFlag = deleteChooseFlag = 0;
-        deleteImg.setVisibility(View.INVISIBLE);
-        editImg.setVisibility(View.INVISIBLE);
+        readAllDataFromFB();
+        taskisList = new ArrayList<Task>();
+//        deleteImg.setVisibility(View.INVISIBLE);
+//        editImg.setVisibility(View.INVISIBLE);
 //        itai = new Task("hello world",0);
+
         listTask.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
@@ -72,20 +112,64 @@ public class To_Do_list_Activity extends AppCompatActivity {
                 position = pos;
                 // TODO Auto-generated method stub
 
-//
-                deleteImg.setVisibility(View.VISIBLE);
-                editImg.setVisibility(View.VISIBLE);
+////
+//                deleteImg.setVisibility(View.VISIBLE);
+//                editImg.setVisibility(View.VISIBLE);
 
 
                 return true;
             }
         });
 
+//
 
+//        mValueEventListener = new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//               String taskName = dataSnapshot.getValue().toString();
+//                adapt.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        };
+//        mDatabaseReference.addValueEventListener(mValueEventListener);
+
+
+  //      FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
+//        if(userr!=null) {
+//                mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
+//
+//        }
+//
+//
 
     }
 
+    //here we will read all the data from the FB - to the adapters every enterce to ToDolist - and that to save space on the Phone DB + to get the mission per user.
 
+        public void readAllDataFromFB(){
+            FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
+            mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid());
+            mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    for(DataSnapshot ds : snapshot.child("Task").getChildren()) {
+                        Task todol = ds.getValue(Task.class);
+                        adapt.add(todol);
+                    }
+                    adapt.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+
+            });
+        }
 
 
 
@@ -93,17 +177,90 @@ public class To_Do_list_Activity extends AppCompatActivity {
 
     public void addTaskNow(View v) {
 
-        if (toDoListEditText.getText().toString().equalsIgnoreCase("")) {
-            Toast.makeText(this, R.string.DidntEnterNewTask,
-                    Toast.LENGTH_LONG).show();
-        } else {
-            Task task = new Task(toDoListEditText.getText().toString());
-            db.addTask(task);
-            toDoListEditText.setText("");
-            adapt.add(task);
-            adapt.notifyDataSetChanged();
+        Intent i = new Intent(this, TaskEditActivity.class);
+        startActivityForResult(i, 1);
+
+
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                taskName = data.getStringExtra("taskName");
+                priority = data.getIntExtra("priority",0);
+
+
+                Task t1 = new Task(taskName,priority);
+                FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
+                if(userr!=null){
+                    String name = userr.getDisplayName();
+                    String email = userr.getEmail();
+//                    if(email.equals("rrrr@rrr.com")){
+                        Toast.makeText(this, "hii", Toast.LENGTH_SHORT).show();
+                        mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid());
+                        mDatabaseReference.child("Task").child(t1.getIdretu()).setValue(t1);
+
+                        switch (t1.getPriorty()){
+                            case 0:
+                                break;
+                            case 1:
+                                break;
+                            case 2:
+                                break;
+                        }
+
+
+
+
+                mChildEventListener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    if(dataSnapshot.exists()){
+                        System.out.println("The " + dataSnapshot.getKey() + " score is " + dataSnapshot.getValue());
+                        fetchData(dataSnapshot);
+//                        Task todo =  dataSnapshot.getValue(Task.class);
+//                    adapt.notifyDataSetChanged();
+                        Log.d("the todo is : ", "jj");
+                    }
+
+
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            };
+
+            mDatabaseReference.addChildEventListener(mChildEventListener);
+
+//                    }
+                }
+
+
+
+
+
+            }
         }
     }
+
 
     // array adapter to connect the data
     public class MyAdapter extends ArrayAdapter<Task> {
@@ -141,97 +298,24 @@ public class To_Do_list_Activity extends AppCompatActivity {
             Task current = taskList.get(position);
             chk.setText(current.getTaskName());
             chk.setTag(current);
-            Log.d("listener", String.valueOf(current.getId()));
+
             return convertView;
         }
 
 
 
-    }
-
-
-    public void onDelete(View v){
-        db.deleteTask(list.get(position));
-        adapt.remove(list.get(position));
-        adapt.notifyDataSetChanged();
-        deleteImg.setVisibility(View.INVISIBLE);
-        editImg.setVisibility(View.INVISIBLE);
-
-    }
-    public void onEdit(View v){
-
-
-// Set up the input
-
-        callBuilder();
-        adapt.notifyDataSetChanged();
-// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-
-
-// Set up the buttons
-
-        adapt.notifyDataSetChanged();
-
-        adapt.notifyDataSetChanged();
 
 
     }
 
 
-    public void callBuilder(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.ChangeTask);
-        final EditText input = new EditText(this);
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        builder.setView(input);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+    private void fetchData(DataSnapshot datasnapshot){
+        taskisList.clear();
+        for(DataSnapshot ds : datasnapshot.getChildren()){
+            Task todol = ds.getValue(Task.class);
+            taskisList.add(todol);
 
-
-                adapt.notifyDataSetChanged();
-
-                newTask = new Task(input.getText().toString());
-//                db.updateTask(list.get(which));
-                adapt.notifyDataSetChanged();
-
-                db.updateTask(newTask,list.get(position).getId());
-
-                adapt.notifyDataSetChanged();
-
-
-                To_Do_list_Activity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapt.notifyDataSetChanged();
-                    }
-                });
-
-
-
-                adapt.notifyDataSetChanged();
-                adapt = new MyAdapter(getApplicationContext(), 0, list);
-                adapt.notifyDataSetChanged();
-
-                adapt2 = new MyAdapter(getApplicationContext(), R.layout.list_inner_view, list);
-                listTask.setAdapter(adapt2);
-
-                adapt2.notifyDataSetChanged();
-
-
-
-
-
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
+        }
     }
 
 

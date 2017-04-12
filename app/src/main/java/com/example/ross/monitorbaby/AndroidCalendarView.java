@@ -161,7 +161,7 @@ public class AndroidCalendarView extends AppCompatActivity
                 cca.changeCursor(c1);
 
                 if(c1.getCount()==0) // if there is no events for this date
-                    Toast.makeText(getApplicationContext(), R.string.noTaskForToday, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.noTaskForToday, Toast.LENGTH_SHORT).show();
 
             }
         });
