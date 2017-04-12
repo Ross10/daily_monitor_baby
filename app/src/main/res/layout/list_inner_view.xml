@@ -1,50 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="right"
-    
-    >
-
-
-
-
-    <TextView
-        android:text="@string/textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:id="@+id/textView2"
-        android:layout_marginTop="5sp"
-        />
-
+    android:weightSum="2"
+    android:orientation="horizontal">
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20sp"
-        android:weightSum="2"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:orientation="vertical">
 
-
-        <ImageButton
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            app:srcCompat="@drawable/ic_doneicon"
-            android:id="@+id/imageButton6"
-            android:layout_weight="1" />
+            android:id="@+id/firstRow">
+            <TextView
+                android:text="@string/textview"
+                android:layout_width="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:id="@+id/textView2"
+                android:layout_marginTop="5sp"
+                />
 
-        <ImageButton
-            android:layout_width="wrap_content"
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            app:srcCompat="@drawable/ic_editicon"
-            android:id="@+id/imageButton5"
-            android:layout_weight="1" />
+            android:weightSum="2"
+            android:layout_below="@+id/firstRow">
+
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                app:srcCompat="@drawable/ic_doneicon"
+                android:id="@+id/imageButton6"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                app:srcCompat="@drawable/ic_editicon"
+                android:id="@+id/imageButton5"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+
+
+
     </LinearLayout>
 
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.5"
+        android:gravity="right"
+        android:weightSum="1">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="107dp"
+            app:srcCompat="@drawable/low_pri"
+            android:id="@+id/priView"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_weight="0.89" />
+
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

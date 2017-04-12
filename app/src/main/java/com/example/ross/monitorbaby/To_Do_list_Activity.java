@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -43,7 +44,7 @@ import static android.R.id.list;
 import static android.R.id.progress;
 
 public class To_Do_list_Activity extends AppCompatActivity {
-    private  TaskDbHelper db;
+    private TaskDbHelper db;
     private List<Task> list;
     private MyAdapter adapt, adapt2;
     private ListView listTask;
@@ -59,6 +60,7 @@ public class To_Do_list_Activity extends AppCompatActivity {
     private DatabaseReference mDatabaseReference;
     private EditText toDoListEditText;
     Handler mainHandler = new Handler();
+    private ImageView priorityImg;
     private ChildEventListener mChildEventListener;
     private ValueEventListener mValueEventListener;
 
@@ -90,6 +92,7 @@ public class To_Do_list_Activity extends AppCompatActivity {
 //        toDoListEditText = (EditText) findViewById(R.id.toDoListEditText);
         db = new TaskDbHelper(this);
         list = db.getAllTasks();
+        priorityImg = (ImageView)findViewById(R.id.priView);
         adapt = new MyAdapter(this, R.layout.list_inner_view, list);
         listTask = (ListView) findViewById(R.id.listView1);
         listTask.setAdapter(adapt);
@@ -159,6 +162,7 @@ public class To_Do_list_Activity extends AppCompatActivity {
                     for(DataSnapshot ds : snapshot.child("Task").getChildren()) {
                         Task todol = ds.getValue(Task.class);
                         adapt.add(todol);
+
                     }
                     adapt.notifyDataSetChanged();
                 }
@@ -201,14 +205,7 @@ public class To_Do_list_Activity extends AppCompatActivity {
                         mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid());
                         mDatabaseReference.child("Task").child(t1.getIdretu()).setValue(t1);
 
-                        switch (t1.getPriorty()){
-                            case 0:
-                                break;
-                            case 1:
-                                break;
-                            case 2:
-                                break;
-                        }
+
 
 
 
@@ -296,6 +293,21 @@ public class To_Do_list_Activity extends AppCompatActivity {
                 chk = (TextView) convertView.getTag();
             }
             Task current = taskList.get(position);
+            ImageView iv = (ImageView)convertView.findViewById(R.id.priView);
+            switch (current.getPriorty()){
+                case 0:
+                    iv.setImageDrawable(getDrawable(R.drawable.high_pri));
+                    break;
+                case 1:
+                    iv.setImageDrawable(getDrawable(R.drawable.medium_pri));
+
+                    break;
+                case 2:
+                    iv.setImageDrawable(getDrawable(R.drawable.low_pri));
+
+                    break;
+            }
+
             chk.setText(current.getTaskName());
             chk.setTag(current);
 
