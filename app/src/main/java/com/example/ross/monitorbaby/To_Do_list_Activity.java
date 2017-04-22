@@ -58,6 +58,7 @@ public class To_Do_list_Activity extends AppCompatActivity {
     private ArrayList<Task> taskisList;
     private FirebaseAuth mAuth; //Returns an instance of this class corresponding to the default FirebaseApp instance when using getiInstance().
     private DatabaseReference mDatabaseReference;
+    private ListingAdapter adapterson;
     private EditText toDoListEditText;
     Handler mainHandler = new Handler();
     private ImageView priorityImg;
@@ -101,6 +102,7 @@ public class To_Do_list_Activity extends AppCompatActivity {
         mngtask[0]= "EDIT";
         mngtask[1]= "DELETE";
         appContext = To_Do_list_Activity.this;
+
         editChooseFlag = deleteChooseFlag = 0;
         readAllDataFromFB();
         taskisList = new ArrayList<Task>();
@@ -327,7 +329,25 @@ public class To_Do_list_Activity extends AppCompatActivity {
             Task todol = ds.getValue(Task.class);
             taskisList.add(todol);
 
+
         }
+       // System.out.println("TaskisList in 0 place is : " + taskisList.get(0) + " and in the first place is : " + taskisList.get(1));
+//        adapt.add(taskisList.get(0));
+//        adapt.notifyDataSetChanged();
+
+//        adapt.add(taskisList.get(taskisList.size()-1));
+//        adapt.notifyDataSetChanged();
+        adapterson = new ListingAdapter(getApplicationContext(),taskisList);
+        adapterson.notifyDataSetChanged();
+
+    }
+
+
+
+
+
+    public void doneButton(){
+
     }
 
 

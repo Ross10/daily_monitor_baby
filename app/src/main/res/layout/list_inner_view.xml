@@ -43,6 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
+                android:onClick="doneButton"
                 app:srcCompat="@drawable/ic_doneicon"
                 android:id="@+id/imageButton6"
                 android:layout_weight="1" />

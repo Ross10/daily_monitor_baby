@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/bgblack2"
+    android:background="@drawable/bgwhite"
     tools:context="com.example.ross.monitorbaby.To_Do_list_Activity">
 
 
