@@ -203,7 +203,7 @@ public class To_Do_list_Activity extends AppCompatActivity {
                     String name = userr.getDisplayName();
                     String email = userr.getEmail();
 //                    if(email.equals("rrrr@rrr.com")){
-                        Toast.makeText(this, "hii", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this, "hii", Toast.LENGTH_SHORT).show();
                         mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid());
                         mDatabaseReference.child("Task").child(t1.getIdretu()).setValue(t1);
 
@@ -228,6 +228,7 @@ public class To_Do_list_Activity extends AppCompatActivity {
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+//                    Task todo2 = dataSnapshot.getValue(Task.class);
 
                 }
 

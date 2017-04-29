@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -61,6 +62,16 @@
         android:layout_alignTop="@+id/addEventID"
         android:layout_alignLeft="@+id/addEventID"
         android:layout_alignStart="@+id/addEventID" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:srcCompat="@android:drawable/star_big_on"
+        android:id="@+id/star_events"
+        android:layout_alignTop="@+id/calendar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
 
 
