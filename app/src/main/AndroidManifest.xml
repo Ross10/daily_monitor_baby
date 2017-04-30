@@ -66,9 +66,10 @@
         <service
             android:name=".FirebaseBackgroundService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false" />
 
-        <activity android:name=".TaskEditActivity"></activity>
+        <activity android:name=".TaskEditActivity" />
+        <activity android:name=".setted_tasks_Activity"></activity>
     </application>
 
 </manifest>

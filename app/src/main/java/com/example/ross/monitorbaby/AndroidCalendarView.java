@@ -279,12 +279,13 @@ public class AndroidCalendarView extends AppCompatActivity
     }
 
 
+    public void openNewCases(View v){
+        Intent i = new Intent(this, TaskEditActivity.class);
+        startActivityForResult(i,1);
+    }
 
-
-
-
-
-
+    private void startActivityForResult(Intent i) {
+    }
 
 
 }
