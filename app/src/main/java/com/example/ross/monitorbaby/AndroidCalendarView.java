@@ -36,13 +36,13 @@ public class AndroidCalendarView extends AppCompatActivity
     CalendarDbHelper calDbHelper;
     private ListView lVtasksList;
 
-    private int focusedYear;
+    private int focusedYear,currentDay,currentYear,currentMonth;
     private int focusedMonth;
     private int focusedDay;
     private ImageView add;
     private ImageView edit;
     private ImageView delete;
-    private String desc;
+    private String desc,sa;
 
     CalendarView calendar;
 
@@ -200,92 +200,134 @@ public class AndroidCalendarView extends AppCompatActivity
     //function that handle with add edit and delete actions
     public void addEditDelete(String title, final String whereClause, final String action, String desc)
     {
-
-
-        if(action != getString(R.string.Delete2))
-        {
-            //dialog for getting the event description
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(title);
-
-            // Set up the input
+        if(action=="fromSet"){
             final EditText input = new EditText(this);
-            // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-            input.setInputType(InputType.TYPE_CLASS_TEXT);
-            builder.setView(input);
+            input.setText(sa);
 
-            // Set up the button
-            builder.setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-
-                    CalendarDbHelper dbHelper = new CalendarDbHelper(getApplicationContext()); // Create pointer to DB
-                    SQLiteDatabase db = dbHelper.getWritableDatabase(); // Open writable access.
-
-
-
-                    ContentValues values = new ContentValues();
-                    //push data into DB row
-                    values.put(CalendarEvent.YEAR, focusedYear);
-                    values.put(CalendarEvent.MONTH, focusedMonth);
-                    values.put(CalendarEvent.DAY, focusedDay);
-                    values.put(CalendarEvent.STATUS, 1);
-                    values.put(CalendarEvent.DESCRIPTION, input.getText().toString());
-                    //TODO: add status and event description
-
-
-                    if (action == "add" )
-                    {
-                        // Inserting Row to DB
-                        db.insert(CalendarEvent.TABLE_NAME, null, values);
-                    }
-
-
-                    if (action == "edit")
-                    {
-                        db.update(CalendarEvent.TABLE_NAME,values,whereClause,null);
-                    }
-
-                    SQLiteDatabase db1 = calDbHelper.getReadableDatabase();
-                    db1 = calDbHelper.getReadableDatabase(); // get readable access from DB
-                    Cursor c1 = db1.query(CalendarEvent.TABLE_NAME, null, whereClause, null, null, null, null); // query from DB
-                    cca.changeCursor(c1);
-
-                }
-            });
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
-
-            builder.show();
-        }
-
-        else // delete
-        {
             CalendarDbHelper dbHelper = new CalendarDbHelper(getApplicationContext()); // Create pointer to DB
             SQLiteDatabase db = dbHelper.getWritableDatabase(); // Open writable access.
 
-            db.delete(CalendarEvent.TABLE_NAME, whereClause,null);
+            ContentValues values = new ContentValues();
+            //push data into DB row
+            values.put(CalendarEvent.YEAR, focusedYear);
+            values.put(CalendarEvent.MONTH, focusedMonth);
+            values.put(CalendarEvent.DAY, focusedDay);
+            values.put(CalendarEvent.STATUS, 1);
+            values.put(CalendarEvent.DESCRIPTION, input.getText().toString());
 
-            SQLiteDatabase db1 = calDbHelper.getReadableDatabase();
-            db1 = calDbHelper.getReadableDatabase(); // get readable access from DB
-            Cursor c1 = db1.query(CalendarEvent.TABLE_NAME, null, whereClause, null, null, null, null); // query from DB
-            cca.changeCursor(c1);
+
+            db.insert(CalendarEvent.TABLE_NAME, null, values);
+
+
+
+
+
+        }else{
+
+            if(action != getString(R.string.Delete2))
+            {
+                //dialog for getting the event description
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(title);
+
+                // Set up the input
+                final EditText input = new EditText(this);
+                // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+                input.setInputType(InputType.TYPE_CLASS_TEXT);
+                builder.setView(input);
+
+                // Set up the button
+                builder.setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                        CalendarDbHelper dbHelper = new CalendarDbHelper(getApplicationContext()); // Create pointer to DB
+                        SQLiteDatabase db = dbHelper.getWritableDatabase(); // Open writable access.
+
+
+
+                        ContentValues values = new ContentValues();
+                        //push data into DB row
+                        values.put(CalendarEvent.YEAR, focusedYear);
+                        values.put(CalendarEvent.MONTH, focusedMonth);
+                        values.put(CalendarEvent.DAY, focusedDay);
+                        values.put(CalendarEvent.STATUS, 1);
+                        values.put(CalendarEvent.DESCRIPTION, input.getText().toString());
+                        //TODO: add status and event description
+
+
+                        if (action == "add" )
+                        {
+                            // Inserting Row to DB
+                            db.insert(CalendarEvent.TABLE_NAME, null, values);
+                        }
+
+
+                        if (action == "edit")
+                        {
+                            db.update(CalendarEvent.TABLE_NAME,values,whereClause,null);
+                        }
+
+                        SQLiteDatabase db1 = calDbHelper.getReadableDatabase();
+                        db1 = calDbHelper.getReadableDatabase(); // get readable access from DB
+                        Cursor c1 = db1.query(CalendarEvent.TABLE_NAME, null, whereClause, null, null, null, null); // query from DB
+                        cca.changeCursor(c1);
+
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                builder.show();
+            }
+
+            else // delete
+            {
+                CalendarDbHelper dbHelper = new CalendarDbHelper(getApplicationContext()); // Create pointer to DB
+                SQLiteDatabase db = dbHelper.getWritableDatabase(); // Open writable access.
+
+                db.delete(CalendarEvent.TABLE_NAME, whereClause,null);
+
+                SQLiteDatabase db1 = calDbHelper.getReadableDatabase();
+                db1 = calDbHelper.getReadableDatabase(); // get readable access from DB
+                Cursor c1 = db1.query(CalendarEvent.TABLE_NAME, null, whereClause, null, null, null, null); // query from DB
+                cca.changeCursor(c1);
+            }
+
         }
+
+
     }
 
 
     public void openNewCases(View v){
-        Intent i = new Intent(this, TaskEditActivity.class);
+        Intent i = new Intent(this, setted_tasks_Activity.class);
         startActivityForResult(i,1);
     }
 
-    private void startActivityForResult(Intent i) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                currentDay = data.getIntExtra("currentDay",0);
+                currentMonth = data.getIntExtra("currentMonth",0);
+                currentYear = data.getIntExtra("currentYear",0);
+                sa = data.getStringExtra("name");
+                String whereClause = CalendarEvent.YEAR+" = "+currentYear +" AND "+ CalendarEvent.MONTH +" = "+currentMonth + " AND "+ CalendarEvent.DAY +" = "+ currentDay;
+
+
+                addEditDelete(null,whereClause,"fromSet",null);
+
+            }
+        }
     }
+
+
 
 
 }
