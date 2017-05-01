@@ -12,7 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -47,7 +50,7 @@ public class Login_Activity extends AppCompatActivity implements GoogleApiClient
     private ProgressDialog progressDialog = null;
     private String email;
     private String password;
-    private SignInButton mSignInButton;
+    private ImageButton mSignInButton;
     private GoogleApiClient mGoogleApiClient;
     private EditText emailEditText;
     private EditText passwordEditText;
@@ -61,29 +64,29 @@ public class Login_Activity extends AppCompatActivity implements GoogleApiClient
         setContentView(R.layout.activity_login_);
         emailEditText = (EditText)findViewById(R.id.emailEditText);
         passwordEditText = (EditText)findViewById(R.id.passwordEditText);
-        mSignInButton = (SignInButton) findViewById(R.id.googleSignInBtn);
-        mSignInButton.setSize(SignInButton.SIZE_STANDARD);
+        mSignInButton = (ImageButton) findViewById(R.id.googleSignInBtn);
+//        mSignInButton.setSize(SignInButton.SIZE_STANDARD);
 
 
         mAuth = FirebaseAuth.getInstance();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        // Configure Google Sign In
-//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestIdToken(getString(R.string.default_web_client_id))
-//                .requestEmail()
-//                .build();
+//         Configure Google Sign In
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
 //
 //
-//        mGoogleApiClient = new GoogleApiClient.Builder(getApplicationContext()).enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener()
-//        {
-//
-//
-//            @Override
-//            public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-//                Toast.makeText(Login_Activity.this, " you go an error ", Toast.LENGTH_LONG).show();
-//
-//            }
-//        }).addApi(Auth.GOOGLE_SIGN_IN_API,gso).build();
+        mGoogleApiClient = new GoogleApiClient.Builder(getApplicationContext()).enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener()
+        {
+
+
+            @Override
+            public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+                Toast.makeText(Login_Activity.this, " you got an error ", Toast.LENGTH_LONG).show();
+
+            }
+        }).addApi(Auth.GOOGLE_SIGN_IN_API,gso).build();
 
 
 
@@ -92,28 +95,47 @@ public class Login_Activity extends AppCompatActivity implements GoogleApiClient
     }
 
 
-//    private void signIn() {
-//        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-//        startActivityForResult(signInIntent, RC_SIGN_IN);
-//    }
+    private void signIn() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-//        if (requestCode == RC_SIGN_IN) {
-//            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-//            if (result.isSuccess()) {
-//                // Google Sign In was successful, authenticate with Firebase
-//                GoogleSignInAccount account = result.getSignInAccount();
-//                firebaseAuthWithGoogle(account);
-//            } else {
-//                // Google Sign In failed, update UI appropriately
-//                // ...
-//            }
-//        }
-//    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            if (result.isSuccess()) {
+                // Google Sign In was successful, authenticate with Firebase
+                GoogleSignInAccount account = result.getSignInAccount();
+                firebaseAuthWithGoogle(account);
+            } else {
+                // Google Sign In failed
+                Toast.makeText(this, "Google Sign In failed", Toast.LENGTH_LONG).show();
+            }
+
+        }
+    }
+
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+
+        mDialog = AppHelper.buildAlertDialog("login", "Checking" ,false, this);
+        mDialog.show();
+        // Get credentials and check if sucsess
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
+                        mDialog.dismiss();
+                        checkLoginSuccess(task, true);
+                    }
+                });
+    }
 
 
     @Override
@@ -195,7 +217,7 @@ public class Login_Activity extends AppCompatActivity implements GoogleApiClient
 
 
     public void googleSignIn(View v){
-//        signIn();
+        signIn();
 
     }
 

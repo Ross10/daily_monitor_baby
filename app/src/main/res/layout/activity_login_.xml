@@ -73,11 +73,12 @@
 
     </android.support.design.widget.TextInputLayout>
 
-    <com.google.android.gms.common.SignInButton
+    <ImageButton
         android:id="@+id/googleSignInBtn"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:onClick="googleSignIn"
+        android:background="@drawable/google_button"
         android:layout_gravity="center"
         android:layout_below="@+id/loginBtn"
         android:layout_marginTop="13dp" />
