@@ -19,33 +19,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/firstRow"
+        android:weightSum="3"
         android:layout_weight="1"
         android:orientation="horizontal">
 
 
-        <ImageView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/firstcrawling3"
-            android:id="@+id/imageView6"
+            android:drawableTop="@drawable/sit_with_games"
+            android:text="משחקים"
+            app:srcCompat="@drawable/teeth1"
+            android:background="@null"
+            android:id="@+id/games"
             android:layout_weight="1" />
 
-        <ImageView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/firstcatching"
-            android:id="@+id/imageView5"
+            app:srcCompat="@drawable/standing_bab"
+            android:drawableTop="@drawable/standing_bab"
+            android:text="עמידה"
+            android:background="@null"
+            android:id="@+id/standing"
             android:layout_weight="1" />
 
-        <ImageView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/firstlath"
-            android:id="@+id/imageView"
+            android:drawableTop="@drawable/teeth1"
+            android:text="שן ראשונה"
+            app:srcCompat="@drawable/sit_with_games"
+            android:background="@null"
+            android:id="@+id/fteeth"
             android:layout_weight="1" />
-
-
-
     </LinearLayout>
 
 
@@ -57,26 +64,6 @@
         android:layout_weight="1">
 
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/firstliketalk"
-            android:id="@+id/imageView9"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/firstsmile"
-            android:id="@+id/imageView8"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/firstteeth"
-            android:id="@+id/imageView7"
-            android:layout_weight="1" />
     </LinearLayout>
 
 
@@ -87,20 +74,6 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/firstword"
-            android:id="@+id/imageView12"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/firsttalk"
-            android:id="@+id/imageView11"
-            android:layout_weight="1" />
 
     </LinearLayout>
 
