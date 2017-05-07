@@ -10,46 +10,35 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/bgwhite"
-    android:weightSum="1"
+    android:weightSum="4"
     android:orientation="vertical"
 
     tools:context="com.example.ross.monitorbaby.Home_Page_Activity">
 
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="100sp"
-        app:srcCompat="@drawable/babyforhomepage"
-        android:id="@+id/imageView2" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/logohome"
-        android:id="@+id/imageView3" />
-
     <LinearLayout
         android:layout_margin="10sp"
         android:orientation="horizontal"
+        android:layout_weight="1"
         android:layout_width="fill_parent"
-        android:layout_height="70sp"
+        android:layout_height="wrap_content"
         android:weightSum="2">
 
         <Button
-            android:layout_width="0sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#0000"
-            android:drawableLeft="@drawable/dolist"
+            android:drawableLeft="@drawable/todoing"
             android:text="רשימת קניות"
             android:id="@+id/doList_Btn"
             android:layout_weight="1.00" />
 
         <Button
-            android:layout_width="0sp"
+            android:layout_width="match_parent"
             android:background="#0000"
             android:layout_height="wrap_content"
             android:id="@+id/gallary_Btn"
-            android:drawableLeft="@drawable/gallary"
+            android:drawableLeft="@drawable/gallery"
             android:text="גלריית תמונות"
             android:layout_weight="1" />
 
@@ -60,14 +49,14 @@
 
         android:layout_margin="10sp"
         android:orientation="horizontal"
+        android:layout_weight="1"
         android:weightSum="2"
-
         android:layout_width="fill_parent"
-        android:layout_height="70sp">
+        android:layout_height="wrap_content">
 
         <Button
-            android:layout_width="0sp"
-            android:drawableLeft="@drawable/chat"
+            android:layout_width="match_parent"
+            android:drawableLeft="@drawable/chating"
             android:background="#0000"
             android:layout_height="wrap_content"
             android:text="צ'ט"
@@ -75,9 +64,9 @@
             android:layout_weight="1" />
 
         <Button
-            android:layout_width="0sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/calander"
+            android:drawableLeft="@drawable/calendar"
             android:background="#0000"
             android:text="יומן"
             android:id="@+id/calanter_Btn"
@@ -91,26 +80,59 @@
     <LinearLayout
         android:layout_margin="10sp"
         android:orientation="horizontal"
+        android:layout_weight="1"
         android:layout_width="fill_parent"
-        android:layout_height="70sp"
+        android:layout_height="wrap_content"
         android:weightSum="2">
 
         <Button
-            android:layout_width="0sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#0000"
             android:text="GPS"
             android:id="@+id/gps_Btn"
-            android:drawableLeft="@drawable/gps"
+            android:drawableLeft="@drawable/gpsing"
             android:layout_weight="1" />
 
         <Button
-            android:layout_width="0sp"
+            android:layout_width="match_parent"
             android:background="#0000"
             android:text="מעקב"
             android:layout_height="wrap_content"
             android:id="@+id/tracking_Btn"
-            android:drawableLeft="@drawable/tracking"
+            android:drawableLeft="@drawable/trackinging"
+            android:layout_weight="1" />
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_margin="10sp"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2">
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#0000"
+            android:text="הגדרות"
+            android:id="@+id/properties"
+            android:drawableLeft="@drawable/properties"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:background="#0000"
+            android:text="התנתקות"
+            android:layout_height="wrap_content"
+            android:id="@+id/signOut"
+            android:drawableLeft="@drawable/lockmember"
             android:layout_weight="1" />
 
 

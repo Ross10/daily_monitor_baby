@@ -69,7 +69,8 @@
             android:exported="false" />
 
         <activity android:name=".TaskEditActivity" />
-        <activity android:name=".setted_tasks_Activity"></activity>
+        <activity android:name=".setted_tasks_Activity" />
+        <activity android:name=".ResetPasswordActivity"></activity>
     </application>
 
 </manifest>

@@ -53,6 +53,7 @@ public class AndroidCalendarView extends AppCompatActivity
 
 
 
+
     protected void onCreate(Bundle savedInstanceState)
     {super.onCreate(savedInstanceState);
 
@@ -221,7 +222,6 @@ public class AndroidCalendarView extends AppCompatActivity
 
 
 
-
         }else{
 
             if(action != getString(R.string.Delete2))
@@ -297,6 +297,7 @@ public class AndroidCalendarView extends AppCompatActivity
                 db1 = calDbHelper.getReadableDatabase(); // get readable access from DB
                 Cursor c1 = db1.query(CalendarEvent.TABLE_NAME, null, whereClause, null, null, null, null); // query from DB
                 cca.changeCursor(c1);
+
             }
 
         }

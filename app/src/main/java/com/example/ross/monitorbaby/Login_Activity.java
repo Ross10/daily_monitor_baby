@@ -221,6 +221,12 @@ public class Login_Activity extends AppCompatActivity implements GoogleApiClient
 
     }
 
+    public void forgotPass(View v){
+        Intent i = new Intent(this,ResetPasswordActivity.class);
+        startActivity(i);
+
+    }
+
 
 
 
