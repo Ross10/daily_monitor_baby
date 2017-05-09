@@ -46,8 +46,9 @@ import static android.R.id.progress;
 public class To_Do_list_Activity extends AppCompatActivity {
     private TaskDbHelper db;
     private List<Task> list;
-    private MyAdapter adapt, adapt2;
+//    private MyAdapter adapt, adapt2;
     private ListView listTask;
+    private TaskslistAdapter adapterFour;
     private String [] mngtask;
     private Context appContext;
     private Task newTask;
@@ -56,6 +57,7 @@ public class To_Do_list_Activity extends AppCompatActivity {
     private ImageButton deleteImg,editImg;
     private List<Task> taskList;
     private ArrayList<Task> taskisList;
+    private List<Task> tasklistNew;
     private FirebaseAuth mAuth; //Returns an instance of this class corresponding to the default FirebaseApp instance when using getiInstance().
     private DatabaseReference mDatabaseReference;
     private ListingAdapter adapterson;
@@ -93,10 +95,11 @@ public class To_Do_list_Activity extends AppCompatActivity {
 //        toDoListEditText = (EditText) findViewById(R.id.toDoListEditText);
         db = new TaskDbHelper(this);
         list = db.getAllTasks();
+        tasklistNew = new ArrayList<>();
         priorityImg = (ImageView)findViewById(R.id.priView);
-        adapt = new MyAdapter(this, R.layout.list_inner_view, list);
+//        adapt = new MyAdapter(this, R.layout.list_inner_view, list);
         listTask = (ListView) findViewById(R.id.listView1);
-        listTask.setAdapter(adapt);
+//        listTask.setAdapter(adapt);
         Log.d("the todo is :  hi","hi");
         mngtask =  new String[2];
         mngtask[0]= "EDIT";
@@ -163,10 +166,14 @@ public class To_Do_list_Activity extends AppCompatActivity {
                 public void onDataChange(DataSnapshot snapshot) {
                     for(DataSnapshot ds : snapshot.child("Task").getChildren()) {
                         Task todol = ds.getValue(Task.class);
-                        adapt.add(todol);
+                        tasklistNew.add(todol);
+//                        adapt.add(todol);
 
                     }
-                    adapt.notifyDataSetChanged();
+                    adapterFour = new TaskslistAdapter(To_Do_list_Activity.this,tasklistNew);
+                    listTask.setAdapter(adapterFour);
+
+                    adapterFour.notifyDataSetChanged();
                 }
 
                 @Override
@@ -262,84 +269,90 @@ public class To_Do_list_Activity extends AppCompatActivity {
     }
 
 
-    // array adapter to connect the data
-    public class MyAdapter extends ArrayAdapter<Task> {
-        private Context context;
-        private List<Task> taskList = new ArrayList<Task>();
-        int layoutResourceId;
-        public MyAdapter(Context context, int layoutResourceId,
-                         List<Task> objects) {
-            super(context, layoutResourceId, objects);
-            this.layoutResourceId = layoutResourceId;
-            this.taskList = objects;
-            this.context = context;
-        }
-        /**
-         * This method will define what the view inside the list view will
-         * finally look like Here we are going to code that the checkbox state
-         * is the status of task and check box text is the task name
-         */
-
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            TextView chk = null;
-            if (convertView == null) {
-                LayoutInflater inflater = (LayoutInflater) context
-                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = inflater.inflate(R.layout.list_inner_view,
-                        parent, false);
-                chk = (TextView) convertView.findViewById(R.id.textView2);
-                convertView.setTag(chk);
-
-            } else {
-                chk = (TextView) convertView.getTag();
-            }
-            Task current = taskList.get(position);
-            ImageView iv = (ImageView)convertView.findViewById(R.id.priView);
-            switch (current.getPriorty()){
-                case 0:
-                    iv.setImageDrawable(getDrawable(R.drawable.high_pri));
-                    break;
-                case 1:
-                    iv.setImageDrawable(getDrawable(R.drawable.medium_pri));
-
-                    break;
-                case 2:
-                    iv.setImageDrawable(getDrawable(R.drawable.low_pri));
-
-                    break;
-            }
-
-            chk.setText(current.getTaskName());
-            chk.setTag(current);
-
-            return convertView;
-        }
-
-
-
-
-
-    }
+//    // array adapter to connect the data
+//    public class MyAdapter extends ArrayAdapter<Task> {
+//        private Context context;
+//        private List<Task> taskList = new ArrayList<Task>();
+//        int layoutResourceId;
+//        public MyAdapter(Context context, int layoutResourceId,
+//                         List<Task> objects) {
+//            super(context, layoutResourceId, objects);
+//            this.layoutResourceId = layoutResourceId;
+//            this.taskList = objects;
+//            this.context = context;
+//        }
+//        /**
+//         * This method will define what the view inside the list view will
+//         * finally look like Here we are going to code that the checkbox state
+//         * is the status of task and check box text is the task name
+//         */
+//
+//
+////        @Override
+////        public View getView(int position, View convertView, ViewGroup parent) {
+////            TextView chk = null;
+////            if (convertView == null) {
+////                LayoutInflater inflater = (LayoutInflater) context
+////                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+////                convertView = inflater.inflate(R.layout.list_inner_view,
+////                        parent, false);
+////                chk = (TextView) convertView.findViewById(R.id.taskNameId);
+////                convertView.setTag(chk);
+////
+////            } else {
+////                chk = (TextView) convertView.getTag();
+////            }
+////            Task current = taskList.get(position);
+////            ImageView iv = (ImageView)convertView.findViewById(R.id.priView);
+////            switch (current.getPriorty()){
+////                case 0:
+////                    iv.setImageDrawable(getDrawable(R.drawable.high_pri));
+////                    break;
+////                case 1:
+////                    iv.setImageDrawable(getDrawable(R.drawable.medium_pri));
+////
+////                    break;
+////                case 2:
+////                    iv.setImageDrawable(getDrawable(R.drawable.low_pri));
+////
+////                    break;
+////            }
+////
+////            chk.setText(current.getTaskName());
+////            chk.setTag(current);
+////
+////            return convertView;
+////        }
+//
+//
+//
+//
+//
+//    }
 
 
     private void fetchData(DataSnapshot datasnapshot){
         taskisList.clear();
+        tasklistNew.clear();
         for(DataSnapshot ds : datasnapshot.getChildren()){
             Task todol = ds.getValue(Task.class);
             taskisList.add(todol);
+            tasklistNew.add(todol);
 
 
         }
+
+        adapterFour = new TaskslistAdapter(this,tasklistNew);
+        listTask.setAdapter(adapterFour);
+
        // System.out.println("TaskisList in 0 place is : " + taskisList.get(0) + " and in the first place is : " + taskisList.get(1));
 //        adapt.add(taskisList.get(0));
 //        adapt.notifyDataSetChanged();
 
 //        adapt.add(taskisList.get(taskisList.size()-1));
 //        adapt.notifyDataSetChanged();
-        adapterson = new ListingAdapter(getApplicationContext(),taskisList);
-        adapterson.notifyDataSetChanged();
+//        adapterson = new ListingAdapter(getApplicationContext(),taskisList);
+//        adapterson.notifyDataSetChanged();
 
     }
 

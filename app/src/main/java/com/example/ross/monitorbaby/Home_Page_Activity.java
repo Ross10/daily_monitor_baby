@@ -2,6 +2,7 @@ package com.example.ross.monitorbaby;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,9 +12,17 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class Home_Page_Activity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button doList_Btn ,calender_Btn,gallery_Btn,gps_Btn,tracking_Btn,chat_Btn;
+    private Button doList_Btn ,calender_Btn,gallery_Btn,gps_Btn,tracking_Btn,chat_Btn,signOut_Btn,properties_Btn;
+    private FirebaseAuth mauth;
+    private GoogleApiClient mGoogleApiClient;
 
 
     @Override
@@ -26,6 +35,9 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
         gps_Btn = (Button)findViewById(R.id.gps_Btn);
         tracking_Btn = (Button)findViewById(R.id.tracking_Btn);
         chat_Btn = (Button)findViewById(R.id.chat_Btn);
+        signOut_Btn = (Button)findViewById(R.id.signOut_Btn);
+        properties_Btn = (Button)findViewById(R.id.properties_Btn);
+        mauth = FirebaseAuth.getInstance();
 
         doList_Btn.setOnClickListener(this);
         calender_Btn.setOnClickListener(this);
@@ -33,6 +45,8 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
         gps_Btn.setOnClickListener(this);
         tracking_Btn.setOnClickListener(this);
         chat_Btn.setOnClickListener(this);
+        signOut_Btn.setOnClickListener(this);
+        properties_Btn.setOnClickListener(this);
 
     }
 
@@ -62,6 +76,14 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
             case R.id.tracking_Btn:
                 nevigateTo = new Intent(this,TrackingActivity.class);
                 break;
+            case R.id.signOut_Btn:
+                mauth.signOut();
+                nevigateTo = new Intent(this,Login_Activity.class);
+                break;
+            /*case R.id.properties_Btn:
+                nevigateTo = new Intent(this,Prefernce_Activity.class);
+                break;
+            */
 //
 //            case R.id.chat_Btn:
 //                nevigateTo = new Intent(this,ChatActivity.class);
@@ -75,4 +97,13 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
 
 //
     }
+
+//    private void sinout(){
+//        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
+//            @Override
+//            public void onResult(@NonNull Status status) {
+//
+//            }
+//        });
+//    }
 }

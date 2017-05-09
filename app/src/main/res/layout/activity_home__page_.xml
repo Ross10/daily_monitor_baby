@@ -122,7 +122,7 @@
             android:layout_height="wrap_content"
             android:background="#0000"
             android:text="הגדרות"
-            android:id="@+id/properties"
+            android:id="@+id/properties_Btn"
             android:drawableLeft="@drawable/properties"
             android:layout_weight="1" />
 
@@ -131,7 +131,7 @@
             android:background="#0000"
             android:text="התנתקות"
             android:layout_height="wrap_content"
-            android:id="@+id/signOut"
+            android:id="@+id/signOut_Btn"
             android:drawableLeft="@drawable/lockmember"
             android:layout_weight="1" />
 

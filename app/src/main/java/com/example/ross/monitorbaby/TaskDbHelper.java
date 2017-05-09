@@ -24,7 +24,7 @@ public class TaskDbHelper extends SQLiteOpenHelper {
 
     // Database Name
     private static final String TABLE_TASKS = "tasks";
-    private To_Do_list_Activity.MyAdapter adapt;
+//    private To_Do_list_Activity.MyAdapter adapt;
     // tasks Table Columns names
     private static final String KEY_ID = "id";
     private static final String KEY_TASKNAME = "taskName";

@@ -22,7 +22,7 @@
                 android:textColor="@color/colorAccent"
                 android:layout_height="wrap_content"
                 android:textSize="30sp"
-                android:id="@+id/textView2"
+                android:id="@+id/taskNameId"
                 android:layout_marginTop="5sp"
                 />
 
