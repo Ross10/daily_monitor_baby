@@ -12,10 +12,17 @@
         android:layout_weight="0.5"
         android:orientation="vertical">
 
+
+
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/firstRow">
+
+
+
             <TextView
                 android:text="@string/textview"
                 android:layout_width="wrap_content"
@@ -27,9 +34,9 @@
                 />
 
 
+
+
         </LinearLayout>
-
-
 
 
         <LinearLayout
@@ -38,33 +45,44 @@
             android:weightSum="3"
             android:layout_below="@+id/firstRow">
 
-
-            <ImageButton
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@null"
-                android:onClick="doneButton"
-                app:srcCompat="@drawable/ic_doneicon"
-                android:id="@+id/imageButton6"
-                android:layout_weight="1" />
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                app:srcCompat="@drawable/ic_editicon"
-                android:id="@+id/imageButton5"
-                android:layout_weight="1" />
+                android:layout_weight="2"
+                android:textSize="15sp"
+                android:id="@+id/timeThatClicked" />
 
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="62dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 app:srcCompat="@drawable/low_pri"
                 android:id="@+id/priView"
-                android:layout_weight="1"
                 android:layout_gravity="right"
                 />
+
+            <!--<ImageButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@null"-->
+            <!--android:onClick="doneButton"-->
+            <!--app:srcCompat="@drawable/ic_doneicon"-->
+            <!--android:id="@+id/imageButton6"-->
+            <!--android:layout_weight="1" />-->
+
+            <!--<ImageButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@null"-->
+            <!--app:srcCompat="@drawable/ic_editicon"-->
+            <!--android:id="@+id/imageButton5"-->
+            <!--android:layout_weight="1" />-->
+
+
+
+
+
         </LinearLayout>
 
 

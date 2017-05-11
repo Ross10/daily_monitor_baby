@@ -55,7 +55,8 @@ public class AndroidCalendarView extends AppCompatActivity
 
 
     protected void onCreate(Bundle savedInstanceState)
-    {super.onCreate(savedInstanceState);
+    {
+        super.onCreate(savedInstanceState);
 
         //sets the main layout of the activity
         setContentView(R.layout.activity_android_calendar_view);

@@ -11,6 +11,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,6 +40,10 @@ public class TaskslistAdapter extends ArrayAdapter<Task>{
 
         TextView tv = (TextView) listviewItem.findViewById(R.id.taskNameId);
         ImageView iv = (ImageView)listviewItem.findViewById(R.id.priView);
+        TextView time2  = (TextView)listviewItem.findViewById(R.id.timeThatClicked);
+
+//        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+
 
         Task task = taskList.get(position);
 
@@ -52,7 +60,7 @@ public class TaskslistAdapter extends ArrayAdapter<Task>{
             }
 
 
-
+        time2.setText(task.getDate());
 
 
         tv.setText(task.getTaskName());

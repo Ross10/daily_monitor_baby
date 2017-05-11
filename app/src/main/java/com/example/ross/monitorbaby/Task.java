@@ -14,6 +14,8 @@ import java.util.UUID;
 public class Task {
     private String taskName;
     private int priorty;
+    private String date;
+
 
     private DatabaseReference dbRef;
     private String uniqueChatId;
@@ -23,9 +25,10 @@ public class Task {
 
     }
 
-    public Task(String taskName,int priorty){
+    public Task(String taskName,int priorty,String date){
         this.taskName = taskName;
         this.priorty = priorty;
+        this.date = date;
 
     }
 
@@ -50,6 +53,14 @@ public class Task {
         return priorty;
     }
 
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     // Not including in FireBase database
 

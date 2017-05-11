@@ -20,12 +20,15 @@
         android:icon="@drawable/baby_icon"
         android:label="Daily B-Care"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        GPS
+        android:theme="@style/Theme.AppCompat.NoActionBar">
+        <!--android:theme="@style/AppTheme"-->
+
+
+        <!--GPS-->
         <service
             android:name=".LocalService"
             android:enabled="true" />
-        //GPS
+        <!--GPS-->
 
         <!-- Login activity -->
         <activity android:name=".Login_Activity">

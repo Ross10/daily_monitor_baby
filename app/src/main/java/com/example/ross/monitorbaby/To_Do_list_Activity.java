@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
@@ -37,13 +38,15 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static android.R.id.list;
 import static android.R.id.progress;
 
-public class To_Do_list_Activity extends AppCompatActivity {
+public class To_Do_list_Activity extends AppCompatActivity{
     private TaskDbHelper db;
     private List<Task> list;
 //    private MyAdapter adapt, adapt2;
@@ -64,6 +67,7 @@ public class To_Do_list_Activity extends AppCompatActivity {
     private EditText toDoListEditText;
     Handler mainHandler = new Handler();
     private ImageView priorityImg;
+    private ImageButton deleteTaskImg, editTaskImg;
     private ChildEventListener mChildEventListener;
     private ValueEventListener mValueEventListener;
 
@@ -93,6 +97,9 @@ public class To_Do_list_Activity extends AppCompatActivity {
 //        deleteImg = (ImageButton)findViewById(R.id.deleteImg);
 //        editImg = (ImageButton)findViewById(R.id.editImg);
 //        toDoListEditText = (EditText) findViewById(R.id.toDoListEditText);
+        editTaskImg = (ImageButton)findViewById(R.id.editTask) ;
+        deleteTaskImg = (ImageButton)findViewById(R.id.deleteTask) ;
+
         db = new TaskDbHelper(this);
         list = db.getAllTasks();
         tasklistNew = new ArrayList<>();
@@ -113,16 +120,18 @@ public class To_Do_list_Activity extends AppCompatActivity {
 //        editImg.setVisibility(View.INVISIBLE);
 //        itai = new Task("hello world",0);
 
+        deleteTaskImg.setVisibility(View.INVISIBLE);
+        editTaskImg.setVisibility(View.INVISIBLE);
+
         listTask.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-                                           int pos, long id) {
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int pos, long id) {
                 position = pos;
                 // TODO Auto-generated method stub
 
 ////
-//                deleteImg.setVisibility(View.VISIBLE);
-//                editImg.setVisibility(View.VISIBLE);
+                deleteTaskImg.setVisibility(View.VISIBLE);
+                editTaskImg.setVisibility(View.VISIBLE);
 
 
                 return true;
@@ -153,8 +162,18 @@ public class To_Do_list_Activity extends AppCompatActivity {
 //        }
 //
 //
+//        listTask.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                return false;
+//            }
+//        });
 
     }
+
+
+
 
     //here we will read all the data from the FB - to the adapters every enterce to ToDolist - and that to save space on the Phone DB + to get the mission per user.
 
@@ -202,9 +221,9 @@ public class To_Do_list_Activity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 taskName = data.getStringExtra("taskName");
                 priority = data.getIntExtra("priority",0);
+                String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
 
-
-                Task t1 = new Task(taskName,priority);
+                Task t1 = new Task(taskName,priority,currentDateTimeString);
                 FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
                 if(userr!=null){
                     String name = userr.getDisplayName();
@@ -363,6 +382,11 @@ public class To_Do_list_Activity extends AppCompatActivity {
     public void doneButton(){
 
     }
+
+    public void deleteEvent(View v){
+
+    }
+
 
 
 }
