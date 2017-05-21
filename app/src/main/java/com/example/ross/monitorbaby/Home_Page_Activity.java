@@ -2,6 +2,7 @@ package com.example.ross.monitorbaby;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
     private GoogleApiClient mGoogleApiClient;
     private  Animation animAlpha;
     private  LinearLayout screen;
+    private Handler handler;
 
 
 
@@ -53,29 +55,105 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
         chat_Btn.setOnClickListener(this);
         signOut_Btn.setOnClickListener(this);
         properties_Btn.setOnClickListener(this);
+
+        //ANIMATIONS - Not in use YET
         animAlpha = AnimationUtils.loadAnimation(this,R.anim.anim_alpha); // load the animation from the directory
-        screen = (LinearLayout)findViewById(R.id.activity_home__page_);
-        Animation animRotateIn_icon = AnimationUtils.loadAnimation(this, R.anim.anim_alpha);
-        Animation zoomin = AnimationUtils.loadAnimation(this, R.anim.bounce);
-        Animation zoomin1 = AnimationUtils.loadAnimation(this, R.anim.rotate);
-        Animation zoomin2 = AnimationUtils.loadAnimation(this, R.anim.sequential);
-        Animation zoomin3 = AnimationUtils.loadAnimation(this, R.anim.slide_up);
-        Animation zoomin4 = AnimationUtils.loadAnimation(this, R.anim.together);
-        Animation zoomin5 = AnimationUtils.loadAnimation(this, R.anim.vlink);
-        Animation zoomin6 = AnimationUtils.loadAnimation(this, R.anim.zoom_in);
-        doList_Btn.startAnimation(zoomin5);
-        calender_Btn.startAnimation(zoomin5);
-        gallery_Btn.startAnimation(zoomin5);
-        gps_Btn.startAnimation(zoomin5);
-        tracking_Btn.startAnimation(zoomin5);
-        chat_Btn.startAnimation(zoomin5);
-        signOut_Btn.startAnimation(zoomin5);
-        properties_Btn.startAnimation(zoomin5);
+//        screen = (LinearLayout)findViewById(R.id.activity_home__page_);
+//        Animation animRotateIn_icon = AnimationUtils.loadAnimation(this, R.anim.anim_alpha);
+//        Animation zoomin = AnimationUtils.loadAnimation(this, R.anim.bounce);
+//        Animation zoomin1 = AnimationUtils.loadAnimation(this, R.anim.rotate);
+//        Animation zoomin2 = AnimationUtils.loadAnimation(this, R.anim.sequential);
+//        Animation zoomin3 = AnimationUtils.loadAnimation(this, R.anim.slide_up);
+//        Animation zoomin4 = AnimationUtils.loadAnimation(this, R.anim.together);
+//        animAlpha = AnimationUtils.loadAnimation(this, R.anim.vlink);
+//        Animation zoomin6 = AnimationUtils.loadAnimation(this, R.anim.zoom_in);
+        hideButoons();
 //        screen.startAnimation(animRotateIn_icon);
+        showButtons();
+
     }
 
 
+    private void showButtons(){
+        handler = new Handler();
 
+        handler.postDelayed(new Runnable(){
+            @Override
+            public void run(){
+                ((Button) findViewById(R.id.doList_Btn)).setVisibility(View.VISIBLE);
+//                doList_Btn.startAnimation(animAlpha);
+            }
+        }, 125);
+
+        handler.postDelayed(new Runnable(){
+            @Override
+            public void run(){
+                ((Button) findViewById(R.id.gallary_Btn)).setVisibility(View.VISIBLE);
+//                gallery_Btn.startAnimation(animAlpha);
+            }
+        }, 250);
+
+        handler.postDelayed(new Runnable(){
+            @Override
+            public void run(){
+                ((Button) findViewById(R.id.calanter_Btn)).setVisibility(View.VISIBLE);
+//                calender_Btn.startAnimation(animAlpha);
+            }
+        }, 375);
+
+        handler.postDelayed(new Runnable(){
+            @Override
+            public void run(){
+                ((Button) findViewById(R.id.chat_Btn)).setVisibility(View.VISIBLE);
+//                chat_Btn.startAnimation(animAlpha);
+            }
+        }, 500);
+
+        handler.postDelayed(new Runnable(){
+            @Override
+            public void run(){
+                ((Button) findViewById(R.id.gps_Btn)).setVisibility(View.VISIBLE);
+//                gps_Btn.startAnimation(animAlpha);
+            }
+        }, 625);
+
+        handler.postDelayed(new Runnable(){
+            @Override
+            public void run(){
+                ((Button) findViewById(R.id.tracking_Btn)).setVisibility(View.VISIBLE);
+//                tracking_Btn.startAnimation(animAlpha);
+            }
+        }, 750);
+
+        handler.postDelayed(new Runnable(){
+            @Override
+            public void run(){
+                ((Button) findViewById(R.id.signOut_Btn)).setVisibility(View.VISIBLE);
+//                signOut_Btn.startAnimation(animAlpha);
+            }
+        }, 875);
+
+        handler.postDelayed(new Runnable(){
+            @Override
+            public void run(){
+                ((Button) findViewById(R.id.properties_Btn)).setVisibility(View.VISIBLE);
+//                properties_Btn.startAnimation(animAlpha);
+            }
+        }, 1000);
+
+//etc
+    }
+
+    public void hideButoons(){
+        doList_Btn.setVisibility(View.INVISIBLE);
+        calender_Btn.setVisibility(View.INVISIBLE);
+        gallery_Btn.setVisibility(View.INVISIBLE);
+        gps_Btn.setVisibility(View.INVISIBLE);
+        tracking_Btn.setVisibility(View.INVISIBLE);
+        chat_Btn.setVisibility(View.INVISIBLE);
+        signOut_Btn.setVisibility(View.INVISIBLE);
+        properties_Btn.setVisibility(View.INVISIBLE);
+    }
 
     @Override
     public void onClick(View v) {
@@ -137,4 +215,16 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
     @Override
     public void onBackPressed() {
     }
+
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        hideButoons();
+        showButtons();
+        // put your code here...
+
+    }
+
+
 }
