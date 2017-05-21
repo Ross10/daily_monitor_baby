@@ -7,10 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -23,6 +26,9 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
     private Button doList_Btn ,calender_Btn,gallery_Btn,gps_Btn,tracking_Btn,chat_Btn,signOut_Btn,properties_Btn;
     private FirebaseAuth mauth;
     private GoogleApiClient mGoogleApiClient;
+    private  Animation animAlpha;
+    private  LinearLayout screen;
+
 
 
     @Override
@@ -47,7 +53,11 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
         chat_Btn.setOnClickListener(this);
         signOut_Btn.setOnClickListener(this);
         properties_Btn.setOnClickListener(this);
-
+        animAlpha = AnimationUtils.loadAnimation(this,R.anim.anim_alpha); // load the animation from the directory
+        screen = (LinearLayout)findViewById(R.id.activity_home__page_);
+        Animation animRotateIn_icon = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        Animation zoomin = AnimationUtils.loadAnimation(this, R.anim.zoom_in);
+        screen.startAnimation(animRotateIn_icon);
     }
 
 
@@ -58,7 +68,9 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
 
         Intent nevigateTo = null;
         switch (v.getId()){
+
             case R.id.gps_Btn:
+                gps_Btn.startAnimation(animAlpha);
                 nevigateTo = new Intent(this,GpsHandler.class);
                 break;
             case R.id.doList_Btn:
@@ -77,8 +89,8 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
                 nevigateTo = new Intent(this,TrackingActivity.class);
                 break;
             case R.id.signOut_Btn:
-                mauth.signOut();
-                nevigateTo = new Intent(this,Login_Activity.class);
+//                mauth.signOut();
+                nevigateTo = new Intent(this,traceTabActivity.class);
                 break;
             /*case R.id.properties_Btn:
                 nevigateTo = new Intent(this,Prefernce_Activity.class);
@@ -106,4 +118,9 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
 //            }
 //        });
 //    }
+
+
+    @Override
+    public void onBackPressed() {
+    }
 }

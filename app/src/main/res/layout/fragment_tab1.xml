@@ -1,0 +1,106 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.ross.monitorbaby.Tab1Frag">
+
+
+
+    <LinearLayout
+        android:layout_width="372dp"
+        android:layout_height="match_parent"
+        android:weightSum="4"
+        android:orientation="vertical">
+
+
+
+
+
+     <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:weightSum="3">
+
+
+         <ImageView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             app:srcCompat="@android:drawable/arrow_up_float"
+             android:layout_marginTop="20sp"
+             android:layout_marginBottom="20sp"
+             android:id="@+id/upArrow"
+             android:layout_weight="1" />
+
+         <ImageView
+             android:layout_width="match_parent"
+             android:layout_height="269sp"
+             android:id="@+id/ammountBottle"
+             android:layout_weight="1"
+             app:srcCompat="@drawable/b150" />
+
+
+         <ImageView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="20sp"
+             app:srcCompat="@android:drawable/arrow_down_float"
+             android:id="@+id/downArrow"
+             android:layout_weight="1" />
+
+     </LinearLayout>
+
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:weightSum="2"
+            android:layout_marginTop="20sp"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+
+            <ImageView
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/green_vi"
+                android:id="@+id/iv_confirm_bottle"
+                android:onClick="onConfirmBottleClick"
+                android:layout_alignParentTop="true"
+                />
+
+            <TextView
+                android:text="abcdefgh"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/ammout"
+                android:layout_gravity="right"
+                android:layout_marginRight="35dp"
+                android:layout_marginEnd="35dp"
+                android:layout_marginTop="107dp" />
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+</FrameLayout>

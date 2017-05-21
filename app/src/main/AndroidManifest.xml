@@ -21,14 +21,16 @@
         android:label="Daily B-Care"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <!--android:theme="@style/AppTheme"-->
+
+        <!-- android:theme="@style/AppTheme" -->
 
 
-        <!--GPS-->
+        <!-- GPS -->
         <service
             android:name=".LocalService"
             android:enabled="true" />
-        <!--GPS-->
+        <!-- GPS -->
+
 
         <!-- Login activity -->
         <activity android:name=".Login_Activity">
@@ -73,7 +75,15 @@
 
         <activity android:name=".TaskEditActivity" />
         <activity android:name=".setted_tasks_Activity" />
-        <activity android:name=".ResetPasswordActivity"></activity>
+        <activity android:name=".ResetPasswordActivity" />
+        <activity
+            android:name=".tracAtivity"
+            android:label="@string/title_activity_trac_ativity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".traceTabActivity"
+            android:label="@string/title_activity_trace_tab"
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
     </application>
 
 </manifest>

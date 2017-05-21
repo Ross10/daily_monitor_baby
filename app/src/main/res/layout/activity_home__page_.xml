@@ -12,7 +12,6 @@
     android:background="@drawable/greybacground1"
     android:weightSum="4"
     android:orientation="vertical"
-
     tools:context="com.example.ross.monitorbaby.Home_Page_Activity">
 
 
