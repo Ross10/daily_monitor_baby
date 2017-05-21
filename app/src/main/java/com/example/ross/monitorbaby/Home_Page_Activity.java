@@ -55,9 +55,23 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
         properties_Btn.setOnClickListener(this);
         animAlpha = AnimationUtils.loadAnimation(this,R.anim.anim_alpha); // load the animation from the directory
         screen = (LinearLayout)findViewById(R.id.activity_home__page_);
-        Animation animRotateIn_icon = AnimationUtils.loadAnimation(this, R.anim.rotate);
-        Animation zoomin = AnimationUtils.loadAnimation(this, R.anim.zoom_in);
-        screen.startAnimation(animRotateIn_icon);
+        Animation animRotateIn_icon = AnimationUtils.loadAnimation(this, R.anim.anim_alpha);
+        Animation zoomin = AnimationUtils.loadAnimation(this, R.anim.bounce);
+        Animation zoomin1 = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        Animation zoomin2 = AnimationUtils.loadAnimation(this, R.anim.sequential);
+        Animation zoomin3 = AnimationUtils.loadAnimation(this, R.anim.slide_up);
+        Animation zoomin4 = AnimationUtils.loadAnimation(this, R.anim.together);
+        Animation zoomin5 = AnimationUtils.loadAnimation(this, R.anim.vlink);
+        Animation zoomin6 = AnimationUtils.loadAnimation(this, R.anim.zoom_in);
+        doList_Btn.startAnimation(zoomin5);
+        calender_Btn.startAnimation(zoomin5);
+        gallery_Btn.startAnimation(zoomin5);
+        gps_Btn.startAnimation(zoomin5);
+        tracking_Btn.startAnimation(zoomin5);
+        chat_Btn.startAnimation(zoomin5);
+        signOut_Btn.startAnimation(zoomin5);
+        properties_Btn.startAnimation(zoomin5);
+//        screen.startAnimation(animRotateIn_icon);
     }
 
 
