@@ -189,8 +189,11 @@ public class To_Do_list_Activity extends AppCompatActivity{
 //                        adapt.add(todol);
 
                     }
+
+                    //Firebase is asynchronous. So thats why we need to set or notify the adapter from within the callback.
                     adapterFour = new TaskslistAdapter(To_Do_list_Activity.this,tasklistNew);
                     listTask.setAdapter(adapterFour);
+
 
                     adapterFour.notifyDataSetChanged();
                 }

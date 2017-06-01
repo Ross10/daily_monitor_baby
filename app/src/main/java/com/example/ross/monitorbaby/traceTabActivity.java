@@ -20,6 +20,9 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 
 public class traceTabActivity extends AppCompatActivity {
 
@@ -51,6 +54,16 @@ public class traceTabActivity extends AppCompatActivity {
         adapter.addFragment(new Tab2Frag(), "צרכים");
         adapter.addFragment(new Tab3Frag(), "רשומות");
         viewPager.setAdapter(adapter);
+    }
+
+
+    public static String getDateAndHour()
+    {
+        Calendar c= Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm a");
+        String str=sdf.format(c.getTime());
+
+        return str;
     }
 
 }

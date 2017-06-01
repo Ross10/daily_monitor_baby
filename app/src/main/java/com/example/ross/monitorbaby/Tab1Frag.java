@@ -13,6 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class Tab1Frag extends Fragment {
 
     private static final String TAG = "Tab1Fragment";
@@ -21,6 +26,10 @@ public class Tab1Frag extends Fragment {
     private int currAmmountPos;
     private int[] ammountsArr;
     private int[] imagesArr;
+    private DatabaseReference databaseReference;
+    private FirebaseUser userr;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,6 +62,15 @@ public class Tab1Frag extends Fragment {
             @Override
             public void onClick(View view) {
                 onDownArrowClickede();
+            }
+        });
+
+
+
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onConfirm();
             }
         });
 
@@ -96,6 +114,16 @@ public class Tab1Frag extends Fragment {
             ammountBottle.setImageResource(imagesArr[currAmmountPos]); // set new image
 
         }
+    }
+
+    public void onConfirm(){
+        String date = traceTabActivity.getDateAndHour();
+        Logs log = new Logs(date,ammountText.getText().toString());
+        userr = FirebaseAuth.getInstance().getCurrentUser();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid());
+        databaseReference.child("Logs").child(log.getLogId()).setValue(log);
+
+
     }
 
 

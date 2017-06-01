@@ -6,56 +6,62 @@
     tools:context="com.example.ross.monitorbaby.Tab1Frag">
 
 
-
     <LinearLayout
-        android:layout_width="372dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:weightSum="4"
         android:orientation="vertical">
 
 
+        <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:orientation="horizontal"
+               android:weightSum="2">
 
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="344dp"
+                android:layout_gravity="center"
+                android:id="@+id/ammountBottle"
+                app:srcCompat="@drawable/b150" />
 
-     <LinearLayout
-            android:layout_width="wrap_content"
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            app:srcCompat="@android:drawable/arrow_up_float"
+            android:id="@+id/upArrow" />
+
+
+        <TextView
+            android:text=""
+            android:textSize="20sp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:weightSum="3">
+            android:id="@+id/ammout"
+            android:gravity="right"
+            android:layout_gravity="right" />
+
+        <ImageView
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            app:srcCompat="@android:drawable/arrow_down_float"
+            android:id="@+id/downArrow" />
 
 
-         <ImageView
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             app:srcCompat="@android:drawable/arrow_up_float"
-             android:layout_marginTop="20sp"
-             android:layout_marginBottom="20sp"
-             android:id="@+id/upArrow"
-             android:layout_weight="1" />
-
-         <ImageView
-             android:layout_width="match_parent"
-             android:layout_height="269sp"
-             android:id="@+id/ammountBottle"
-             android:layout_weight="1"
-             app:srcCompat="@drawable/b150" />
-
-
-         <ImageView
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_marginTop="20sp"
-             app:srcCompat="@android:drawable/arrow_down_float"
-             android:id="@+id/downArrow"
-             android:layout_weight="1" />
-
-     </LinearLayout>
-
-
-
-
-
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="39dp"
+            android:layout_gravity="right"
+            app:srcCompat="@drawable/green_vi"
+            android:id="@+id/iv_confirm_bottle"
+            android:onClick="onConfirmBottleClick"
+            android:layout_alignParentTop="true" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,37 +73,7 @@
             android:layout_gravity="center">
 
 
-            <ImageView
-                android:layout_width="50sp"
-                android:layout_height="50sp"
-                android:layout_gravity="right"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/green_vi"
-                android:id="@+id/iv_confirm_bottle"
-                android:onClick="onConfirmBottleClick"
-                android:layout_alignParentTop="true"
-                />
-
-            <TextView
-                android:text="abcdefgh"
-                android:textSize="20sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/ammout"
-                android:layout_gravity="right"
-                android:layout_marginRight="35dp"
-                android:layout_marginEnd="35dp"
-                android:layout_marginTop="107dp" />
-
-
         </LinearLayout>
-
-
-
-
-
-
 
 
     </LinearLayout>
