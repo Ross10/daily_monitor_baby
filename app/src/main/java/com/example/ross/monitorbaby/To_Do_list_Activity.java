@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -55,8 +56,8 @@ public class To_Do_list_Activity extends AppCompatActivity{
     private String [] mngtask;
     private Context appContext;
     private Task newTask;
-    private int editChooseFlag,deleteChooseFlag,position,priority;
-    private String taskName,taskId;
+    private int editChooseFlag,deleteChooseFlag,position,priority,saiedYes,taskProirty;
+    private String taskName,taskId,taskDate,m_Text;
     private ImageButton deleteImg,editImg;
     private List<Task> taskList;
     private ArrayList<Task> taskisList;
@@ -212,14 +213,20 @@ public class To_Do_list_Activity extends AppCompatActivity{
 
 
 
-                mChildEventListener = new ChildEventListener() {
+
+
+
+
+
+
+                    mChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     if(dataSnapshot.exists()){
                         System.out.println("The " + dataSnapshot.getKey() + " score is " + dataSnapshot.getValue());
                         fetchData(dataSnapshot);
-//                        Task todo =  dataSnapshot.getValue(Task.class);
-                        Log.d("the todo is : ", "jj");
+////                        Task todo =  dataSnapshot.getValue(Task.class);
+//                        Log.d("the todo is : ", "jj");
 
                     }
                     adapterFour.notifyDataSetChanged();
@@ -263,11 +270,11 @@ public class To_Do_list_Activity extends AppCompatActivity{
 
 
     private void fetchData(DataSnapshot datasnapshot){
-        taskisList.clear();
-        tasklistNew.clear();
+//        taskisList.clear();
+//        tasklistNew.clear();
         for(DataSnapshot ds : datasnapshot.getChildren()){
             Task todol = ds.getValue(Task.class);
-            taskisList.add(todol);
+//            taskisList.add(todol);
             tasklistNew.add(todol);
 
 
@@ -275,8 +282,10 @@ public class To_Do_list_Activity extends AppCompatActivity{
 
         adapterFour = new TaskslistAdapter(this,tasklistNew);
         listTask.setAdapter(adapterFour);
+        adapterFour.notifyDataSetChanged();
 
-       // System.out.println("TaskisList in 0 place is : " + taskisList.get(0) + " and in the first place is : " + taskisList.get(1));
+
+        // System.out.println("TaskisList in 0 place is : " + taskisList.get(0) + " and in the first place is : " + taskisList.get(1));
 //        adapt.add(taskisList.get(0));
 //        adapt.notifyDataSetChanged();
 
@@ -291,18 +300,102 @@ public class To_Do_list_Activity extends AppCompatActivity{
 
 
 
-    public void doneButton(){
+    public void editEvent(View v){
+        if(tasklistNew.size()>0){
+            taskId = tasklistNew.get(position).getId();
+            taskDate = tasklistNew.get(position).getDate();
+            taskProirty = tasklistNew.get(position).getPriorty();
+
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("שינוי משימה");
+
+// Set up the input
+            final EditText input = new EditText(this);
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+            input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            builder.setView(input);
+
+// Set up the buttons
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    m_Text = input.getText().toString();
+                    tasklistNew.remove(position);
+
+                    mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid());
+                    mDatabaseReference.child("Task").child(taskId).removeValue();
+
+                    Task t1 = new Task(m_Text,taskProirty,taskDate);
+//                FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
+                    if(userr!=null) {
+                        String name = userr.getDisplayName();
+                        String email = userr.getEmail();
+//                    if(email.equals("rrrr@rrr.com")){
+                        //Toast.makeText(this, "hii", Toast.LENGTH_SHORT).show();
+                        mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid());
+                        mDatabaseReference.child("Task").child(t1.getId()).setValue(t1);
+                    }
+
+
+
+
+
+                        adapterFour.notifyDataSetChanged();
+
+
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            adapterFour.notifyDataSetChanged();
+            builder.show();
+
+
+        }
+
+        adapterFour.notifyDataSetChanged();
+        deleteTaskImg.setVisibility(View.INVISIBLE);
+        editTaskImg.setVisibility(View.INVISIBLE);
 
     }
 
     public void deleteEvent(View v){
         if(tasklistNew.size()>0){
-            taskId = tasklistNew.get(position).getId();
-            tasklistNew.remove(position);
-            adapterFour.notifyDataSetChanged();
 
-            mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid());
-            mDatabaseReference.child("Task").child(taskId).removeValue();
+            taskId = tasklistNew.get(position).getId();
+            AlertDialog.Builder builder;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+            } else {
+                builder = new AlertDialog.Builder(this);
+            }
+            builder.setTitle("ההודעה תימחק")
+                    .setMessage("האם אתה בטוח שברצונך למחוק את המשימה?")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            tasklistNew.remove(position);
+
+                            adapterFour.notifyDataSetChanged();
+
+                            mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid());
+                            mDatabaseReference.child("Task").child(taskId).removeValue();
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+
+
         }
 
 
