@@ -1,5 +1,6 @@
 package com.example.ross.monitorbaby;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -44,6 +45,7 @@ public class Tab2Frag extends Fragment {
                 userr = FirebaseAuth.getInstance().getCurrentUser();
                 databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid());
                 databaseReference.child("Logs").child(log.getLogId()).setValue(log);
+
 
 
             }

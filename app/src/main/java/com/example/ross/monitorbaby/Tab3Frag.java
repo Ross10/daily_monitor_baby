@@ -96,9 +96,7 @@ public class Tab3Frag extends Fragment {
 
 
                     );
-                    listviewAdapter.notifyDataSetChanged();
                     lv.setAdapter(listviewAdapter);
-                    listviewAdapter.notifyDataSetChanged();
 
 
                 }

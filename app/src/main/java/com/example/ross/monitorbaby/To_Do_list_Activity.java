@@ -56,7 +56,7 @@ public class To_Do_list_Activity extends AppCompatActivity{
     private Context appContext;
     private Task newTask;
     private int editChooseFlag,deleteChooseFlag,position,priority;
-    private String taskName;
+    private String taskName,taskId;
     private ImageButton deleteImg,editImg;
     private List<Task> taskList;
     private ArrayList<Task> taskisList;
@@ -70,7 +70,7 @@ public class To_Do_list_Activity extends AppCompatActivity{
     private ImageButton deleteTaskImg, editTaskImg;
     private ChildEventListener mChildEventListener;
     private ValueEventListener mValueEventListener;
-
+    FirebaseUser userr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +97,7 @@ public class To_Do_list_Activity extends AppCompatActivity{
 //        deleteImg = (ImageButton)findViewById(R.id.deleteImg);
 //        editImg = (ImageButton)findViewById(R.id.editImg);
 //        toDoListEditText = (EditText) findViewById(R.id.toDoListEditText);
+        userr = FirebaseAuth.getInstance().getCurrentUser();
         editTaskImg = (ImageButton)findViewById(R.id.editTask) ;
         deleteTaskImg = (ImageButton)findViewById(R.id.deleteTask) ;
 
@@ -134,41 +135,13 @@ public class To_Do_list_Activity extends AppCompatActivity{
                 editTaskImg.setVisibility(View.VISIBLE);
 
 
+
+
                 return true;
             }
         });
 
-//
 
-//        mValueEventListener = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//               String taskName = dataSnapshot.getValue().toString();
-//                adapt.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        };
-//        mDatabaseReference.addValueEventListener(mValueEventListener);
-
-
-  //      FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
-//        if(userr!=null) {
-//                mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
-//
-//        }
-//
-//
-//        listTask.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                return false;
-//            }
-//        });
 
     }
 
@@ -186,7 +159,6 @@ public class To_Do_list_Activity extends AppCompatActivity{
                     for(DataSnapshot ds : snapshot.child("Task").getChildren()) {
                         Task todol = ds.getValue(Task.class);
                         tasklistNew.add(todol);
-//                        adapt.add(todol);
 
                     }
 
@@ -225,16 +197,15 @@ public class To_Do_list_Activity extends AppCompatActivity{
                 taskName = data.getStringExtra("taskName");
                 priority = data.getIntExtra("priority",0);
                 String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-
                 Task t1 = new Task(taskName,priority,currentDateTimeString);
-                FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
+//                FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
                 if(userr!=null){
                     String name = userr.getDisplayName();
                     String email = userr.getEmail();
 //                    if(email.equals("rrrr@rrr.com")){
                         //Toast.makeText(this, "hii", Toast.LENGTH_SHORT).show();
                         mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid());
-                        mDatabaseReference.child("Task").child(t1.getIdretu()).setValue(t1);
+                        mDatabaseReference.child("Task").child(t1.getId()).setValue(t1);
 
 
 
@@ -248,10 +219,10 @@ public class To_Do_list_Activity extends AppCompatActivity{
                         System.out.println("The " + dataSnapshot.getKey() + " score is " + dataSnapshot.getValue());
                         fetchData(dataSnapshot);
 //                        Task todo =  dataSnapshot.getValue(Task.class);
-//                    adapt.notifyDataSetChanged();
                         Log.d("the todo is : ", "jj");
-                    }
 
+                    }
+                    adapterFour.notifyDataSetChanged();
 
                 }
 
@@ -291,68 +262,6 @@ public class To_Do_list_Activity extends AppCompatActivity{
     }
 
 
-//    // array adapter to connect the data
-//    public class MyAdapter extends ArrayAdapter<Task> {
-//        private Context context;
-//        private List<Task> taskList = new ArrayList<Task>();
-//        int layoutResourceId;
-//        public MyAdapter(Context context, int layoutResourceId,
-//                         List<Task> objects) {
-//            super(context, layoutResourceId, objects);
-//            this.layoutResourceId = layoutResourceId;
-//            this.taskList = objects;
-//            this.context = context;
-//        }
-//        /**
-//         * This method will define what the view inside the list view will
-//         * finally look like Here we are going to code that the checkbox state
-//         * is the status of task and check box text is the task name
-//         */
-//
-//
-////        @Override
-////        public View getView(int position, View convertView, ViewGroup parent) {
-////            TextView chk = null;
-////            if (convertView == null) {
-////                LayoutInflater inflater = (LayoutInflater) context
-////                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-////                convertView = inflater.inflate(R.layout.list_inner_view,
-////                        parent, false);
-////                chk = (TextView) convertView.findViewById(R.id.taskNameId);
-////                convertView.setTag(chk);
-////
-////            } else {
-////                chk = (TextView) convertView.getTag();
-////            }
-////            Task current = taskList.get(position);
-////            ImageView iv = (ImageView)convertView.findViewById(R.id.priView);
-////            switch (current.getPriorty()){
-////                case 0:
-////                    iv.setImageDrawable(getDrawable(R.drawable.high_pri));
-////                    break;
-////                case 1:
-////                    iv.setImageDrawable(getDrawable(R.drawable.medium_pri));
-////
-////                    break;
-////                case 2:
-////                    iv.setImageDrawable(getDrawable(R.drawable.low_pri));
-////
-////                    break;
-////            }
-////
-////            chk.setText(current.getTaskName());
-////            chk.setTag(current);
-////
-////            return convertView;
-////        }
-//
-//
-//
-//
-//
-//    }
-
-
     private void fetchData(DataSnapshot datasnapshot){
         taskisList.clear();
         tasklistNew.clear();
@@ -387,6 +296,22 @@ public class To_Do_list_Activity extends AppCompatActivity{
     }
 
     public void deleteEvent(View v){
+        if(tasklistNew.size()>0){
+            taskId = tasklistNew.get(position).getId();
+            tasklistNew.remove(position);
+            adapterFour.notifyDataSetChanged();
+
+            mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid());
+            mDatabaseReference.child("Task").child(taskId).removeValue();
+        }
+
+
+
+
+        deleteTaskImg.setVisibility(View.INVISIBLE);
+        editTaskImg.setVisibility(View.INVISIBLE);
+
+
 
     }
 

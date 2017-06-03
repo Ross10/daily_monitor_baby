@@ -15,6 +15,7 @@ public class Task {
     private String taskName;
     private int priorty;
     private String date;
+    private String Id;
 
 
     private DatabaseReference dbRef;
@@ -29,11 +30,20 @@ public class Task {
         this.taskName = taskName;
         this.priorty = priorty;
         this.date = date;
+        this.Id = UUID.randomUUID().toString();
 
     }
 
+    public String getId() {
+        return Id;
+    }
 
-    public String getIdretu() { return UUID.randomUUID().toString();}
+    public void setId(String id) {
+        Id = id;
+    }
+
+
+    //    public String getIdretu() { return UUID.randomUUID().toString();}
 
 
 

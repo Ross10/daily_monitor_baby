@@ -27,7 +27,7 @@ public class TaskslistAdapter extends ArrayAdapter<Task>{
     private List<Task> taskList;
 
     public TaskslistAdapter(Activity context, List<Task> taskList) {
-        super(context, R.layout.list_inner_view,taskList);
+        super(context, R.layout.newlookfortasklist,taskList);
         this.context = context;
         this.taskList = taskList;
     }
@@ -36,7 +36,7 @@ public class TaskslistAdapter extends ArrayAdapter<Task>{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View listviewItem = inflater.inflate(R.layout.list_inner_view,null,true);
+        View listviewItem = inflater.inflate(R.layout.newlookfortasklist,null,true);
 
         TextView tv = (TextView) listviewItem.findViewById(R.id.taskNameId);
         ImageView iv = (ImageView)listviewItem.findViewById(R.id.priView);
