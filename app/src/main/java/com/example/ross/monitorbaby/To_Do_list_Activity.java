@@ -50,7 +50,7 @@ import static android.R.id.progress;
 public class To_Do_list_Activity extends AppCompatActivity{
     private TaskDbHelper db;
     private List<Task> list;
-//    private MyAdapter adapt, adapt2;
+    //    private MyAdapter adapt, adapt2;
     private ListView listTask;
     private TaskslistAdapter adapterFour;
     private String [] mngtask;
@@ -114,7 +114,7 @@ public class To_Do_list_Activity extends AppCompatActivity{
         mngtask[0]= "EDIT";
         mngtask[1]= "DELETE";
         appContext = To_Do_list_Activity.this;
-
+        adapterFour = new TaskslistAdapter(this,tasklistNew);
         editChooseFlag = deleteChooseFlag = 0;
         readAllDataFromFB();
         taskisList = new ArrayList<Task>();
@@ -151,33 +151,33 @@ public class To_Do_list_Activity extends AppCompatActivity{
 
     //here we will read all the data from the FB - to the adapters every enterce to ToDolist - and that to save space on the Phone DB + to get the mission per user.
 
-        public void readAllDataFromFB(){
-            FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
-            mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid());
-            mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot snapshot) {
-                    for(DataSnapshot ds : snapshot.child("Task").getChildren()) {
-                        Task todol = ds.getValue(Task.class);
-                        tasklistNew.add(todol);
-
-                    }
-
-                    //Firebase is asynchronous. So thats why we need to set or notify the adapter from within the callback.
-                    adapterFour = new TaskslistAdapter(To_Do_list_Activity.this,tasklistNew);
-                    listTask.setAdapter(adapterFour);
-
-
-                    adapterFour.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+    public void readAllDataFromFB(){
+        FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid());
+        mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for(DataSnapshot ds : snapshot.child("Task").getChildren()) {
+                    Task todol = ds.getValue(Task.class);
+                    tasklistNew.add(todol);
 
                 }
 
-            });
-        }
+                //Firebase is asynchronous. So thats why we need to set or notify the adapter from within the callback.
+                adapterFour = new TaskslistAdapter(To_Do_list_Activity.this,tasklistNew);
+                listTask.setAdapter(adapterFour);
+
+
+                adapterFour.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
+    }
 
 
 
@@ -197,6 +197,7 @@ public class To_Do_list_Activity extends AppCompatActivity{
             if (resultCode == RESULT_OK) {
                 taskName = data.getStringExtra("taskName");
                 priority = data.getIntExtra("priority",0);
+
                 String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
                 Task t1 = new Task(taskName,priority,currentDateTimeString);
 //                FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
@@ -204,58 +205,62 @@ public class To_Do_list_Activity extends AppCompatActivity{
                     String name = userr.getDisplayName();
                     String email = userr.getEmail();
 //                    if(email.equals("rrrr@rrr.com")){
-                        //Toast.makeText(this, "hii", Toast.LENGTH_SHORT).show();
-                        mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid());
-                        mDatabaseReference.child("Task").child(t1.getId()).setValue(t1);
+                    //Toast.makeText(this, "hii", Toast.LENGTH_SHORT).show();
+                    mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid());
+                    mDatabaseReference.child("Task").child(t1.getId()).setValue(t1);
 
 
 
 
 
-
-
-
-
-
-
-
-                    mChildEventListener = new ChildEventListener() {
-                @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    if(dataSnapshot.exists()){
-                        System.out.println("The " + dataSnapshot.getKey() + " score is " + dataSnapshot.getValue());
-                        fetchData(dataSnapshot);
-////                        Task todo =  dataSnapshot.getValue(Task.class);
-//                        Log.d("the todo is : ", "jj");
-
-                    }
+                    tasklistNew.add(t1);
+                    listTask.setAdapter(adapterFour);
                     adapterFour.notifyDataSetChanged();
 
-                }
 
-                @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//                    Task todo2 = dataSnapshot.getValue(Task.class);
 
-                }
 
-                @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
 
-                }
 
-                @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            };
-                    
-            mDatabaseReference.addChildEventListener(mChildEventListener);
+//
+//                    mChildEventListener = new ChildEventListener() {
+//                        @Override
+//                        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+//
+//                            if(dataSnapshot.exists()){
+//                                System.out.println("The " + dataSnapshot.getKey() + " score is " + dataSnapshot.getValue());
+//                                fetchData(dataSnapshot);
+//////                        Task todo =  dataSnapshot.getValue(Task.class);
+////                        Log.d("the todo is : ", "jj");
+//
+//                            }
+//                            adapterFour.notifyDataSetChanged();
+//
+//                        }
+//
+//                        @Override
+//                        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+////                    Task todo2 = dataSnapshot.getValue(Task.class);
+//
+//                        }
+//
+//                        @Override
+//                        public void onChildRemoved(DataSnapshot dataSnapshot) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(DatabaseError databaseError) {
+//
+//                        }
+//                    };
+//
+//                    mDatabaseReference.addChildEventListener(mChildEventListener);
 
 //                    }
                 }
@@ -269,32 +274,26 @@ public class To_Do_list_Activity extends AppCompatActivity{
     }
 
 
-    private void fetchData(DataSnapshot datasnapshot){
-//        taskisList.clear();
-//        tasklistNew.clear();
-        for(DataSnapshot ds : datasnapshot.getChildren()){
-            Task todol = ds.getValue(Task.class);
-//            taskisList.add(todol);
-            tasklistNew.add(todol);
-
-
-        }
-
-        adapterFour = new TaskslistAdapter(this,tasklistNew);
-        listTask.setAdapter(adapterFour);
-        adapterFour.notifyDataSetChanged();
-
-
-        // System.out.println("TaskisList in 0 place is : " + taskisList.get(0) + " and in the first place is : " + taskisList.get(1));
-//        adapt.add(taskisList.get(0));
-//        adapt.notifyDataSetChanged();
-
-//        adapt.add(taskisList.get(taskisList.size()-1));
-//        adapt.notifyDataSetChanged();
-//        adapterson = new ListingAdapter(getApplicationContext(),taskisList);
-//        adapterson.notifyDataSetChanged();
-
-    }
+//    private void fetchData(DataSnapshot datasnapshot){
+////        taskisList.clear();
+//        for(DataSnapshot ds : datasnapshot.getChildren()){
+//            Task todol = ds.getValue(Task.class);
+////            taskisList.add(todol);
+//            tasklistNew.add(todol);
+//        }
+//
+////        ArrayAdapter<Task> listviewAdapter = new ArrayAdapter<Task>(
+////                this,
+////                android.R.layout.simple_dropdown_item_1line,
+////                tasklistNew
+////        );
+//
+//        listTask.setAdapter(adapterFour);
+//      adapterFour.notifyDataSetChanged();
+//
+//
+//
+//    }
 
 
 
@@ -338,10 +337,9 @@ public class To_Do_list_Activity extends AppCompatActivity{
                     }
 
 
-
-
-
-                        adapterFour.notifyDataSetChanged();
+                    tasklistNew.add(t1);
+                    listTask.setAdapter(adapterFour);
+                    adapterFour.notifyDataSetChanged();
 
 
                 }

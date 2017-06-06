@@ -80,7 +80,7 @@ public class ChatActivity extends AppCompatActivity implements ChildEventListene
 
         // Get view reference
         mMessageText = (EditText) findViewById(R.id.etMessageText);
-        mChatListView = (ListView) findViewById(R.id.chatListView);
+        mChatListView = (ListView) findViewById(R.id.usersListView);
         mEtAddress = (EditText) findViewById(R.id.etAddress);
         mLocationConditionSection = (RelativeLayout) findViewById(R.id.locationConditionSection);
         mTimeConditionSection = (LinearLayout) findViewById(R.id.timeConditionSection);

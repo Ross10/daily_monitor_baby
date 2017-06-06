@@ -188,9 +188,9 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
                 nevigateTo = new Intent(this,Prefernce_Activity.class);
                 break;
             */
-//
+////
 //            case R.id.chat_Btn:
-//                nevigateTo = new Intent(this,ChatActivity.class);
+//                nevigateTo = new Intent(this,todo2.class);
 //                break;
         }
 

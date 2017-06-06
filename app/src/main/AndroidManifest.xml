@@ -83,7 +83,8 @@
         <activity
             android:name=".traceTabActivity"
             android:label="@string/title_activity_trace_tab"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".chatingActivity" />
     </application>
 
 </manifest>
