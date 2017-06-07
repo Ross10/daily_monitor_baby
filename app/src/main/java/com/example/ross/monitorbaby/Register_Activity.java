@@ -128,15 +128,20 @@ public class Register_Activity extends AppCompatActivity {
     }
 
     private void addNewUser(String uid) {
+
+//        UserDetails userdetail = new UserDetails(1);
+//        mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        FirebaseUser userBase = mAuth.getCurrentUser();
+//        mDatabaseReference.child(userBase.getUid()).setValue(userdetail);
+
         String emailUser =   email.getText().toString();
         String nannyuser =  nannyAddress.getText().toString();
         String childUser = childName.getText().toString();
         String PhoneNumUser = phoneNum.getText().toString();
         String fullNameUser =  fullname.getText().toString();
         User user = new User(fullNameUser,emailUser,"", new Date().getTime(),User.NO_URI,childUser,PhoneNumUser,nannyuser);
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users");
-        FirebaseUser userBase = mAuth.getCurrentUser();
-        mDatabaseReference.child(userBase.getUid()).setValue(user);
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userBase.getUid()).child("userDetail");
+        mDatabaseReference.setValue(user);
 
 //        mDatabaseReference.child(uid).push();
 //        mDatabaseReference.child(uid).setValue(user);

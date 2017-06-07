@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_setting"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.ross.monitorbaby.settingActivity"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/settingicon"
+        android:id="@+id/imageView" />
+
+
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/textInputLayout2"
+        android:layout_below="@+id/phonestyle"
+        >
+
+        <EditText
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:textStyle="bold"
+            android:layout_below="@+id/phoneNum"
+            android:hint="שם מלא"
+            android:drawableRight="@drawable/user25icon"
+            android:ems="10"
+            android:id="@+id/fullNameProp"
+            style="@style/Widget.AppCompat.EditText" />
+
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/emailstyle"
+        android:layout_marginTop="5dp">
+
+        <EditText
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:gravity="center"
+            android:drawableRight="@drawable/maicon"
+            android:hint = "דואר אלקטרוני"
+            android:id="@+id/emailProp"
+            android:layout_above="@+id/passwdEditText"
+            android:layout_alignLeft="@+id/passwdEditText"
+            android:layout_alignStart="@+id/passwdEditText" />
+
+
+    </android.support.design.widget.TextInputLayout>
+
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nannystyle"
+        android:gravity="center"
+        android:layout_below="@id/reapetpass"
+        android:layout_marginTop="5dp">
+
+
+        <EditText
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:drawableRight="@drawable/adresscare"
+            android:hint="כתובת המעון"
+            android:ems="10"
+            android:id="@+id/nannyAddressProp"
+            android:gravity="center"
+            android:layout_above="@+id/ChildName"
+            android:layout_alignLeft="@+id/ChildName"
+            android:layout_alignStart="@+id/ChildName" />
+
+
+
+    </android.support.design.widget.TextInputLayout>
+
+
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/kiddnamestyle"
+        android:gravity="center"
+        android:layout_below="@+id/phonestyle"
+        android:layout_marginTop="5dp">
+
+        <EditText
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:gravity="center"
+            android:hint="שם הילד"
+            android:drawableRight="@drawable/babyicon"
+            android:ems="10"
+            android:id="@+id/ChildNameProp" />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/kiddnamestyle"
+        android:layout_above="@+id/registerBtn"
+        android:id="@+id/phonestyle"
+        android:gravity="center"
+        android:layout_marginTop="5dp">
+
+        <EditText
+
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:gravity="center"
+            android:drawableRight="@drawable/phonedis"
+            android:hint = "טלפון לעדכונים"
+            android:id="@+id/phoneNumProp" />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="2"
+        >
+
+        <Button
+        android:text="שנה פרטים"
+        android:layout_width="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_height="wrap_content"
+        android:id="@+id/registerBtn"
+        android:layout_weight="1"
+        android:onClick="changeDetails"
+        />
+
+
+        <Button
+            android:text="חזור "
+            android:layout_width="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_weight="1"
+
+            android:layout_height="wrap_content"
+            android:id="@+id/returnBtn"
+            android:onClick="returnToMenu"
+            />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

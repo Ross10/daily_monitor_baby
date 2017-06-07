@@ -184,10 +184,10 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
 //                mauth.signOut();
                 nevigateTo = new Intent(this,traceTabActivity.class);
                 break;
-            /*case R.id.properties_Btn:
-                nevigateTo = new Intent(this,Prefernce_Activity.class);
+            case R.id.properties_Btn:
+                nevigateTo = new Intent(this,settingActivity.class);
                 break;
-            */
+
 ////
 //            case R.id.chat_Btn:
 //                nevigateTo = new Intent(this,todo2.class);
