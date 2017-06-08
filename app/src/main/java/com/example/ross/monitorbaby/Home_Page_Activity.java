@@ -7,7 +7,10 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -15,6 +18,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -30,6 +34,7 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
     private  Animation animAlpha;
     private  LinearLayout screen;
     private Handler handler;
+    private View viewLayout;
 
 
 
@@ -57,7 +62,7 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
         properties_Btn.setOnClickListener(this);
 
         //ANIMATIONS - Not in use YET
-        animAlpha = AnimationUtils.loadAnimation(this,R.anim.anim_alpha); // load the animation from the directory
+//        animAlpha = AnimationUtils.loadAnimation(this,R.anim.anim_alpha); // load the animation from the directory
 //        screen = (LinearLayout)findViewById(R.id.activity_home__page_);
 //        Animation animRotateIn_icon = AnimationUtils.loadAnimation(this, R.anim.anim_alpha);
 //        Animation zoomin = AnimationUtils.loadAnimation(this, R.anim.bounce);
@@ -83,7 +88,7 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
                 ((Button) findViewById(R.id.doList_Btn)).setVisibility(View.VISIBLE);
 //                doList_Btn.startAnimation(animAlpha);
             }
-        }, 125);
+        }, 2000);
 
         handler.postDelayed(new Runnable(){
             @Override
@@ -91,7 +96,7 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
                 ((Button) findViewById(R.id.gallary_Btn)).setVisibility(View.VISIBLE);
 //                gallery_Btn.startAnimation(animAlpha);
             }
-        }, 250);
+        }, 2000);
 
         handler.postDelayed(new Runnable(){
             @Override
@@ -99,7 +104,7 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
                 ((Button) findViewById(R.id.calanter_Btn)).setVisibility(View.VISIBLE);
 //                calender_Btn.startAnimation(animAlpha);
             }
-        }, 375);
+        }, 2000);
 
         handler.postDelayed(new Runnable(){
             @Override
@@ -107,7 +112,7 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
                 ((Button) findViewById(R.id.chat_Btn)).setVisibility(View.VISIBLE);
 //                chat_Btn.startAnimation(animAlpha);
             }
-        }, 500);
+        }, 2000);
 
         handler.postDelayed(new Runnable(){
             @Override
@@ -115,7 +120,7 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
                 ((Button) findViewById(R.id.gps_Btn)).setVisibility(View.VISIBLE);
 //                gps_Btn.startAnimation(animAlpha);
             }
-        }, 625);
+        }, 2000);
 
         handler.postDelayed(new Runnable(){
             @Override
@@ -123,7 +128,7 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
                 ((Button) findViewById(R.id.tracking_Btn)).setVisibility(View.VISIBLE);
 //                tracking_Btn.startAnimation(animAlpha);
             }
-        }, 750);
+        }, 2000);
 
         handler.postDelayed(new Runnable(){
             @Override
@@ -131,7 +136,7 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
                 ((Button) findViewById(R.id.signOut_Btn)).setVisibility(View.VISIBLE);
 //                signOut_Btn.startAnimation(animAlpha);
             }
-        }, 875);
+        }, 2000);
 
         handler.postDelayed(new Runnable(){
             @Override
@@ -139,7 +144,7 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
                 ((Button) findViewById(R.id.properties_Btn)).setVisibility(View.VISIBLE);
 //                properties_Btn.startAnimation(animAlpha);
             }
-        }, 1000);
+        }, 2000);
 
 //etc
     }
@@ -162,7 +167,6 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
         switch (v.getId()){
 
             case R.id.gps_Btn:
-                gps_Btn.startAnimation(animAlpha);
                 nevigateTo = new Intent(this,GpsHandler.class);
                 break;
             case R.id.doList_Btn:

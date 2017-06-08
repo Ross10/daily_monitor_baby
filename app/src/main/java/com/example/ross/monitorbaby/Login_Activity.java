@@ -2,6 +2,7 @@ package com.example.ross.monitorbaby;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -11,7 +12,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -43,6 +47,8 @@ import java.io.PrintWriter;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import static com.example.ross.monitorbaby.Register_Activity.MyPREFERENCES;
+
 public class Login_Activity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = Login_Activity.class.getSimpleName();
     private static final int RC_SIGN_IN = 1;
@@ -57,16 +63,26 @@ public class Login_Activity extends AppCompatActivity implements GoogleApiClient
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseReference;
     private android.app.AlertDialog mDialog;
+    private View viewLayout;
+    private Boolean loginSucced;
+    private SharedPreferences preferences;
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_);
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
         emailEditText = (EditText)findViewById(R.id.emailEditText);
         passwordEditText = (EditText)findViewById(R.id.passwordEditText);
         mSignInButton = (ImageButton) findViewById(R.id.googleSignInBtn);
+        LayoutInflater layoutInflater = getLayoutInflater();
+        viewLayout =layoutInflater.inflate(R.layout.login_toast, (ViewGroup) findViewById(R.id.custom_layout));
+        registerUser();
 //        mSignInButton.setSize(SignInButton.SIZE_STANDARD);
-
+        loginSucced = false;
 
         mAuth = FirebaseAuth.getInstance();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
@@ -183,8 +199,11 @@ public class Login_Activity extends AppCompatActivity implements GoogleApiClient
     private void checkLoginSuccess(Task<AuthResult> task, boolean googleSign) {
 
         if(task.isSuccessful()){
-            Intent homePage = new Intent(Login_Activity.this,Home_Page_Activity.class);
-            startActivity(homePage);
+            loginSucced = true;
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("isregister",loginSucced);
+            editor.commit();
+            registerUser();
         }else{
             //if the task didnt sucsses show up an error
             mDialog=AppHelper.buildAlertDialog("Email does not exsits" , "Failed to Authentication", true , Login_Activity.this);
@@ -225,6 +244,23 @@ public class Login_Activity extends AppCompatActivity implements GoogleApiClient
         Intent i = new Intent(this,ResetPasswordActivity.class);
         startActivity(i);
 
+    }
+
+    public void registerUser(){
+        SharedPreferences preferences = getSharedPreferences("MyPrefs",MODE_PRIVATE);
+        Boolean isregis  = preferences.getBoolean("isregister",false);
+        if (isregis == true){
+            Toast toast1 = Toast.makeText(this,"Toast:Gravity.TOP",Toast.LENGTH_SHORT);
+            toast1.setGravity(Gravity.CENTER,0,0);
+            toast1.setView(viewLayout);
+            toast1.show();
+
+
+
+            Intent i = new Intent(this,Home_Page_Activity.class);
+            startActivity(i);
+
+        }
     }
 
 

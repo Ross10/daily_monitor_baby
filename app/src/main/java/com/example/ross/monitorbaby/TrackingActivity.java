@@ -48,8 +48,7 @@ public class TrackingActivity extends AppCompatActivity
 
         final Context context =getApplicationContext();
 
-        // get data from shared reference
-        preferences = getSharedPreferences("MyPrefs",MODE_PRIVATE);
+
         trackDbHalper = new TrackingDbHelper(this);
 
         // connect items with layout

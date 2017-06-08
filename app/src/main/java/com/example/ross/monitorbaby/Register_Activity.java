@@ -41,6 +41,8 @@ public class Register_Activity extends AppCompatActivity {
     private DatabaseReference mDatabaseReference;
     private ProgressDialog progressDialog = null;
     private AlertDialog mDialog;
+    private SharedPreferences preferences;
+    private Boolean isRegistered;
 
    private FirebaseUser fireuser ; //Returns the currently signed-in FirebaseUser or null if there is none.
 
@@ -48,6 +50,7 @@ public class Register_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_);
+        isRegistered = false;
 
         fullname = (EditText)findViewById(R.id.fullNameEditText);
         passwd = (EditText)findViewById(R.id.passwdEditText);
@@ -62,6 +65,7 @@ public class Register_Activity extends AppCompatActivity {
         mDatabaseReference = FirebaseDatabase.getInstance().getReference("users");
 
 
+
     }
 
 
@@ -74,15 +78,15 @@ public class Register_Activity extends AppCompatActivity {
 
 
 
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("Email",email.getText().toString());
-            editor.putString("Password",passwd.getText().toString());
-            editor.putString("nannyAddress",nannyAddress.getText().toString());
-            editor.putString("childName",childName.getText().toString());
-            editor.putString("phoneNum",phoneNum.getText().toString());
-            editor.putString("fullname",fullname.getText().toString());
-
-            editor.commit();
+//            SharedPreferences.Editor editor = sharedPreferences.edit();
+//            editor.putString("Email",email.getText().toString());
+//            editor.putString("Password",passwd.getText().toString());
+//            editor.putString("nannyAddress",nannyAddress.getText().toString());
+//            editor.putString("childName",childName.getText().toString());
+//            editor.putString("phoneNum",phoneNum.getText().toString());
+//            editor.putString("fullname",fullname.getText().toString());
+//
+//            editor.commit();
 //            Toast.makeText(this, getString(R.string.Thanks) + fullname.getText().toString() +getString(R.string.YourDataSavedSuccsefuly2), Toast.LENGTH_LONG).show();
 
             progressDialog = ProgressDialog.show(Register_Activity.this,"אנא המתן..","העמוד בטעינה",true);
@@ -115,6 +119,10 @@ public class Register_Activity extends AppCompatActivity {
                     //If the task sucsses to add a user to firebase DB and start HomeACtivity
                     addNewUser(task.getResult().getUser().getUid());
                     progressDialog.dismiss();
+                    isRegistered = true;
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("isregister",isRegistered);
+                    editor.commit();
                     Intent homePage = new Intent(Register_Activity.this,Home_Page_Activity.class);
                     startActivity(homePage);
                 }else{
