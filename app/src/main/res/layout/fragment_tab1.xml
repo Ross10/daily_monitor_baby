@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.ross.monitorbaby.Tab1Frag"
+    android:background="@drawable/bgtry3"
     android:id="@+id/tab1"
     >
 

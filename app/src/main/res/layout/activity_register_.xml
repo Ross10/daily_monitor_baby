@@ -12,7 +12,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
 
-    android:background="@drawable/greybacground1"
+    android:background="@drawable/bgtry1"
     tools:context="com.example.ross.monitorbaby.Register_Activity">
 
 
@@ -78,7 +78,6 @@
             android:layout_alignStart="@+id/confirmPasswdEditText" />
 
 
-
     </android.support.design.widget.TextInputLayout>
 
 
@@ -98,6 +97,8 @@
             android:inputType="textPersonName"
             android:textStyle="bold"
             android:hint="שם מלא"
+            android:textColor="@color/black"
+
             android:drawableRight="@drawable/user25icon"
             android:ems="10"
             android:id="@+id/fullNameEditText"

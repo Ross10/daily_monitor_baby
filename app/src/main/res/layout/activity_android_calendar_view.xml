@@ -17,16 +17,6 @@
         android:layout_height="wrap_content" />
 
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="130sp"
-        android:id="@+id/listViewId"
-        android:layout_below="@+id/calendar"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-    </ListView>
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -73,6 +63,16 @@
         android:layout_above="@+id/listViewId"
         android:layout_alignLeft="@+id/calendar"
         android:layout_alignStart="@+id/calendar" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="130sp"
+        android:id="@+id/listViewId"
+        android:layout_below="@+id/calendar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+    </ListView>
 </RelativeLayout>
 
 

@@ -10,6 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.ross.monitorbaby.settingActivity"
+    android:background="@drawable/bgtry4"
     android:orientation="vertical">
 
 
@@ -28,6 +29,8 @@
         android:gravity="center"
         android:id="@+id/textInputLayout2"
         android:layout_below="@+id/phonestyle"
+        android:textColorHint="@color/black"
+
         >
 
         <EditText
@@ -37,6 +40,7 @@
             android:inputType="textPersonName"
             android:textStyle="bold"
             android:layout_below="@+id/phoneNum"
+            android:textColor="@color/black"
             android:hint="שם מלא"
             android:drawableRight="@drawable/user25icon"
             android:ems="10"

@@ -2,7 +2,10 @@ package com.example.ross.monitorbaby;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -20,6 +23,7 @@ public class settingActivity extends AppCompatActivity {
     private FirebaseAuth mAuth; //Returns an instance of this class corresponding to the default FirebaseApp instance when using getiInstance().
     private DatabaseReference mDatabaseReference;
     private FirebaseUser userr;
+    private View viewLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +35,8 @@ public class settingActivity extends AppCompatActivity {
         fullNameProp= (EditText)findViewById(R.id.fullNameProp);
 
         userr = FirebaseAuth.getInstance().getCurrentUser();
-
+        LayoutInflater layoutInflater = getLayoutInflater();
+        viewLayout =layoutInflater.inflate(R.layout.detailschanged_toast, (ViewGroup) findViewById(R.id.greenV));
 
 
         readData();
@@ -93,6 +98,14 @@ public class settingActivity extends AppCompatActivity {
             mDatabaseReference.child("email").setValue(emailProp.getText().toString());
             mDatabaseReference.child("nannyAddress").setValue(nannyAddressProp.getText().toString());
             mDatabaseReference.child("phoneNumber").setValue(phoneNumProp.getText().toString());
+
+            Toast toast1 = Toast.makeText(this,"Toast:Gravity.TOP",Toast.LENGTH_SHORT);
+            toast1.setGravity(Gravity.CENTER,0,0);
+            toast1.setView(viewLayout);
+            toast1.show();
+
+
+
 
     }
 

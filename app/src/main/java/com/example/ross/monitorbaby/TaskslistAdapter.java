@@ -49,13 +49,13 @@ public class TaskslistAdapter extends ArrayAdapter<Task>{
 
         switch (task.getPriorty()){
                 case 0:
-                    iv.setImageResource(R.drawable.high_pri);
+                    iv.setImageResource(R.drawable.high_priora);
                     break;
                 case 1:
-                    iv.setImageResource(R.drawable.medium_pri);
+                    iv.setImageResource(R.drawable.med_priora);
                     break;
                 case 2:
-                    iv.setImageResource(R.drawable.low_pri);
+                    iv.setImageResource(R.drawable.low_priora);
                     break;
             }
 

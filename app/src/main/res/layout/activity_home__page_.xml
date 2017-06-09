@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/greybacground1"
+    android:background="@drawable/bgtry4"
     android:weightSum="4"
     android:orientation="vertical"
     tools:context="com.example.ross.monitorbaby.Home_Page_Activity">
@@ -28,7 +28,8 @@
             android:layout_height="wrap_content"
             android:background="#0000"
             android:drawableLeft="@drawable/todoing"
-            android:text="רשימת קניות"
+            android:text="משימות"
+            android:textColor="@color/black"
             android:id="@+id/doList_Btn"
             android:layout_weight="1.00" />
 
@@ -39,6 +40,7 @@
             android:id="@+id/gallary_Btn"
             android:drawableLeft="@drawable/gallery"
             android:text="גלריית תמונות"
+            android:textColor="@color/black"
             android:layout_weight="1" />
 
 
@@ -59,6 +61,7 @@
             android:background="#0000"
             android:layout_height="wrap_content"
             android:text="צ'ט"
+            android:textColor="@color/black"
             android:id="@+id/chat_Btn"
             android:layout_weight="1" />
 
@@ -68,6 +71,7 @@
             android:drawableLeft="@drawable/calendar"
             android:background="#0000"
             android:text="יומן"
+            android:textColor="@color/black"
             android:id="@+id/calanter_Btn"
             android:layout_weight="1" />
 
@@ -89,6 +93,7 @@
             android:layout_height="wrap_content"
             android:background="#0000"
             android:text="GPS"
+            android:textColor="@color/black"
             android:id="@+id/gps_Btn"
             android:drawableLeft="@drawable/gpsing"
             android:layout_weight="1" />
@@ -97,6 +102,7 @@
             android:layout_width="match_parent"
             android:background="#0000"
             android:text="מעקב"
+            android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:id="@+id/tracking_Btn"
             android:drawableLeft="@drawable/trackinging"
@@ -121,6 +127,7 @@
             android:layout_height="wrap_content"
             android:background="#0000"
             android:text="הגדרות"
+            android:textColor="@color/black"
             android:id="@+id/properties_Btn"
             android:drawableLeft="@drawable/properties"
             android:layout_weight="1" />
@@ -129,6 +136,7 @@
             android:layout_width="match_parent"
             android:background="#0000"
             android:text="התנתקות"
+            android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:id="@+id/signOut_Btn"
             android:drawableLeft="@drawable/lockmember"

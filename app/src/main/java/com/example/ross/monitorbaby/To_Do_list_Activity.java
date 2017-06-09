@@ -1,5 +1,8 @@
 package com.example.ross.monitorbaby;
 
+import android.*;
+import android.app.PendingIntent;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,13 +11,18 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.PopupMenu;
+import android.telephony.SmsManager;
 import android.text.InputType;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -46,12 +54,15 @@ import java.util.List;
 
 import static android.R.id.list;
 import static android.R.id.progress;
+import static java.security.AccessController.getContext;
 
 public class To_Do_list_Activity extends AppCompatActivity{
     private TaskDbHelper db;
     private List<Task> list;
     //    private MyAdapter adapt, adapt2;
     private ListView listTask;
+    private static final String SMS_SENT_INTENT_FILTER = "com.yourapp.sms_send";
+    private static final String SMS_DELIVERED_INTENT_FILTER = "com.yourapp.sms_delivered";
     private TaskslistAdapter adapterFour;
     private String [] mngtask;
     private Context appContext;
@@ -73,10 +84,12 @@ public class To_Do_list_Activity extends AppCompatActivity{
     private ValueEventListener mValueEventListener;
     FirebaseUser userr;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to__do_list_);
+
 
 //        Task t1 = new Task("new Task2",0);
 //        FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
@@ -130,10 +143,30 @@ public class To_Do_list_Activity extends AppCompatActivity{
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int pos, long id) {
                 position = pos;
                 // TODO Auto-generated method stub
+                Context wrapper = new ContextThemeWrapper(getApplicationContext(), R.style.popupMenuStyle);
+                PopupMenu popupMenu = new PopupMenu(wrapper,arg1);
+                popupMenu.getMenuInflater().inflate(R.menu.manufortasks,popupMenu.getMenu());
 
-////
-                deleteTaskImg.setVisibility(View.VISIBLE);
-                editTaskImg.setVisibility(View.VISIBLE);
+
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if(item.getItemId()==R.id.item1){
+                            deletethis();
+                        }
+                        else if(item.getItemId()==R.id.item2){
+                            editthisone();
+                        }
+                        else{
+                            ActivityCompat.requestPermissions(To_Do_list_Activity.this,new String[]{android.Manifest.permission.SEND_SMS},1);
+                            sendSms();
+                            //sms sender
+                        }
+                        Toast.makeText(getApplication(),"Item Clicked: "+item.getTitle() + "item id is : " + item,Toast.LENGTH_SHORT).show();
+                        return true;
+                    } });
+                popupMenu.show();
 
 
 
@@ -296,10 +329,46 @@ public class To_Do_list_Activity extends AppCompatActivity{
 //    }
 
 
+    public void deletethis(){
+        if(tasklistNew.size()>0){
+
+            taskId = tasklistNew.get(position).getId();
+            AlertDialog.Builder builder;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+            } else {
+                builder = new AlertDialog.Builder(this);
+            }
+            builder.setTitle("ההודעה תימחק")
+                    .setMessage("האם אתה בטוח שברצונך למחוק את המשימה?")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            tasklistNew.remove(position);
+
+                            adapterFour.notifyDataSetChanged();
+
+                            mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid());
+                            mDatabaseReference.child("Task").child(taskId).removeValue();
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+
+
+        }
 
 
 
-    public void editEvent(View v){
+    }
+
+    public void editthisone(){
+
         if(tasklistNew.size()>0){
             taskId = tasklistNew.get(position).getId();
             taskDate = tasklistNew.get(position).getDate();
@@ -312,7 +381,7 @@ public class To_Do_list_Activity extends AppCompatActivity{
 // Set up the input
             final EditText input = new EditText(this);
 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-            input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
             builder.setView(input);
 
 // Set up the buttons
@@ -357,55 +426,41 @@ public class To_Do_list_Activity extends AppCompatActivity{
         }
 
         adapterFour.notifyDataSetChanged();
-        deleteTaskImg.setVisibility(View.INVISIBLE);
-        editTaskImg.setVisibility(View.INVISIBLE);
+
 
     }
 
-    public void deleteEvent(View v){
-        if(tasklistNew.size()>0){
 
-            taskId = tasklistNew.get(position).getId();
-            AlertDialog.Builder builder;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
-            } else {
-                builder = new AlertDialog.Builder(this);
+    private void sendSms() // send SMS when phone in radius
+    {
+        String message = "משימה : "+ tasklistNew.get(position).getTaskName();
+        Boolean sendSuccses = false;
+
+        String phnNo =  "0587000097" ;//preferable use complete international number
+
+        PendingIntent sentPI = PendingIntent.getBroadcast(this, 0, new Intent(
+                SMS_SENT_INTENT_FILTER), 0);
+        PendingIntent deliveredPI = PendingIntent.getBroadcast(this, 0, new Intent(
+                SMS_DELIVERED_INTENT_FILTER), 0);
+
+
+        while(!sendSuccses){
+            try {
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(phnNo, null, message, sentPI, deliveredPI);
+                Toast.makeText(getApplicationContext(), R.string.MessageSentSuccesfuly,
+                        Toast.LENGTH_LONG).show();
+                sendSuccses = true;
+            } catch (Exception ex) {
+                Toast.makeText(getApplicationContext(),ex.getMessage(),
+                        Toast.LENGTH_LONG).show();
+                ex.printStackTrace();
             }
-            builder.setTitle("ההודעה תימחק")
-                    .setMessage("האם אתה בטוח שברצונך למחוק את המשימה?")
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            tasklistNew.remove(position);
-
-                            adapterFour.notifyDataSetChanged();
-
-                            mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid());
-                            mDatabaseReference.child("Task").child(taskId).removeValue();
-                        }
-                    })
-                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            // do nothing
-
-                        }
-                    })
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show();
-
 
         }
 
 
-
-
-        deleteTaskImg.setVisibility(View.INVISIBLE);
-        editTaskImg.setVisibility(View.INVISIBLE);
-
-
-
     }
-
 
 
 }
