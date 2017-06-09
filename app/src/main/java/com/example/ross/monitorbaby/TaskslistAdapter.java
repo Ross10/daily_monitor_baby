@@ -37,7 +37,6 @@ public class TaskslistAdapter extends ArrayAdapter<Task>{
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         View listviewItem = inflater.inflate(R.layout.newlookfortasklist,null,true);
-
         TextView tv = (TextView) listviewItem.findViewById(R.id.taskNameId);
         ImageView iv = (ImageView)listviewItem.findViewById(R.id.priView);
         TextView time2  = (TextView)listviewItem.findViewById(R.id.timeThatClicked);

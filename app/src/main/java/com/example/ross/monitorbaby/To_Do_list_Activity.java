@@ -20,6 +20,7 @@ import android.telephony.SmsManager;
 import android.text.InputType;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -83,6 +84,8 @@ public class To_Do_list_Activity extends AppCompatActivity{
     private ChildEventListener mChildEventListener;
     private ValueEventListener mValueEventListener;
     FirebaseUser userr;
+    private View viewLayout;
+
 
 
     @Override
@@ -90,7 +93,8 @@ public class To_Do_list_Activity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to__do_list_);
 
-
+        LayoutInflater layoutInflater = getLayoutInflater();
+        viewLayout =layoutInflater.inflate(R.layout.smssent, (ViewGroup) findViewById(R.id.greenV2));
 //        Task t1 = new Task("new Task2",0);
 //        FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
 //        if(userr!=null){
@@ -142,6 +146,8 @@ public class To_Do_list_Activity extends AppCompatActivity{
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int pos, long id) {
                 position = pos;
+                arg1.setSelected(true);
+
                 // TODO Auto-generated method stub
                 Context wrapper = new ContextThemeWrapper(getApplicationContext(), R.style.popupMenuStyle);
                 PopupMenu popupMenu = new PopupMenu(wrapper,arg1);
@@ -163,7 +169,7 @@ public class To_Do_list_Activity extends AppCompatActivity{
                             sendSms();
                             //sms sender
                         }
-                        Toast.makeText(getApplication(),"Item Clicked: "+item.getTitle() + "item id is : " + item,Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplication(),"Item Clicked: "+item.getTitle() + "item id is : " + item,Toast.LENGTH_SHORT).show();
                         return true;
                     } });
                 popupMenu.show();
@@ -448,12 +454,14 @@ public class To_Do_list_Activity extends AppCompatActivity{
             try {
                 SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(phnNo, null, message, sentPI, deliveredPI);
-                Toast.makeText(getApplicationContext(), R.string.MessageSentSuccesfuly,
-                        Toast.LENGTH_LONG).show();
                 sendSuccses = true;
+                Toast toast1 = Toast.makeText(this,"Toast:Gravity.TOP",Toast.LENGTH_SHORT);
+                toast1.setGravity(Gravity.CENTER,0,0);
+                toast1.setView(viewLayout);
+                toast1.show();
             } catch (Exception ex) {
-                Toast.makeText(getApplicationContext(),ex.getMessage(),
-                        Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(),ex.getMessage(),
+//                        Toast.LENGTH_LONG).show();
                 ex.printStackTrace();
             }
 
