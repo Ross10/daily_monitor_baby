@@ -185,7 +185,7 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
         switch (v.getId()){
 
             case R.id.gps_Btn:
-                nevigateTo = new Intent(this,GpsHandler.class);
+                nevigateTo = new Intent(this,MainActivity.class);
                 break;
             case R.id.doList_Btn:
                 nevigateTo = new Intent(this,To_Do_list_Activity.class);
@@ -200,20 +200,20 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
                 break;
 
             case R.id.tracking_Btn:
-                nevigateTo = new Intent(this,TrackingActivity.class);
-                break;
-            case R.id.signOut_Btn:
-//                mauth.signOut();
                 nevigateTo = new Intent(this,traceTabActivity.class);
                 break;
+//            case R.id.signOut_Btn:
+////                mauth.signOut();
+//                nevigateTo = new Intent(this,Alarm.class);
+//                break;
             case R.id.properties_Btn:
                 nevigateTo = new Intent(this,settingActivity.class);
                 break;
 
-////
-//            case R.id.chat_Btn:
-//                nevigateTo = new Intent(this,todo2.class);
-//                break;
+
+            case R.id.chat_Btn:
+                nevigateTo = new Intent(this,GpsHandler.class);
+                break;
         }
 
         if(nevigateTo!=null){

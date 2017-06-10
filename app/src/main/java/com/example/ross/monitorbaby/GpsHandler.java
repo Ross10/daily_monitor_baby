@@ -733,5 +733,3 @@ public class GpsHandler extends AppCompatActivity implements GoogleApiClient.Con
 
 
 }
-
-
