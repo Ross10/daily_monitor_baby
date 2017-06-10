@@ -168,7 +168,7 @@ public class MyService extends Service {
         criteria.setPowerRequirement(Criteria.POWER_HIGH);
         criteria.setCostAllowed(true);
         String best=locationManager.getBestProvider(criteria, false);
-        locationManager.requestLocationUpdates(best, 1, 1,locationListener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1,locationListener);
         return START_STICKY;
     }
 
