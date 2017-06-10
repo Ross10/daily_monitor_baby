@@ -52,7 +52,13 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 import android.app.Notification;
@@ -91,7 +97,7 @@ public class GpsHandler extends AppCompatActivity implements GoogleApiClient.Con
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private Location mCurrentLocation, location;
-    private String mLastUpdateTime, m_Text,phoneNumber;
+    private String mLastUpdateTime, m_Text,phoneNumber,addressFB,phonenum;
     private List<Address> addresses;
     private Context appContext;
     private  double[] geoAddressLocation;
@@ -101,6 +107,10 @@ public class GpsHandler extends AppCompatActivity implements GoogleApiClient.Con
     private ImageButton gpsByGoogleMap;
     private SharedPreferences sharedPreferences;
     private ImageView gpsisOff;
+    private DatabaseReference mDatabaseReference;
+    FirebaseUser userr;
+
+
 
 
 
@@ -125,6 +135,7 @@ public class GpsHandler extends AppCompatActivity implements GoogleApiClient.Con
         tempTextView = (TextView) findViewById(R.id.tempTextView);
         progressBar = (ProgressBar) findViewById(R.id.progressBar2);
         gpsisOff = (ImageView)findViewById(R.id.gpsisOff);
+        userr = FirebaseAuth.getInstance().getCurrentUser();
 
         noSuchAddressFlag = false;
         sentSms =0;
@@ -132,9 +143,30 @@ public class GpsHandler extends AppCompatActivity implements GoogleApiClient.Con
         appContext = GpsHandler.this;
         on = false;
         toggle.setChecked(sharedPreferences.getBoolean("toggleButton", false));
-        phoneNumber = sharedPreferences.getString("phoneNum","noPhoneInserted");
+//        phoneNumber = sharedPreferences.getString("phoneNum","noPhoneInserted");
         geoAddressLocation = new double[2];
 
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid()).child("userDetail");
+        mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+
+                if(user!=null){
+                    addressFB = user.getNannyAddress();
+                    phonenum = user.getPhoneNumber();
+                }
+
+
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
 
         // run time permission
         permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);

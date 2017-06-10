@@ -35,6 +35,7 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
     private  LinearLayout screen;
     private Handler handler;
     private View viewLayout;
+    private static int enterdflag;
 
 
 
@@ -51,7 +52,7 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
         signOut_Btn = (Button)findViewById(R.id.signOut_Btn);
         properties_Btn = (Button)findViewById(R.id.properties_Btn);
         mauth = FirebaseAuth.getInstance();
-
+        enterdflag =0;
         doList_Btn.setOnClickListener(this);
         calender_Btn.setOnClickListener(this);
         gallery_Btn.setOnClickListener(this);
@@ -82,70 +83,85 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
     private void showButtons(){
         handler = new Handler();
 
-        handler.postDelayed(new Runnable(){
-            @Override
-            public void run(){
-                ((Button) findViewById(R.id.doList_Btn)).setVisibility(View.VISIBLE);
+        if(enterdflag ==0){
+
+            handler.postDelayed(new Runnable(){
+                @Override
+                public void run(){
+                    ((Button) findViewById(R.id.doList_Btn)).setVisibility(View.VISIBLE);
 //                doList_Btn.startAnimation(animAlpha);
-            }
-        }, 2000);
+                }
+            }, 2000);
 
-        handler.postDelayed(new Runnable(){
-            @Override
-            public void run(){
-                ((Button) findViewById(R.id.gallary_Btn)).setVisibility(View.VISIBLE);
+            handler.postDelayed(new Runnable(){
+                @Override
+                public void run(){
+                    ((Button) findViewById(R.id.gallary_Btn)).setVisibility(View.VISIBLE);
 //                gallery_Btn.startAnimation(animAlpha);
-            }
-        }, 2000);
+                }
+            }, 2000);
 
-        handler.postDelayed(new Runnable(){
-            @Override
-            public void run(){
-                ((Button) findViewById(R.id.calanter_Btn)).setVisibility(View.VISIBLE);
+            handler.postDelayed(new Runnable(){
+                @Override
+                public void run(){
+                    ((Button) findViewById(R.id.calanter_Btn)).setVisibility(View.VISIBLE);
 //                calender_Btn.startAnimation(animAlpha);
-            }
-        }, 2000);
+                }
+            }, 2000);
 
-        handler.postDelayed(new Runnable(){
-            @Override
-            public void run(){
-                ((Button) findViewById(R.id.chat_Btn)).setVisibility(View.VISIBLE);
+            handler.postDelayed(new Runnable(){
+                @Override
+                public void run(){
+                    ((Button) findViewById(R.id.chat_Btn)).setVisibility(View.VISIBLE);
 //                chat_Btn.startAnimation(animAlpha);
-            }
-        }, 2000);
+                }
+            }, 2000);
 
-        handler.postDelayed(new Runnable(){
-            @Override
-            public void run(){
-                ((Button) findViewById(R.id.gps_Btn)).setVisibility(View.VISIBLE);
+            handler.postDelayed(new Runnable(){
+                @Override
+                public void run(){
+                    ((Button) findViewById(R.id.gps_Btn)).setVisibility(View.VISIBLE);
 //                gps_Btn.startAnimation(animAlpha);
-            }
-        }, 2000);
+                }
+            }, 2000);
 
-        handler.postDelayed(new Runnable(){
-            @Override
-            public void run(){
-                ((Button) findViewById(R.id.tracking_Btn)).setVisibility(View.VISIBLE);
+            handler.postDelayed(new Runnable(){
+                @Override
+                public void run(){
+                    ((Button) findViewById(R.id.tracking_Btn)).setVisibility(View.VISIBLE);
 //                tracking_Btn.startAnimation(animAlpha);
-            }
-        }, 2000);
+                }
+            }, 2000);
 
-        handler.postDelayed(new Runnable(){
-            @Override
-            public void run(){
-                ((Button) findViewById(R.id.signOut_Btn)).setVisibility(View.VISIBLE);
+            handler.postDelayed(new Runnable(){
+                @Override
+                public void run(){
+                    ((Button) findViewById(R.id.signOut_Btn)).setVisibility(View.VISIBLE);
 //                signOut_Btn.startAnimation(animAlpha);
-            }
-        }, 2000);
+                }
+            }, 2000);
 
-        handler.postDelayed(new Runnable(){
-            @Override
-            public void run(){
-                ((Button) findViewById(R.id.properties_Btn)).setVisibility(View.VISIBLE);
+            handler.postDelayed(new Runnable(){
+                @Override
+                public void run(){
+                    ((Button) findViewById(R.id.properties_Btn)).setVisibility(View.VISIBLE);
 //                properties_Btn.startAnimation(animAlpha);
-            }
-        }, 2000);
+                }
+            }, 2000);
 
+
+        }else{
+            doList_Btn.setVisibility(View.VISIBLE);
+            calender_Btn.setVisibility(View.VISIBLE);
+            gallery_Btn.setVisibility(View.VISIBLE);
+            gps_Btn.setVisibility(View.VISIBLE);
+            tracking_Btn.setVisibility(View.VISIBLE);
+            chat_Btn.setVisibility(View.VISIBLE);
+            signOut_Btn.setVisibility(View.VISIBLE);
+            properties_Btn.setVisibility(View.VISIBLE);
+
+
+        }
 //etc
     }
 
@@ -162,6 +178,8 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
+        enterdflag =1;
+
 
         Intent nevigateTo = null;
         switch (v.getId()){

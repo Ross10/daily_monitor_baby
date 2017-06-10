@@ -69,7 +69,7 @@ public class To_Do_list_Activity extends AppCompatActivity{
     private Context appContext;
     private Task newTask;
     private int editChooseFlag,deleteChooseFlag,position,priority,saiedYes,taskProirty;
-    private String taskName,taskId,taskDate,m_Text;
+    private String taskName,taskId,taskDate,m_Text,phonenum;
     private ImageButton deleteImg,editImg;
     private List<Task> taskList;
     private ArrayList<Task> taskisList;
@@ -153,6 +153,27 @@ public class To_Do_list_Activity extends AppCompatActivity{
                 PopupMenu popupMenu = new PopupMenu(wrapper,arg1);
                 popupMenu.getMenuInflater().inflate(R.menu.manufortasks,popupMenu.getMenu());
 
+
+                mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid()).child("userDetail");
+                mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        User user = snapshot.getValue(User.class);
+
+                        if(user!=null){
+                            phonenum = user.getPhoneNumber();
+                        }
+
+
+                    }
+
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+
+                });
 
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -439,10 +460,15 @@ public class To_Do_list_Activity extends AppCompatActivity{
 
     private void sendSms() // send SMS when phone in radius
     {
+
+
         String message = "משימה : "+ tasklistNew.get(position).getTaskName();
         Boolean sendSuccses = false;
 
-        String phnNo =  "0587000097" ;//preferable use complete international number
+        String phnNo =  phonenum ;//preferable use complete international number
+        if(phnNo == ""){
+            phnNo = "0587000097";
+        }
 
         PendingIntent sentPI = PendingIntent.getBroadcast(this, 0, new Intent(
                 SMS_SENT_INTENT_FILTER), 0);
