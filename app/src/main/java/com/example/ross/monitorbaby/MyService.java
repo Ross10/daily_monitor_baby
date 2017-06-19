@@ -4,6 +4,7 @@ package com.example.ross.monitorbaby;
  * Created by Ross on 6/10/2017.
  */
 import android.Manifest;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -38,8 +39,11 @@ public class MyService extends Service {
     private int sentSms;
     private LocationManager locationManager;
 
+
     private float distance;
     private String mLastUpdateTime;
+
+
 
     // location listener
     private LocationListener locationListener = new LocationListener() {
@@ -148,12 +152,12 @@ public class MyService extends Service {
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) !=
                     PackageManager.PERMISSION_GRANTED)
             {
-                return START_NOT_STICKY;
+                return START_STICKY;
 
             }
             if( checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) !=
                     PackageManager.PERMISSION_GRANTED) {
-                return START_NOT_STICKY;
+                return START_STICKY;
 
             }
 
@@ -168,7 +172,14 @@ public class MyService extends Service {
         criteria.setPowerRequirement(Criteria.POWER_HIGH);
         criteria.setCostAllowed(true);
         String best=locationManager.getBestProvider(criteria, false);
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1,locationListener);
+        if(locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER )){
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 1,locationListener);
+        }else{
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1,locationListener);
+
+        }
+
+
         return START_STICKY;
     }
 

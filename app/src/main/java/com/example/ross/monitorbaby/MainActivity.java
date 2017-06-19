@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                     Intent intent = new Intent(MainActivity.this, MyService.class);
                     intent.putExtra("lat", "" + lat);
                     intent.putExtra("lon", "" + lon);
-                    intent.putExtra("distance", "15");
+                    intent.putExtra("distance", "190");
 
                     //request permission
                     askPermessions();

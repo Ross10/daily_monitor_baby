@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bgtry4">
+    android:background="@drawable/cmppngless">
 
     <ImageView
         android:layout_width="113dp"

@@ -12,7 +12,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
 
-    android:background="@drawable/bgtry4"
+    android:background="@drawable/cmppngless"
     tools:context="com.example.ross.monitorbaby.Register_Activity">
 
 
@@ -41,6 +41,8 @@
             android:hint = "אשר סיסמא"
             android:gravity="center"
             android:drawableRight="@drawable/locklock25"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/black"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"
@@ -67,7 +69,10 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"
+            android:textColor="@color/black"
+
             android:id="@+id/passwdEditText"
+            android:backgroundTint="@color/black"
             android:drawableRight="@drawable/locklock25"
             android:gravity="center"
             android:hint = "סיסמא"
@@ -98,7 +103,7 @@
             android:textStyle="bold"
             android:hint="שם מלא"
             android:textColor="@color/black"
-
+            android:backgroundTint="@color/black"
             android:drawableRight="@drawable/user25icon"
             android:ems="10"
             android:id="@+id/fullNameEditText"
@@ -124,6 +129,9 @@
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:ems="10"
+            android:textColor="@color/black"
+
+            android:backgroundTint="@color/black"
             android:gravity="center"
             android:drawableRight="@drawable/maicon"
             android:hint = "דואר אלקטרוני"
@@ -150,7 +158,10 @@
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/black"
             android:inputType="textPersonName"
+            android:textColor="@color/black"
+
             android:drawableRight="@drawable/adresscare"
             android:hint="כתובת המעון"
             android:ems="10"
@@ -182,6 +193,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
+            android:backgroundTint="@color/black"
+            android:textColor="@color/black"
+
             android:gravity="center"
             android:hint="שם הילד"
             android:drawableRight="@drawable/babyicon"
@@ -215,6 +229,9 @@
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:ems="10"
+            android:backgroundTint="@color/black"
+            android:textColor="@color/black"
+
             android:gravity="center"
             android:drawableRight="@drawable/phonedis"
             android:hint = "טלפון לעדכונים"

@@ -38,11 +38,10 @@
 
         <!-- Alarm -->
 
+
         <!-- END Alarm -->
 
-
-        <service android:name=".MyService"></service>
-
+        <service android:name=".MyService" />
 
         <!-- Login activity -->
         <activity android:name=".Login_Activity">
@@ -98,7 +97,9 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".chatingActivity" />
         <activity android:name=".settingActivity" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ClanaderviewActiviry" />
+        <activity android:name=".CalanderViewHelper"></activity>
     </application>
 
 </manifest>

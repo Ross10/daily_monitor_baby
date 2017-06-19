@@ -196,16 +196,16 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
                 break;
 
             case R.id.calanter_Btn:
-                nevigateTo = new Intent(this,AndroidCalendarView.class);
+                nevigateTo = new Intent(this,ClanaderviewActiviry.class);
                 break;
 
             case R.id.tracking_Btn:
                 nevigateTo = new Intent(this,traceTabActivity.class);
                 break;
-//            case R.id.signOut_Btn:
-////                mauth.signOut();
-//                nevigateTo = new Intent(this,Alarm.class);
-//                break;
+            case R.id.signOut_Btn:
+//
+                finish();
+                break;
             case R.id.properties_Btn:
                 nevigateTo = new Intent(this,settingActivity.class);
                 break;
@@ -244,7 +244,6 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
         super.onResume();
         hideButoons();
         showButtons();
-        // put your code here...
 
     }
 

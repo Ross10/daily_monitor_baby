@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    android:background="@drawable/bgtry4"
+    android:background="@drawable/cmppngless"
     tools:context="com.example.ross.monitorbaby.To_Do_list_Activity">
 
 
@@ -29,25 +29,6 @@
             android:layout_weight="1"
             android:onClick="addTaskNow"
             android:background="@null"/>
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/trying123"
-            android:layout_weight="1"
-            android:onClick="editEvent"
-            android:id="@+id/editTask"
-            android:background="@null"/>
-
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/deletetask"
-            android:onClick="deleteEvent"
-            android:layout_weight="1"
-            android:id="@+id/deleteTask"
-            android:background="@null" />
 
 
     </LinearLayout>

@@ -116,8 +116,8 @@ public class To_Do_list_Activity extends AppCompatActivity{
 //        editImg = (ImageButton)findViewById(R.id.editImg);
 //        toDoListEditText = (EditText) findViewById(R.id.toDoListEditText);
         userr = FirebaseAuth.getInstance().getCurrentUser();
-        editTaskImg = (ImageButton)findViewById(R.id.editTask) ;
-        deleteTaskImg = (ImageButton)findViewById(R.id.deleteTask) ;
+//        editTaskImg = (ImageButton)findViewById(R.id.editTask) ;
+//        deleteTaskImg = (ImageButton)findViewById(R.id.deleteTask) ;
 
         db = new TaskDbHelper(this);
         list = db.getAllTasks();
@@ -139,8 +139,8 @@ public class To_Do_list_Activity extends AppCompatActivity{
 //        editImg.setVisibility(View.INVISIBLE);
 //        itai = new Task("hello world",0);
 
-        deleteTaskImg.setVisibility(View.INVISIBLE);
-        editTaskImg.setVisibility(View.INVISIBLE);
+//        deleteTaskImg.setVisibility(View.INVISIBLE);
+//        editTaskImg.setVisibility(View.INVISIBLE);
 
         listTask.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override

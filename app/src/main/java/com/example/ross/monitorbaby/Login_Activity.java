@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
@@ -75,11 +76,13 @@ public class Login_Activity extends AppCompatActivity implements GoogleApiClient
         setContentView(R.layout.activity_login_);
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
+
         emailEditText = (EditText)findViewById(R.id.emailEditText);
         passwordEditText = (EditText)findViewById(R.id.passwordEditText);
         mSignInButton = (ImageButton) findViewById(R.id.googleSignInBtn);
         LayoutInflater layoutInflater = getLayoutInflater();
         viewLayout =layoutInflater.inflate(R.layout.login_toast, (ViewGroup) findViewById(R.id.custom_layout));
+
         registerUser();
 //        mSignInButton.setSize(SignInButton.SIZE_STANDARD);
         loginSucced = false;
@@ -261,6 +264,12 @@ public class Login_Activity extends AppCompatActivity implements GoogleApiClient
             startActivity(i);
 
         }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
     }
 
 
