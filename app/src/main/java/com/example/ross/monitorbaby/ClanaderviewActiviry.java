@@ -56,7 +56,6 @@ public class ClanaderviewActiviry extends AppCompatActivity {
                 focusedMonth = month+1;
                 focusedYear = year;
                 Log.d(TAG,"onSelectedDate :  mm/dd/yyyy" + date);
-                Toast.makeText(ClanaderviewActiviry.this, "onSelectedDate :  mm/dd/yyyy" + date, Toast.LENGTH_SHORT).show();
 
 
 

@@ -29,6 +29,13 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.List;
@@ -41,6 +48,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     EditText ed;
     TextView tvAddress;
     ImageView startNevigate;
+    private FirebaseAuth mAuth; //Returns an instance of this class corresponding to the default FirebaseApp instance when using getiInstance().
+    private DatabaseReference mDatabaseReference;
+    private FirebaseUser userr;
+
 
     // Geocoder
     Geocoder geocoder;
@@ -53,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private Location mCurrentLocation, location;
+    private String strAddress;
 
     // lan and lot that will set to the location variable
     float lat,lon;
@@ -78,6 +90,32 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         ed=(EditText)findViewById(R.id.editText);
         tvAddress =(TextView)findViewById(R.id.textView2);
         startNevigate = (ImageView)findViewById(R.id.imageView4);
+        userr = FirebaseAuth.getInstance().getCurrentUser();
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid()).child("userDetail");
+        mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+
+                if(user!=null){
+                    strAddress = user.getNannyAddress();
+                    ed.setText(strAddress);
+                }
+
+
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
+        if(strAddress==null){
+            strAddress = "";
+        }
+
 
 
         // geoCoder initial
@@ -115,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                     Intent intent = new Intent(MainActivity.this, MyService.class);
                     intent.putExtra("lat", "" + lat);
                     intent.putExtra("lon", "" + lon);
-                    intent.putExtra("distance", "190");
+                    intent.putExtra("distance", "600");
 
                     //request permission
                     askPermessions();
@@ -139,7 +177,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         startNevigate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showInGoogleMap(lstAdresses);
+                if(lstAdresses!=null){
+                    showInGoogleMap(lstAdresses);
+                }else{
+                    Toast.makeText(MainActivity.this, "אין כתובת לניווט",
+                            Toast.LENGTH_LONG).show();
+                }
+
 
 
             }

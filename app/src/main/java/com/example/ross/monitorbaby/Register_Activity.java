@@ -127,7 +127,7 @@ public class Register_Activity extends AppCompatActivity {
                     startActivity(homePage);
                 }else{
                     //if the task didnt sucsses show up an error
-                    mDialog=AppHelper.buildAlertDialog("faild title" , "faild message", true , Register_Activity.this);
+                    mDialog=AppHelper.buildAlertDialog("בעיה בהתחברות" , "אנא בדוק שהינך מחובר לאינטרנט", true , Register_Activity.this);
                     mDialog.show();
                     progressDialog.dismiss();
                 }
@@ -150,7 +150,7 @@ public class Register_Activity extends AppCompatActivity {
         User user = new User(fullNameUser,emailUser,"", new Date().getTime(),User.NO_URI,childUser,PhoneNumUser,nannyuser);
         mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userBase.getUid()).child("userDetail");
         mDatabaseReference.setValue(user);
-
+    int counter;
 //        mDatabaseReference.child(uid).push();
 //        mDatabaseReference.child(uid).setValue(user);
     }

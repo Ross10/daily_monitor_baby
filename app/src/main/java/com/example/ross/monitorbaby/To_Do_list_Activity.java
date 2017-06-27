@@ -58,7 +58,7 @@ import static android.R.id.progress;
 import static java.security.AccessController.getContext;
 
 public class To_Do_list_Activity extends AppCompatActivity{
-    private TaskDbHelper db;
+//    private TaskDbHelper db;
     private List<Task> list;
     //    private MyAdapter adapt, adapt2;
     private ListView listTask;
@@ -76,14 +76,14 @@ public class To_Do_list_Activity extends AppCompatActivity{
     private List<Task> tasklistNew;
     private FirebaseAuth mAuth; //Returns an instance of this class corresponding to the default FirebaseApp instance when using getiInstance().
     private DatabaseReference mDatabaseReference;
-    private ListingAdapter adapterson;
+//    private ListingAdapter adapterson;
     private EditText toDoListEditText;
     Handler mainHandler = new Handler();
     private ImageView priorityImg;
     private ImageButton deleteTaskImg, editTaskImg;
     private ChildEventListener mChildEventListener;
     private ValueEventListener mValueEventListener;
-    FirebaseUser userr;
+    private FirebaseUser userr;
     private View viewLayout;
 
 
@@ -119,8 +119,8 @@ public class To_Do_list_Activity extends AppCompatActivity{
 //        editTaskImg = (ImageButton)findViewById(R.id.editTask) ;
 //        deleteTaskImg = (ImageButton)findViewById(R.id.deleteTask) ;
 
-        db = new TaskDbHelper(this);
-        list = db.getAllTasks();
+//        db = new TaskDbHelper(this);
+//        list = db.getAllTasks();
         tasklistNew = new ArrayList<>();
         priorityImg = (ImageView)findViewById(R.id.priView);
 //        adapt = new MyAdapter(this, R.layout.list_inner_view, list);

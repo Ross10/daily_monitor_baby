@@ -65,6 +65,7 @@ public class Tab3Frag extends Fragment {
     public void readAllDataFromFB(){
         logArray.clear(); //Without it it can be duplicate values 2.
         FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
+        userr.getDisplayName();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid()).child("Logs");
         mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

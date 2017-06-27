@@ -1,5 +1,4 @@
 package com.example.ross.monitorbaby;
-
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;

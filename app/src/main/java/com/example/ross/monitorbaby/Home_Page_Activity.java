@@ -25,6 +25,12 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Home_Page_Activity extends AppCompatActivity implements View.OnClickListener {
 
@@ -36,7 +42,9 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
     private Handler handler;
     private View viewLayout;
     private static int enterdflag;
-
+    private FirebaseAuth mAuth; //Returns an instance of this class corresponding to the default FirebaseApp instance when using getiInstance().
+    private DatabaseReference mDatabaseReference;
+    private FirebaseUser userr;
 
 
     @Override
@@ -76,6 +84,34 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
         hideButoons();
 //        screen.startAnimation(animRotateIn_icon);
         showButtons();
+
+
+        userr = FirebaseAuth.getInstance().getCurrentUser();
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid()).child("userDetail");
+        mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+
+                if(user!=null && (user.getPhoneNumber().equals("") || user.getEmail().equals("") || user.getDisplayName().equals("") || user.getChildName().equals("") || user.getNannyAddress().equals(""))){
+                    properties_Btn.setBackgroundColor(Color.RED);
+                    Toast.makeText(Home_Page_Activity.this, " אנא מלא פרטים אישיים דרך ההגדרות למקסום החוויה באפליקציה ", Toast.LENGTH_LONG).show();
+
+
+
+
+                }
+
+
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
 
     }
 
@@ -211,9 +247,9 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
                 break;
 
 
-            case R.id.chat_Btn:
-                nevigateTo = new Intent(this,GpsHandler.class);
-                break;
+//            case R.id.chat_Btn:
+//                nevigateTo = new Intent(this,GpsHandler.class);
+//                break;
         }
 
         if(nevigateTo!=null){
@@ -244,6 +280,34 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
         super.onResume();
         hideButoons();
         showButtons();
+        userr = FirebaseAuth.getInstance().getCurrentUser();
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid()).child("userDetail");
+        mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+
+                if(user!=null && (user.getPhoneNumber().equals("") || user.getEmail().equals("") || user.getDisplayName().equals("") || user.getChildName().equals("") || user.getNannyAddress().equals(""))){
+                    properties_Btn.setBackgroundColor(Color.RED);
+                    Toast.makeText(Home_Page_Activity.this, " אנא מלא פרטים אישיים דרך ההגדרות למקסום החוויה באפליקציה ", Toast.LENGTH_LONG).show();
+
+
+
+
+                }else{
+                    properties_Btn.setBackgroundColor(Color.TRANSPARENT);
+                }
+
+
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
 
     }
 

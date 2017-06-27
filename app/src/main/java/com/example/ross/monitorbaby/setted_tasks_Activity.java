@@ -5,13 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import java.util.Calendar;
 import java.util.Date;
 
 public class setted_tasks_Activity extends AppCompatActivity implements View.OnClickListener{
 
-    private Button fteeth,fcrawl,fstand,fwalk,ftalk,fliketalk,flaugh,fsmile,fgames;
+    private Button fteeth,fcrawl,fstand,fwalk,ftalk,fliketalk,flaugh,fsmile,fgames,plusBtn,minusBtn;
     private String dataToSet;
     private int currentYear,currentMonth,currentDay;
 
@@ -23,6 +24,8 @@ public class setted_tasks_Activity extends AppCompatActivity implements View.OnC
         fteeth = (Button)findViewById(R.id.fteeth);
         fstand = (Button)findViewById(R.id.standing);
         fgames = (Button)findViewById(R.id.games);
+//        plusBtn = (Button)findViewById(R.id.button3);
+//        minusBtn = (Button)findViewById(R.id.button4);
 
 
         int[] dates = CalendarEvent.getDate(); // static function in Calendar event
@@ -39,6 +42,7 @@ public class setted_tasks_Activity extends AppCompatActivity implements View.OnC
       //  flaugh.setOnClickListener(this);
       //  fsmile.setOnClickListener(this);
         fgames.setOnClickListener(this);
+//        plusBtn.setOnClickListener(this);
 
 
     }
@@ -61,6 +65,14 @@ public class setted_tasks_Activity extends AppCompatActivity implements View.OnC
             case R.id.games:
                 dataToSet = "משחק ראשון";
                 break;
+//            case R.id.button3:
+//                Button myButton = new Button(this);
+//                myButton.setText("Add Me");
+//
+//                LinearLayout ll = (LinearLayout)findViewById(R.id.thirdRow);
+//                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//                ll.addView(myButton, lp);
+//                break;
 
 
 
@@ -68,6 +80,6 @@ public class setted_tasks_Activity extends AppCompatActivity implements View.OnC
         }
         intent.putExtra("name", dataToSet);
         setResult(RESULT_OK, intent);
-        finish();
+//        finish();
     }
 }

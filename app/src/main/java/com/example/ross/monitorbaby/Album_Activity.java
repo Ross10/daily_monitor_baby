@@ -74,7 +74,7 @@ public class Album_Activity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 ImageItem item = (ImageItem) parent.getItemAtPosition(position);
                 //Create intent
-                Intent intent = new Intent(getApplicationContext(), DetailsActivity.class);
+                Intent intent = new Intent(getApplicationContext(),  DetailsActivity.class);
                 intent.putExtra("title", item.getTitle());
                 intent.putExtra("image", item.getImage());
 
