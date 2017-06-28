@@ -32,6 +32,7 @@ public class Tab3Frag extends Fragment {
     private DatabaseReference mDatabaseReference;
     private FirebaseUser userr;
     private ArrayList<String> logArray;
+    private String childname;
     private LogsAdapter adapter;
 
     ArrayList<String> stringAarray;
@@ -66,6 +67,31 @@ public class Tab3Frag extends Fragment {
         logArray.clear(); //Without it it can be duplicate values 2.
         FirebaseUser userr = FirebaseAuth.getInstance().getCurrentUser();
         userr.getDisplayName();
+
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid()).child("userDetail");
+        mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+
+                if(user!=null){
+                    childname = user.getChildName();
+
+
+                }
+
+
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
+
+
         mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid()).child("Logs");
         mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -73,16 +99,16 @@ public class Tab3Frag extends Fragment {
                 for(DataSnapshot ds : snapshot.getChildren()) {
                     Logs newLog = ds.getValue(Logs.class);
                     if(newLog.getKind() ==0){
-                        logArray.add("הילד אכל : " + newLog.getAmount() + " בשעה : " +  newLog.getDateAndTime());
+                        logArray.add(childname + " אכל : " + newLog.getAmount() + " בשעה : " +  newLog.getDateAndTime());
 
                     }
                     else if(newLog.getKind()==1){
-                        logArray.add("the kid m/ade pee" +  newLog.getDateAndTime());
+                        logArray.add(childname + " עשה פיפי בשעה : " +  newLog.getDateAndTime());
 
                     }
 
                     else{
-                        logArray.add("the kid made poo" +  newLog.getDateAndTime());
+                        logArray.add(childname + " עשה קקי בשעה : " +  newLog.getDateAndTime());
                     }
 
                 }
