@@ -46,6 +46,7 @@
             android:textSize="20sp"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:id="@+id/ammout"
             android:gravity="right"
             android:layout_gravity="right" />

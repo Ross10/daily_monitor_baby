@@ -24,6 +24,10 @@ public class setted_tasks_Activity extends AppCompatActivity implements View.OnC
         fteeth = (Button)findViewById(R.id.fteeth);
         fstand = (Button)findViewById(R.id.standing);
         fgames = (Button)findViewById(R.id.games);
+        fcrawl = (Button)findViewById(R.id.crawl);
+        fsmile = (Button)findViewById(R.id.firstSmile);
+        fliketalk = (Button)findViewById(R.id.firstWord);
+//        flaugh = (Button)findViewById(R.id.firstSmile);
 //        plusBtn = (Button)findViewById(R.id.button3);
 //        minusBtn = (Button)findViewById(R.id.button4);
 
@@ -34,13 +38,13 @@ public class setted_tasks_Activity extends AppCompatActivity implements View.OnC
        currentYear =dates[2];
 
         fteeth.setOnClickListener(this);
-        //fcrawl.setOnClickListener(this);
+        fcrawl.setOnClickListener(this);
         fstand.setOnClickListener(this);
        // fwalk.setOnClickListener(this);
        // ftalk.setOnClickListener(this);
-      //  fliketalk.setOnClickListener(this);
-      //  flaugh.setOnClickListener(this);
-      //  fsmile.setOnClickListener(this);
+        fliketalk.setOnClickListener(this);
+        fsmile.setOnClickListener(this);
+//        fsmile.setOnClickListener(this);
         fgames.setOnClickListener(this);
 //        plusBtn.setOnClickListener(this);
 
@@ -65,21 +69,22 @@ public class setted_tasks_Activity extends AppCompatActivity implements View.OnC
             case R.id.games:
                 dataToSet = "משחק ראשון";
                 break;
-//            case R.id.button3:
-//                Button myButton = new Button(this);
-//                myButton.setText("Add Me");
-//
-//                LinearLayout ll = (LinearLayout)findViewById(R.id.thirdRow);
-//                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-//                ll.addView(myButton, lp);
-//                break;
 
+            case R.id.crawl:
+                dataToSet = "זחילה!";
+                break;
 
+            case R.id.firstSmile:
+                dataToSet = "החיוך הראשון";
+                break;
 
+            case R.id.firstWord:
+                dataToSet = "המילה הראשונה";
+                break;
 
         }
         intent.putExtra("name", dataToSet);
         setResult(RESULT_OK, intent);
-//        finish();
+        finish();
     }
 }

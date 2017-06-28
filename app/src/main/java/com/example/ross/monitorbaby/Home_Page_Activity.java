@@ -56,7 +56,6 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
         gallery_Btn = (Button)findViewById(R.id.gallary_Btn);
         gps_Btn = (Button)findViewById(R.id.gps_Btn);
         tracking_Btn = (Button)findViewById(R.id.tracking_Btn);
-        chat_Btn = (Button)findViewById(R.id.chat_Btn);
         signOut_Btn = (Button)findViewById(R.id.signOut_Btn);
         properties_Btn = (Button)findViewById(R.id.properties_Btn);
         mauth = FirebaseAuth.getInstance();
@@ -66,7 +65,6 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
         gallery_Btn.setOnClickListener(this);
         gps_Btn.setOnClickListener(this);
         tracking_Btn.setOnClickListener(this);
-        chat_Btn.setOnClickListener(this);
         signOut_Btn.setOnClickListener(this);
         properties_Btn.setOnClickListener(this);
 
@@ -145,13 +143,6 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
                 }
             }, 2000);
 
-            handler.postDelayed(new Runnable(){
-                @Override
-                public void run(){
-                    ((Button) findViewById(R.id.chat_Btn)).setVisibility(View.VISIBLE);
-//                chat_Btn.startAnimation(animAlpha);
-                }
-            }, 2000);
 
             handler.postDelayed(new Runnable(){
                 @Override
@@ -192,7 +183,6 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
             gallery_Btn.setVisibility(View.VISIBLE);
             gps_Btn.setVisibility(View.VISIBLE);
             tracking_Btn.setVisibility(View.VISIBLE);
-            chat_Btn.setVisibility(View.VISIBLE);
             signOut_Btn.setVisibility(View.VISIBLE);
             properties_Btn.setVisibility(View.VISIBLE);
 
@@ -207,7 +197,6 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
         gallery_Btn.setVisibility(View.INVISIBLE);
         gps_Btn.setVisibility(View.INVISIBLE);
         tracking_Btn.setVisibility(View.INVISIBLE);
-        chat_Btn.setVisibility(View.INVISIBLE);
         signOut_Btn.setVisibility(View.INVISIBLE);
         properties_Btn.setVisibility(View.INVISIBLE);
     }
@@ -287,7 +276,8 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
             public void onDataChange(DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
 
-                if(user!=null && (user.getPhoneNumber().equals("") || user.getEmail().equals("") || user.getDisplayName().equals("") || user.getChildName().equals("") || user.getNannyAddress().equals(""))){
+
+                if(user==null || user!=null && (user.getPhoneNumber().equals("") || user.getEmail().equals("") || user.getDisplayName().equals("") || user.getChildName().equals("") || user.getNannyAddress().equals(""))){
                     properties_Btn.setBackgroundColor(Color.RED);
                     Toast.makeText(Home_Page_Activity.this, " אנא מלא פרטים אישיים דרך ההגדרות למקסום החוויה באפליקציה ", Toast.LENGTH_LONG).show();
 

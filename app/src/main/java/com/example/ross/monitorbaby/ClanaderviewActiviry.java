@@ -1,10 +1,15 @@
 package com.example.ross.monitorbaby;
 
+import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,10 +34,14 @@ public class ClanaderviewActiviry extends AppCompatActivity {
     private int focusedYear,currentDay,currentYear,currentMonth;
     private int focusedMonth;
     private int focusedDay;
-    private String date;
+    private int status;
+    private boolean isDatePicked;
+    private String date,settedtask;
     private FirebaseAuth mAuth; //Returns an instance of this class corresponding to the default FirebaseApp instance when using getiInstance().
     private DatabaseReference mDatabaseReference;
     FirebaseUser userr;
+//    @RequiresApi(api = Build.VERSION_CODES.N)
+    @TargetApi(Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +51,14 @@ public class ClanaderviewActiviry extends AppCompatActivity {
         addEventID = (ImageButton)findViewById(R.id.addEventID);
         eye = (ImageButton)findViewById(R.id.eye);
         userr = FirebaseAuth.getInstance().getCurrentUser();
+        isDatePicked = false;
+        status =0;
+        settedtask = "";
+        Calendar c = Calendar.getInstance();
+        System.out.println("Current time => " + c.getTime());
 
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        String formattedDate = df.format(c.getTime());
 
 
         mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener(){
@@ -56,6 +72,8 @@ public class ClanaderviewActiviry extends AppCompatActivity {
                 focusedMonth = month+1;
                 focusedYear = year;
                 Log.d(TAG,"onSelectedDate :  mm/dd/yyyy" + date);
+                isDatePicked=true;
+
 
 
 
@@ -96,7 +114,15 @@ public class ClanaderviewActiviry extends AppCompatActivity {
                 int day=dates[0];
                 int month =dates[1];
                 int year =dates[2];
-                int status =0;
+                status =0;
+
+                if(isDatePicked==false){
+                    focusedDay =day;
+                    focusedMonth = month;
+                    focusedYear = year;
+
+                    date = focusedDay + "/" + (focusedMonth+1) + "/" + focusedYear;
+                }
 
 
                 if(day>=focusedDay && month>=focusedMonth && year>=focusedYear){
@@ -133,6 +159,18 @@ public class ClanaderviewActiviry extends AppCompatActivity {
 
     public void onEyeClicked(View v){
         Intent intent = new Intent(ClanaderviewActiviry.this,CalanderViewHelper.class);
+        if(isDatePicked==false){
+            int[] dates = CalendarEvent.getDate(); // function in Calendar event
+            int day=dates[0];
+            int month =dates[1];
+            int year =dates[2];
+
+            focusedDay =day;
+            focusedMonth = month;
+            focusedYear = year;
+
+            date = focusedDay + "/" + (focusedMonth+1) + "/" + focusedYear;
+        }
         intent.putExtra("date",date);
         startActivity(intent);
     }
@@ -152,7 +190,22 @@ public class ClanaderviewActiviry extends AppCompatActivity {
                 currentDay = data.getIntExtra("currentDay",0);
                 currentMonth = data.getIntExtra("currentMonth",0);
                 currentYear = data.getIntExtra("currentYear",0);
-                String whereClause = CalendarEvent.YEAR+" = "+currentYear +" AND "+ CalendarEvent.MONTH +" = "+currentMonth + " AND "+ CalendarEvent.DAY +" = "+ currentDay;
+                settedtask= data.getStringExtra("name");
+
+                if(currentDay>=focusedDay && currentMonth>=focusedMonth && currentYear>=focusedYear){
+                    status = 1;
+                }
+
+                else{
+                    status = 2;
+                }
+                mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid()).child("Calander");
+
+                CalanderTask t2 = new CalanderTask(date,settedtask,status);
+                mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid()).child("Calander").child(t2.getId());
+
+                mDatabaseReference.setValue(t2);
+
 
             }
         }

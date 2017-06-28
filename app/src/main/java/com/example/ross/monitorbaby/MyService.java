@@ -25,12 +25,23 @@ import android.support.v4.app.NotificationCompat;
 import android.telephony.SmsManager;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.text.DateFormat;
 import java.util.Date;
 
 
 public class MyService extends Service {
     static final int MY_PERMISSIONS_COARSE_LOCATION=1;
+    private FirebaseAuth mAuth; //Returns an instance of this class corresponding to the default FirebaseApp instance when using getiInstance().
+    private DatabaseReference mDatabaseReference;
+    private FirebaseUser userr;
 
     // location variable to compare with the current location
     private Location targetLocation,mCurrentLocation;
@@ -40,8 +51,9 @@ public class MyService extends Service {
     private LocationManager locationManager;
 
 
+
     private float distance;
-    private String mLastUpdateTime;
+    private String mLastUpdateTime,phonenumber;
 
 
 
@@ -52,6 +64,7 @@ public class MyService extends Service {
         // when the location changed, compare the current location with the target location , by distance defferance !
         @Override
         public void onLocationChanged(Location location) {
+
             mCurrentLocation = location;
             mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
             boolean isSendNotification=false;
@@ -132,6 +145,8 @@ public class MyService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
+
         // init the locationManager
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         // init the target location
@@ -139,6 +154,7 @@ public class MyService extends Service {
         //get lon and lat from the intent , and convert from string to float
         String lat= intent.getExtras().getString("lat");
         String lon= intent.getExtras().getString("lon");
+        phonenumber = intent.getExtras().getString("phonenum");
         // set the lat and lon to the "target location" variable
         targetLocation.setLatitude((float)Float.valueOf(lat));
         targetLocation.setLongitude((float)Float.valueOf(lon));
@@ -187,20 +203,25 @@ public class MyService extends Service {
 
     private void sendSms() // send SMS when phone in radius
     {
+
         String message = getString(R.string.TheKidIsSafe);
 
         String phnNo =  "0587000097" ;//preferable use complete international number
-
+        phnNo = phonenumber;
         PendingIntent sentPI = PendingIntent.getBroadcast(this, 0, new Intent(
                 SMS_SENT_INTENT_FILTER), 0);
         PendingIntent deliveredPI = PendingIntent.getBroadcast(this, 0, new Intent(
                 SMS_DELIVERED_INTENT_FILTER), 0);
 
-
+        if(phonenumber==null){
+            Toast.makeText(getApplicationContext(),"מספר הטלפון שהוזן שגוי. אנא שנה אותו מההגדרות",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
 
         try {
             SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phnNo, null, message, sentPI, deliveredPI);
+            smsManager.sendTextMessage(phonenumber, null, message, sentPI, deliveredPI);
             Toast.makeText(getApplicationContext(), R.string.MessageSentSuccesfuly,
                     Toast.LENGTH_LONG).show();
             sentSms++;

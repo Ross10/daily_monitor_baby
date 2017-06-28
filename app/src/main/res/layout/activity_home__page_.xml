@@ -57,22 +57,22 @@
 
         <Button
             android:layout_width="match_parent"
-            android:drawableLeft="@drawable/chating"
-            android:background="#0000"
-            android:layout_height="wrap_content"
-            android:text="צ'ט"
-            android:textColor="@color/black"
-            android:id="@+id/chat_Btn"
-            android:layout_weight="1" />
-
-        <Button
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/calendar"
             android:background="#0000"
             android:text="יומן"
             android:textColor="@color/black"
             android:id="@+id/calanter_Btn"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#0000"
+            android:text="GPS"
+            android:textColor="@color/black"
+            android:id="@+id/gps_Btn"
+            android:drawableLeft="@drawable/gpsing"
             android:layout_weight="1" />
 
 
@@ -88,15 +88,7 @@
         android:layout_height="wrap_content"
         android:weightSum="2">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#0000"
-            android:text="GPS"
-            android:textColor="@color/black"
-            android:id="@+id/gps_Btn"
-            android:drawableLeft="@drawable/gpsing"
-            android:layout_weight="1" />
+
 
         <Button
             android:layout_width="match_parent"
@@ -109,6 +101,17 @@
             android:layout_weight="1" />
 
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#0000"
+            android:text="הגדרות"
+            android:textColor="@color/black"
+            android:id="@+id/properties_Btn"
+            android:drawableLeft="@drawable/properties"
+            android:layout_weight="1" />
+
+
     </LinearLayout>
 
 
@@ -123,24 +126,22 @@
 
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#0000"
-            android:text="הגדרות"
-            android:textColor="@color/black"
-            android:id="@+id/properties_Btn"
-            android:drawableLeft="@drawable/properties"
-            android:layout_weight="1" />
-
-        <Button
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:background="#0000"
             android:text="התנתקות"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:id="@+id/signOut_Btn"
-            android:drawableLeft="@drawable/lockmember"
-            android:layout_weight="1" />
+            android:drawableLeft="@drawable/lockmember" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/babylogotohomepage"
+            android:id="@+id/imageView3" />
 
 
     </LinearLayout>

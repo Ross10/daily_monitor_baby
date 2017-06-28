@@ -20,6 +20,7 @@
         android:hint="משימה חדשה"
         android:id="@+id/newMission"
         android:layout_alignParentRight="true"
+        android:textColor="@color/black"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -68,7 +69,7 @@
             <RadioButton
                 android:text="High"
                 android:layout_width="wrap_content"
-                android:background="@color/lightorange"
+                android:background="@color/red"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:id="@+id/highRb" />
@@ -78,7 +79,7 @@
             <RadioButton
                 android:text="Medium"
                 android:layout_width="wrap_content"
-                android:background="@color/colorAccent"
+                android:background="@color/blue"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:id="@+id/mediumRb" />
@@ -87,7 +88,7 @@
                 android:text="Low"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/yellow"
+                android:background="@color/lightgreen2"
                 android:layout_weight="1"
                 android:id="@+id/lowRb" />
 

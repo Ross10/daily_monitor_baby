@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private Location mCurrentLocation, location;
-    private String strAddress;
+    private String strAddress,phonenum;
 
     // lan and lot that will set to the location variable
     float lat,lon;
@@ -90,6 +90,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         ed=(EditText)findViewById(R.id.editText);
         tvAddress =(TextView)findViewById(R.id.textView2);
         startNevigate = (ImageView)findViewById(R.id.imageView4);
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.SEND_SMS},1);
+
         userr = FirebaseAuth.getInstance().getCurrentUser();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid()).child("userDetail");
         mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -99,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
                 if(user!=null){
                     strAddress = user.getNannyAddress();
+                    phonenum = user.getPhoneNumber();
                     ed.setText(strAddress);
                 }
 
@@ -154,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                     intent.putExtra("lat", "" + lat);
                     intent.putExtra("lon", "" + lon);
                     intent.putExtra("distance", "600");
+                    intent.putExtra("phonenum",phonenum);
 
                     //request permission
                     askPermessions();

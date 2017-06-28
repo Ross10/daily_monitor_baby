@@ -131,18 +131,6 @@
         android:orientation="horizontal">
 
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableTop="@drawable/add"
-            android:textColor="@color/black"
-            app:srcCompat="@drawable/teeth1"
-            android:background="@null"
-            android:id="@+id/addmoreimages"
-            android:layout_weight="1" />
-
-
-
     </LinearLayout>
 
 

@@ -163,7 +163,6 @@
     </android.support.design.widget.TextInputLayout>
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -176,24 +175,13 @@
         android:layout_gravity="bottom|center"
         android:layout_height="wrap_content"
         android:id="@+id/registerBtn"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:onClick="changeDetails"
         />
 
 
-        <Button
-            android:text="חזור "
-            android:layout_width="wrap_content"
-            android:layout_gravity="right|bottom"
-            android:layout_weight="1"
-
-            android:layout_height="wrap_content"
-            android:id="@+id/returnBtn"
-            android:onClick="returnToMenu"
-            />
 
     </LinearLayout>
-
 
 
 </LinearLayout>
