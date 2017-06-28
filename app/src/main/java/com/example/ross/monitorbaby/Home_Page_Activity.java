@@ -93,7 +93,7 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
 
                 if(user!=null && (user.getPhoneNumber().equals("") || user.getEmail().equals("") || user.getDisplayName().equals("") || user.getChildName().equals("") || user.getNannyAddress().equals(""))){
                     properties_Btn.setBackgroundColor(Color.RED);
-                    Toast.makeText(Home_Page_Activity.this, " אנא מלא פרטים אישיים דרך ההגדרות למקסום החוויה באפליקציה ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Home_Page_Activity.this, R.string.fillAllData, Toast.LENGTH_LONG).show();
 
 
 
@@ -279,7 +279,7 @@ public class Home_Page_Activity extends AppCompatActivity implements View.OnClic
 
                 if(user==null || user!=null && (user.getPhoneNumber().equals("") || user.getEmail().equals("") || user.getDisplayName().equals("") || user.getChildName().equals("") || user.getNannyAddress().equals(""))){
                     properties_Btn.setBackgroundColor(Color.RED);
-                    Toast.makeText(Home_Page_Activity.this, " אנא מלא פרטים אישיים דרך ההגדרות למקסום החוויה באפליקציה ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Home_Page_Activity.this, R.string.fillAllDataa, Toast.LENGTH_LONG).show();
 
 
 

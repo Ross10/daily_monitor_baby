@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             public void onClick(View v) {
                 if(ed.getText().toString().isEmpty())
                 {
-                    Toast.makeText(MainActivity.this, "Please type target",
+                    Toast.makeText(MainActivity.this, R.string.pleaseneteradress,
                             Toast.LENGTH_LONG).show();
                 }
                 else
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
                 if (tvAddress.getText().toString().equals(""))
                 {
-                    Toast.makeText(MainActivity.this, "Please type destination",
+                    Toast.makeText(MainActivity.this, R.string.pleaseneteerdest,
                             Toast.LENGTH_LONG).show();
                 }
                 else {
@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 if(lstAdresses!=null){
                     showInGoogleMap(lstAdresses);
                 }else{
-                    Toast.makeText(MainActivity.this, "אין כתובת לניווט",
+                    Toast.makeText(MainActivity.this, R.string.nogpsaddress,
                             Toast.LENGTH_LONG).show();
                 }
 
@@ -312,8 +312,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                     lon=(float) lstAdresses.get(0).getLongitude();
 
                 }
-                addressesDialog.setNegativeButton("בחר", null);
-                addressesDialog.setTitle("אנא בחר את הכתובת הרצויה, אם לא מצאת, אנא נסה לדייק בחיפוש:");
+                addressesDialog.setNegativeButton(R.string.chooseplease, null);
+                addressesDialog.setTitle(R.string.pleasesepicfyadress);
                 addressesDialog.show();
             }
             else {

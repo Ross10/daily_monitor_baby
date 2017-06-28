@@ -177,7 +177,7 @@ public class CalanderViewHelper extends AppCompatActivity {
     {
 
 
-        String message = "משימה : "+ tasklistNew.get(pos).getTaskName();
+        String message = getString(R.string.task)+ tasklistNew.get(pos).getTaskName();
         Boolean sendSuccses = false;
 
         String phnNo =  phonenum ;//preferable use complete international number
@@ -222,8 +222,8 @@ public class CalanderViewHelper extends AppCompatActivity {
             } else {
                 builder = new AlertDialog.Builder(this);
             }
-            builder.setTitle("המשימה תימחק")
-                    .setMessage("האם אתה בטוח שברצונך למחוק את המשימה?")
+            builder.setTitle(R.string.taskwillDeleted)
+                    .setMessage(R.string.taskDelete)
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             tasklistNew.remove(pos);

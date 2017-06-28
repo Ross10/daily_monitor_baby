@@ -89,4 +89,36 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="task">"משימה : "</string>
+    <string name="taskDelete">האם אתה בטוח שברצונך למחוק את המשימה?</string>
+    <string name="taskwillDeleted">המשימה תימחק</string>
+    <string name="addEvent">הוסף אירוע</string>
+    <string name="fillAllData">" אנא מלא פרטים אישיים דרך ההגדרות למקסום החוויה באפליקציה "</string>
+    <string name="fillAllDataa">" אנא מלא פרטים אישיים דרך ההגדרות למקסום החוויה באפליקציה "</string>
+    <string name="errorconnection">" שגיאה בהתחברות "</string>
+    <string name="googlesigninfailed">Google Sign In failed</string>
+    <string name="loading">טוען</string>
+    <string name="homepageimmed">מיד תועבר לדף הבית</string>
+    <string name="pageonload">העמוד בטעינה</string>
+    <string name="pleasewait">אנא המתן..</string>
+    <string name="connectionprob">בעיה בהתברות</string>
+    <string name="pleasefillalldata">לא מילאת את כל הפרטים</string>
+    <string name="unexisteemailadress">חשבון לא קיים</string>
+    <string name="failedtoauto">האימות נכשל</string>
+    <string name="connectionfaildd">שגיאה בהתחברות</string>
+    <string name="pleaseneteradress">אנא הכנס כתובת</string>
+    <string name="pleaseneteerdest">אנא הכנס יעד</string>
+    <string name="nogpsaddress">אין כתובת לניווט</string>
+    <string name="pleasesepicfyadress">אנא בחר את הכתובת הרצויה, אם לא מצאת, אנא נסה לדייק בחיפוש:</string>
+    <string name="chooseplease">בחר</string>
+    <string name="numberundefinedfillsetting">מספר הטלפון שהוזן שגוי. אנא שנה אותו מההגדרות</string>
+    <string name="waitpleasee">אנא המתן..</string>
+    <string name="loadinggpagee">העמוד בטעינה</string>
+    <string name="thedataisbeeingsave">שמירת הנתונים מתבצעת..</string>
+    <string name="pleasewaitttt">אנא המתן..</string>
+    <string name="coneectingfailed">בעיה בהתחברות</string>
+    <string name="checkintenrntconnection">אנא בדוק שהינך מחובר לאינטרנט</string>
+    <string name="enteremailladress">אנא הכנס כתובת אימייל</string>
+    <string name="wesentyou">שלחנו לך הדרכה לאיפוס הסיסמא באימייל!</string>
+    <string name="checkingemail">אין אפשרות לאפס סיסמא אנא בדוק את כתובת המייל</string>
 </resources>

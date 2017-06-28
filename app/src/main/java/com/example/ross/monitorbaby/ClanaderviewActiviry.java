@@ -93,7 +93,7 @@ public class ClanaderviewActiviry extends AppCompatActivity {
     public void addEvent(View v){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("הוסף אירוע");
+        builder.setTitle(R.string.addEvent);
 
         // Set up the input
         final EditText input = new EditText(this);

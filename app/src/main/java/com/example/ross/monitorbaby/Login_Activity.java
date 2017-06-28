@@ -102,7 +102,7 @@ public class Login_Activity extends AppCompatActivity implements GoogleApiClient
 
             @Override
             public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-                Toast.makeText(Login_Activity.this, " you got an error ", Toast.LENGTH_LONG).show();
+                Toast.makeText(Login_Activity.this, R.string.errorconnection, Toast.LENGTH_LONG).show();
 
             }
         }).addApi(Auth.GOOGLE_SIGN_IN_API,gso).build();
@@ -132,7 +132,7 @@ public class Login_Activity extends AppCompatActivity implements GoogleApiClient
                 firebaseAuthWithGoogle(account);
             } else {
                 // Google Sign In failed
-                Toast.makeText(this, "Google Sign In failed", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.googlesigninfailed, Toast.LENGTH_LONG).show();
             }
 
         }
@@ -140,7 +140,7 @@ public class Login_Activity extends AppCompatActivity implements GoogleApiClient
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
 
-        mDialog = AppHelper.buildAlertDialog("login", "Checking" ,false, this);
+        mDialog = AppHelper.buildAlertDialog(getString(R.string.loading), getString(R.string.homepageimmed) ,false, this);
         mDialog.show();
         // Get credentials and check if sucsess
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -167,12 +167,12 @@ public class Login_Activity extends AppCompatActivity implements GoogleApiClient
 
         String email = emailEditText.getText().toString();
         String psswd = passwordEditText.getText().toString();
-        progressDialog = ProgressDialog.show(Login_Activity.this,"אנא המתן..","העמוד בטעינה",true);
+        progressDialog = ProgressDialog.show(Login_Activity.this,getString(R.string.pleasewait),getString(R.string.pageonload),true);
 
         if(email.equals("")|| psswd.equals("")){
 //            Toast.makeText(this, "ERRRORRRRRR", Toast.LENGTH_LONG).show();
 
-            mDialog=AppHelper.buildAlertDialog("בעיה בהתברות" , "לא מילאת את כל הפרטים", true , Login_Activity.this);
+            mDialog=AppHelper.buildAlertDialog(getString(R.string.connectionprob) , getString(R.string.pleasefillalldata), true , Login_Activity.this);
             mDialog.show();
             progressDialog.dismiss();
 
@@ -209,7 +209,7 @@ public class Login_Activity extends AppCompatActivity implements GoogleApiClient
             registerUser();
         }else{
             //if the task didnt sucsses show up an error
-            mDialog=AppHelper.buildAlertDialog("Email does not exsits" , "Failed to Authentication", true , Login_Activity.this);
+            mDialog=AppHelper.buildAlertDialog(getString(R.string.unexisteemailadress) , getString(R.string.failedtoauto), true , Login_Activity.this);
             mDialog.show();
             progressDialog.dismiss();
         }
@@ -233,7 +233,7 @@ public class Login_Activity extends AppCompatActivity implements GoogleApiClient
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Toast.makeText(this, "You got an Error", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.connectionfaildd, Toast.LENGTH_LONG).show();
     }
 
 

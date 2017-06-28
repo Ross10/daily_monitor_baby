@@ -214,7 +214,7 @@ public class MyService extends Service {
                 SMS_DELIVERED_INTENT_FILTER), 0);
 
         if(phonenumber==null){
-            Toast.makeText(getApplicationContext(),"מספר הטלפון שהוזן שגוי. אנא שנה אותו מההגדרות",
+            Toast.makeText(getApplicationContext(), R.string.numberundefinedfillsetting,
                     Toast.LENGTH_LONG).show();
             return;
         }

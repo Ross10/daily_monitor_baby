@@ -89,7 +89,7 @@ public class Register_Activity extends AppCompatActivity {
 //            editor.commit();
 //            Toast.makeText(this, getString(R.string.Thanks) + fullname.getText().toString() +getString(R.string.YourDataSavedSuccsefuly2), Toast.LENGTH_LONG).show();
 
-            progressDialog = ProgressDialog.show(Register_Activity.this,"אנא המתן..","העמוד בטעינה",true);
+            progressDialog = ProgressDialog.show(Register_Activity.this,getString(R.string.waitpleasee),getString(R.string.loadinggpagee),true);
             userEmail =email.getText().toString();
             userPassword = passwd.getText().toString();
 
@@ -103,7 +103,7 @@ public class Register_Activity extends AppCompatActivity {
     }
 
     private void executeSignUp(String userEmail, String userPassword) {
-        mDialog = AppHelper.buildAlertDialog("שמירת הנתונים מתבצעת..", "אנא המתן.." , false , this );
+        mDialog = AppHelper.buildAlertDialog(getString(R.string.thedataisbeeingsave), getString(R.string.pleasewaitttt) , false , this );
         mDialog.show();
 
 
@@ -127,7 +127,7 @@ public class Register_Activity extends AppCompatActivity {
                     startActivity(homePage);
                 }else{
                     //if the task didnt sucsses show up an error
-                    mDialog=AppHelper.buildAlertDialog("בעיה בהתחברות" , "אנא בדוק שהינך מחובר לאינטרנט", true , Register_Activity.this);
+                    mDialog=AppHelper.buildAlertDialog(getString(R.string.coneectingfailed) , getString(R.string.checkintenrntconnection), true , Register_Activity.this);
                     mDialog.show();
                     progressDialog.dismiss();
                 }
