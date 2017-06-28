@@ -52,18 +52,18 @@ public class Tab2Frag extends Fragment {
         });
 
 
-//        peeBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                String date = traceTabActivity.getDateAndHour();
-//                Logs log = new Logs(date,1);
-//                userr = FirebaseAuth.getInstance().getCurrentUser();
-//                databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid());
-//                databaseReference.child("Logs").child(log.getLogId()).setValue(log);
-//
-//            }
-//        });
+        peeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String date = traceTabActivity.getDateAndHour();
+                Logs log = new Logs(date,1);
+                userr = FirebaseAuth.getInstance().getCurrentUser();
+                databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userr.getUid());
+                databaseReference.child("Logs").child(log.getLogId()).setValue(log);
+
+            }
+        });
 
 
 
